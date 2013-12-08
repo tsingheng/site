@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="utf-8"/>
+	<constant name="struts.configuration.xml.reload" value="true" />
+	<constant name="struts.multipart.saveDir" value="C:/tmp"/>
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.multipart.maxSize" value="10701096"/>
+	<package name="default" namespace="/admin" extends="tiles-default">
+		<interceptors>
+			<interceptor name="userAuthInterceptor" class="com.songxh.system.interceptor.AuthInterceptor"></interceptor>
+			<interceptor-stack name="authInterceptor">
+				<interceptor-ref name="userAuthInterceptor"/>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="authInterceptor"/>
+		<global-results>
+			<result name="login">/WEB-INF/admin/login.jsp</result>
+		</global-results>
+		<action name="demo_*" class="com.songxh.demo.DemoAction" method="{1}">
+			<result name="demo">demo</result>
+		</action>
+		<action name="admin" class="com.songxh.system.action.AdminAction">
+			<result name="main">/WEB-INF/admin/index.jsp</result>
+		</action>
+		
+		<action name="resource" class="com.songxh.system.action.ResourceAction">
+			<result name="main">/WEB-INF/admin/system/resource/main.jsp</result>
+			<result name="add">/WEB-INF/admin/system/resource/form.jsp</result>
+			<result name="edit">/WEB-INF/admin/system/resource/form.jsp</result>
+		</action>
+		
+		<action name="role" class="com.songxh.system.action.RoleAction">
+			<result name="main">/WEB-INF/admin/system/role/main.jsp</result>
+			<result name="add">/WEB-INF/admin/system/role/form.jsp</result>
+			<result name="edit">/WEB-INF/admin/system/role/form.jsp</result>
+			<result name="auth">/WEB-INF/admin/system/role/auth.jsp</result>
+		</action>
+		
+		<action name="user" class="com.songxh.system.action.UserAction">
+			<result name="main">/WEB-INF/admin/system/user/main.jsp</result>
+			<result name="add">/WEB-INF/admin/system/user/form.jsp</result>
+			<result name="edit">/WEB-INF/admin/system/user/form.jsp</result>
+		</action>
+		
+		<action name="pro-category" class="com.songxh.product.action.ProCategoryAction">
+			<result name="main">/WEB-INF/admin/product/category/main.jsp</result>
+			<result name="add">/WEB-INF/admin/product/category/form.jsp</result>
+			<result name="edit">/WEB-INF/admin/product/category/form.jsp</result>
+		</action>
+		
+		<action name="product" class="com.songxh.product.action.ProductAction">
+			<result name="main">/WEB-INF/admin/product/product/main.jsp</result>
+			<result name="add">/WEB-INF/admin/product/product/form.jsp</result>
+			<result name="edit">/WEB-INF/admin/product/product/form.jsp</result>
+		</action>
+		
+		<action name="pro-image" class="com.songxh.product.action.ProImageAction">
+			<result name="add">/WEB-INF/admin/product/image/upload.jsp</result>
+			<result name="edit">/WEB-INF/admin/product/image/memo.jsp</result>
+		</action>
+		
+		<action name="message" class="com.songxh.cust.action.MessageAction">
+			<result name="main">/WEB-INF/admin/cust/message/main.jsp</result>
+			<result name="deal">/WEB-INF/admin/cust/message/deal.jsp</result>
+		</action>
+		
+		<action name="info" class="com.songxh.site.action.InfoAction">
+			<result name="main">/WEB-INF/admin/site/info/main.jsp</result>
+			<result name="add">/WEB-INF/admin/site/info/form.jsp</result>
+			<result name="edit">/WEB-INF/admin/site/info/form.jsp</result>
+		</action>
+		
+		<action name="image-display" class="com.songxh.site.action.ImageDisplayAction">
+			<result name="main">/WEB-INF/admin/site/image-display/main.jsp</result>
+			<result name="add">/WEB-INF/admin/site/image-display/upload.jsp</result>
+			<result name="edit">/WEB-INF/admin/site/image-display/upload.jsp</result>
+		</action>
+		
+		<action name="rotate-image" class="com.songxh.site.action.RotateImageAction">
+			<result name="main">/WEB-INF/admin/site/rotate-image/main.jsp</result>
+			<result name="add">/WEB-INF/admin/site/rotate-image/upload.jsp</result>
+			<result name="edit">/WEB-INF/admin/site/rotate-image/upload.jsp</result>
+		</action>
+		
+		<action name="site-property" class="com.songxh.site.action.SitePropertyAction">
+			<result name="edit">/WEB-INF/admin/site/site-property/edit.jsp</result>
+		</action>
+		
+		<action name="index-area" class="com.songxh.site.action.IndexAreaAction">
+			<result name="main">/WEB-INF/admin/site/index-area/main.jsp</result>
+			<result name="add">/WEB-INF/admin/site/index-area/form.jsp</result>
+			<result name="edit">/WEB-INF/admin/site/index-area/form.jsp</result>
+		</action>
+		
+		<action name="area-entity" class="com.songxh.site.action.AreaEntityAction">
+			<result name="add-info">/WEB-INF/admin/site/area-entity/info-form.jsp</result>
+			<result name="add-image">/WEB-INF/admin/site/area-entity/image-form.jsp</result>
+			<result name="add-product">/WEB-INF/admin/site/area-entity/product-form.jsp</result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+body{padding:0px; margin:0px; border:0px; font-size:14px;}
+.logo{width:50%;float:left;height:50px;font-size:24px;line-height:50px;vertical-align:middle;padding-left:40px;color:#0E2D5F;font-weight:900;}
+.right{width:40%;float:right;height:50px;padding-right:30px;font-size:14px;line-height:25px;vertical-align:bottom;}
+.right div{height:25px;text-align:right;}
+.right div a{margin:0 4px;}
+.right div span{margin:0 2px;}
+.toolbar{height:24px;padding:5px; border-bottom:1px solid #95B8E7;}
+.form{margin-left:20px; margin-bottom:22px; margin-top:10px;}
+.form td{padding-top:5px; height:27px;}
+.form .input1{margin:0px; font-size: 12px; line-height: 20px; width: 147px; height: 20px;  padding: 0px 2px; *margin-top: -1px; *height: 18px; *line-height: 18px; _height: 18px; _line-height: 18px; vertical-align: baseline; border: 1px solid #95B8E7;}
+.form .file{font-size:12px; width:227px; height:22px; line-height:22px;}
+.form textarea{padding:3px; margin:0px; border: 1px solid #95B8E7;}
+.form label.error{font-size:12px; color:#ff0000; margin-left:5px; padding:1px 0px 1px 17px; background:url(../image/unchecked.gif) no-repeat;}
+.condition{list-style-type: none; clear:all; padding:5px 0px 10px 15px; margin:0px; border-bottom:1px solid #95B8E7;}
+.condition:after{content: "."; display: block; height: 0px; clear: both; visibility: hidden;}
+.condition li{min-width:237px; float:left; height: 24px; margin:10px 5px 0px 0px; line-height:24px; vertical-align:middle;}
+.condition li input{margin-top:2px;}
+.condition li span.label{width:80px; text-align:right; display:block; float:left;}
+.condition li.button{margin-left:20px;}
+input .date{width:80px;}
+.easyui-linkbutton{margin-right:10px;}

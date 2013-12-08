@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Struts2Diagram version="2.0">
+  <package name="default" location="10,10" size="670,442">
+    <action name="demo_*" location="505,208" size="150,41">
+      <result name="demo" />
+    </action>
+    <action name="admin" location="15,383" size="150,41">
+      <result name="main" />
+    </action>
+    <action name="resource" location="15,47" size="150,83">
+      <result name="main" />
+      <result name="add" />
+      <result name="edit" />
+    </action>
+    <action name="role" location="260,37" size="150,104">
+      <result name="main" />
+      <result name="add" />
+      <result name="edit" />
+      <result name="auth" />
+    </action>
+    <action name="user" location="505,47" size="150,83">
+      <result name="main" />
+      <result name="add" />
+      <result name="edit" />
+    </action>
+    <action name="pro-category" location="15,222" size="150,83">
+      <result name="main" />
+      <result name="add" />
+      <result name="edit" />
+    </action>
+    <action name="product" location="260,222" size="150,83">
+      <result name="main" />
+      <result name="add" />
+      <result name="edit" />
+    </action>
+    <action name="pro-image" location="260,373" size="150,62">
+      <result name="add" />
+      <result name="edit" />
+    </action>
+    <action name="message" location="505,373" size="150,62">
+      <result name="main" />
+      <result name="deal" />
+    </action>
+    <action name="info" location="0,0" size="0,0">
+      <result name="main" />
+      <result name="add" />
+      <result name="edit" />
+    </action>
+    <action name="image-display" location="0,0" size="0,0">
+      <result name="main" />
+      <result name="add" />
+      <result name="edit" />
+    </action>
+    <action name="rotate-image" location="0,0" size="0,0">
+      <result name="main" />
+      <result name="add" />
+      <result name="edit" />
+    </action>
+    <action name="site-property" location="0,0" size="0,0">
+      <result name="edit" />
+    </action>
+    <action name="index-area" location="0,0" size="0,0">
+      <result name="main" />
+      <result name="add" />
+      <result name="edit" />
+    </action>
+    <action name="area-entity" location="0,0" size="0,0">
+      <result name="add-info" />
+      <result name="add-image" />
+      <result name="add-product" />
+    </action>
+  </package>
+</Struts2Diagram>
+

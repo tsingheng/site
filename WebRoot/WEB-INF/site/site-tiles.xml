@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="site.template" template="/WEB-INF/site/jsp/common/frame.jsp">
+		<put-attribute name="site-content" value=""></put-attribute>
+	</definition>
+	<definition name="site.index" extends="site.template">
+		<put-attribute name="site-content" value="/WEB-INF/site/jsp/index.jsp"/>
+	</definition>
+</tiles-definitions>
