@@ -82,7 +82,7 @@ public class AuthInterceptor implements Interceptor {
 		obj.put("auth", false);
 		if(request.getSession().getAttribute(CommonConstraint.USER_SESSION_KEY) == null){
 			obj.put("msg", "登录超时");
-			obj.put("reloat", true);
+			obj.put("reload", true);
 		}else
 			obj.put("msg", "没有访问"+uri+"的权限");
 		PrintWriter out = null;

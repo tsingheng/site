@@ -44,7 +44,7 @@ public class AdminAction extends BaseAction<User> {
 	}
 	
 	public String logout(){
-		request.getSession().removeAttribute(CommonConstraint.USER_SESSION_KEY);
+		request.getSession().invalidate();
 		outJson("{\"success\":true}");
 		return null;
 	}
@@ -82,7 +82,7 @@ public class AdminAction extends BaseAction<User> {
 		String msg = "";
 		String opassword = request.getParameter("opwd");
 		String npassword = request.getParameter("npwd");
-		String cpassword = request.getParameter("cpassword");
+		String cpassword = request.getParameter("cpwd");
 		if(StringUtils.isBlank(opassword))
 			msg = "请输入原密码";
 		else if(StringUtils.isBlank(npassword))
@@ -98,9 +98,14 @@ public class AdminAction extends BaseAction<User> {
 				if(user == null)
 					msg = "用户不存在";
 				else{
-					user.setPassword(MD5Utils.md5(npassword));
-					userService.update(user);
-					result = true;
+					if(!MD5Utils.md5(opassword).equals(user.getPassword())){
+						msg = "原密码不正确";
+					}else{
+						user.setPassword(MD5Utils.md5(npassword));
+						userService.update(user);
+						result = true;
+						request.getSession().invalidate();
+					}
 				}
 			}
 		}

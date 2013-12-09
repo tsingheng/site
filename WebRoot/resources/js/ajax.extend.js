@@ -11,8 +11,18 @@
 				success: function(data, textStatus){
 					if(opt.dataType == 'json')
 						$.myAjaxSuccess(data, textStatus, success);
-					else
+					else{
+						if(data.substr(0, 1)=='{' && data.substr(data.length-1, 1)=='}'){
+							var result = eval('('+data+')');
+							if(result.auth!=undefined&&!result.auth){
+								alert(result.msg);
+								if(data.reload)
+									window.location.reload();
+								return false;
+							}
+						}
 						success(data, textStatus);
+					}
 				},
 				error: function(XMLResponse){
 					alert(XMLResponse.responseText);

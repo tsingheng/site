@@ -26,7 +26,7 @@
 			        //window.opener.close();
 			        }
 			    }else{
-			        window.close()
+			        window.close();
 			    }
 			}
 			function openMaxWin(Url,name) {

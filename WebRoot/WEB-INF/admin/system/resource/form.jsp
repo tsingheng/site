@@ -72,6 +72,4 @@
 	</tr>
 </table>
 <script type="text/javascript" src="${ctx}/resources/js/admin/resource/form.js"></script>
-<script type="text/javascript" src="${ctx}/components/jquery.validate.js"></script>
-<script type="text/javascript" src="${ctx}/components/jquery.extend.js"></script>
 </form>
