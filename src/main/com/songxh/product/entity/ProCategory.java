@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.songxh.core.BaseEntityL;
+import com.songxh.core.Sortable;
 
 /**
  * 文件名： ProCategory.java
@@ -16,7 +17,7 @@ import com.songxh.core.BaseEntityL;
  */
 @Entity
 @Table(name = "pro_category")
-public class ProCategory extends BaseEntityL {
+public class ProCategory extends BaseEntityL implements Sortable {
 
 	/**
 	 * serialVersionUID:TODO(用一句话描述这个变量表示什么)

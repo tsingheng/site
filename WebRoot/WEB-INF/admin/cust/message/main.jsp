@@ -1,8 +1,8 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/components/common.jsp" %>
 <style type="text/css">
-.panel{font-size:14px;}
-.panel td{height:24px;}
+#msgDlg{font-size:14px;}
+#msgDlg td{height:24px;}
 </style>
 <div class="easyui-layout" fit="true">
 <div region="north" border="false">

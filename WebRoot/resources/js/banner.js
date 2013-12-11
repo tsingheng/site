@@ -1,12 +1,12 @@
-//»¬¿éÌõ
+//æ»‘å—æ¡
 $(function(){
 	setTimeout(function(){
-		//´¢´æÔ­Ê¼Î»ÖÃ
+		//å‚¨å­˜åŸå§‹ä½ç½®
 		var orLeft,orWidth; 
 		$('#magic_nav').append('<li id="margic_line"></li>');
-		//»ñÈ¡»¬¿é
+		//è·å–æ»‘å—
 		var $line = $('#margic_line');
-		//¸ù¾İcurrentÉèÖÃ¿í,Î»ÖÃ;Í¬Ê±´æÔ­Ê¼Î»ÖÃ
+		//æ ¹æ®currentè®¾ç½®å®½,ä½ç½®;åŒæ—¶å­˜åŸå§‹ä½ç½®
 		var $cur = $('.current');
 		$line
 			.width($cur.width())
@@ -15,21 +15,81 @@ $(function(){
 			.data('orWidth',$line.width());
 		$('#magic_nav li').find('a').hover(function(){
 			$tar = $(this);
-			//»ñÈ¡»¬ÈëÄ¿±êµÄ¿í¶È(°üº¬padding)
+			//è·å–æ»‘å…¥ç›®æ ‡çš„å®½åº¦(åŒ…å«padding)
 			var _w = $tar.innerWidth();
-			//»ñÈ¡»¬ÈëÄ¿±êµÄÎ»ÖÃ£¨¼õµô±ß¿òºÍ×ó°ë²¿·Ö²¹°×£©
+			//è·å–æ»‘å…¥ç›®æ ‡çš„ä½ç½®ï¼ˆå‡æ‰è¾¹æ¡†å’Œå·¦åŠéƒ¨åˆ†è¡¥ç™½ï¼‰
 			var _l = $tar.position().left - 38;
-			//ÉèÖÃ»¬Èëµ±Ç°Ê±»¬¿éµÄ¿íÎ»ÖÃ
+			//è®¾ç½®æ»‘å…¥å½“å‰æ—¶æ»‘å—çš„å®½ä½ç½®
 			$line.stop().animate({
 				left:_l,
 				width:_w
 			});
 		},function(){
-			//»¬³öÊ±»Ö¸´µ½Ô­Î»ÖÃ
+			//æ»‘å‡ºæ—¶æ¢å¤åˆ°åŸä½ç½®
 			$line.stop().animate({
 				left:$line.data('orLeft'),
 				width:$line.data('orWidth')
 			});	
 		});
 	},300);
+	var time = 3000, banner = $('#banner'), item = banner.find('li:first'), control = banner.find('span:first'), curr = 1, max = banner.find('li').length;
+	var rint;
+	if(item && control){
+		control.addClass('curr');
+		item.show();
+		rint = setInterval(function(){
+			rotate();
+		}, time);
+	}
+	banner.find('span').click(function(){
+		control.removeClass('curr');
+		clearInterval(rint);
+		control = $(this);
+		curr = parseInt(control.html());
+		item.hide();
+		item = banner.find('li:eq('+(curr-1)+')');
+		control.addClass('curr');
+		item.fadeIn();
+		rint = setInterval(function(){
+			rotate();
+		}, time);
+	});
+	function rotate(){
+		control.removeClass('curr');
+		item.hide();
+		curr++;
+		if(curr <= max){
+			item = item.next();
+			control = control.next();
+		}else{
+			curr = 1;
+			item = banner.find('li:first');
+			control = banner.find('span:first');
+		}
+		item.fadeIn();
+		control.addClass('curr');
+	}
+	var speed = 30, scrollHot = $('#scroll_hot'), source = scrollHot.find('#source'), html = source.html(), height = source.height();
+	if(source.height()>0){
+		while(source.height()<2*scrollHot.height()){
+			source.append(html);
+		}
+	}
+	var mar = setInterval(function(){
+		scroll();
+	}, speed);
+	scrollHot.hover(function(){
+		clearInterval(mar);
+	}, function(){
+		mar = setInterval(function(){
+			scroll();
+		}, speed);
+	});
+	function scroll(){
+		if(scrollHot.scrollTop()>=scrollHot.height()){
+			scrollHot.scrollTop(source.height()%height);
+		}else{
+			scrollHot.scrollTop(scrollHot.scrollTop()+1);
+		}
+	}
 })

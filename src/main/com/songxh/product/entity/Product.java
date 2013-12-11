@@ -18,6 +18,7 @@ import javax.persistence.Transient;
 
 import com.songxh.common.CommonConstraint;
 import com.songxh.core.BaseEntityL;
+import com.songxh.core.Sortable;
 
 /**
  * 文件名： Product.java
@@ -28,7 +29,7 @@ import com.songxh.core.BaseEntityL;
  */
 @Entity
 @Table(name = "product")
-public class Product extends BaseEntityL {
+public class Product extends BaseEntityL implements Sortable {
 	/**
 	 * serialVersionUID:TODO(用一句话描述这个变量表示什么)
 	 * @since v1.0

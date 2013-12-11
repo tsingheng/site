@@ -161,98 +161,24 @@ function onClearPro(){
  */
 function sortPro(sortType){
 	var list = $('#pro-list');
-	var url = admin + '/product!sort.action';
+	var url = admin + '/product!sort.action?v='+new Date().getTime();
 	var selected = list.datagrid('getSelected');
-	if(selected){
-		var msg = '';
-		if((sortType == 'up' || sortType == 'first') && selected.sort <= 1){
-			// 判断是不是第一个
-			showMsg('该记录已经是第一条');
-			return false;
-		}
-		var pager = list.datagrid('getPager');
-		if((sortType == 'down' || sortType == 'last') && selected.sort >= pager.pagination('options').total){
-			// 判断是不是已经是最后一个
-			showMsg('该记录已经是最后一条');
-			return false;
-		}
-		if(sortType == 'up'){
-			msg = '确定将此记录上移';
-		}else if(sortType == 'down'){
-			msg = '确定将此记录下移';
-		}else if(sortType == 'first'){
-			msg = '确定将此记录移至第一条';
-		}else if(sortType == 'last'){
-			msg = '确定将此记录移至最后一条';
-		}
-		confirm(msg, function(){
-			$.ajax({
-				url: url,
-				method: 'post',
-				dataType: 'json',
-				data: {sortType: sortType, id: selected.id},
-				success: function(response){
-					showMsg(response.msg, function(){
-						if(response.success){
-							reload('pro');
-						}
-					});
-				}
-			});
-		});
-	}else{
-		showMsg('请先选择需要操作的记录');
-	}
+	sort(sortType, selected, list.datagrid('getPager').pagination('options').total, url, function(){
+		reload('pro');
+	});
 }
 
 function sortProImage(sortType){
 	var list = $('#pro-image-list');
-	var url = admin + '/pro-image!sort.action';
+	var url = admin + '/pro-image!sort.action?v='+new Date().getTime();
 	var selected = list.datagrid('getSelected');
-	if(selected){
-		var msg = '';
-		if((sortType == 'up' || sortType == 'first') && selected.sort <= 1){
-			// 判断是不是第一个
-			showMsg('该记录已经是第一条');
-			return false;
-		}
-		if((sortType == 'down' || sortType == 'last') && selected.sort >= list.datagrid('getData').rows.length){
-			// 判断是不是已经是最后一个
-			showMsg('该记录已经是最后一条');
-			return false;
-		}
-		if(sortType == 'up'){
-			msg = '确定将此记录上移';
-		}else if(sortType == 'down'){
-			msg = '确定将此记录下移';
-		}else if(sortType == 'first'){
-			msg = '确定将此记录移至第一条';
-		}else if(sortType == 'last'){
-			msg = '确定将此记录移至最后一条';
-		}
-		confirm(msg, function(){
-			$.ajax({
-				url: url,
-				method: 'post',
-				dataType: 'json',
-				data: {sortType: sortType, id: selected.id},
-				success: function(response){
-					showMsg(response.msg, function(){
-						if(response.success){
-							//顺序移动成功
-							var list = $('#pro-image-list');
-							list.datagrid('loadData', response.list);
-							var product = $('#pro-list').datagrid('getSelected');
-							product.images = list.datagrid('getData');
-							product.image = response.list[0].path;
-						}
-					});
-				}
-			});
-		});
-	}else{
-		showMsg('请先选择需要操作的记录');
-	}
+	sort(sortType, selected, list.datagrid('getData').rows.length, url, function(){
+		//var list = $('#pro-image-list');
+		list.datagrid('loadData', response.list);
+		var product = $('#pro-list').datagrid('getSelected');
+		product.images = list.datagrid('getData');
+		product.image = response.list[0].path;
+	});
 }
 
 function delProImage(){

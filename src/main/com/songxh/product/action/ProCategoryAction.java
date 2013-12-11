@@ -95,47 +95,7 @@ public class ProCategoryAction extends BaseAction<ProCategory> {
 	}
 	
 	public String sort(){
-		try{
-			if(id == null){
-				failed("请先选择需要操作的记录");
-			}else{
-				ProCategory category = proCategoryService.find(id);
-				if(category == null){
-					failed("请先选择需要操作的记录");
-					return null;
-				}
-				String sortType = request.getParameter("sortType");
-				if("up".equals(sortType) || "first".equals(sortType)){
-					if(category.getSort() <= 1){
-						failed("该记录已经是第一条");
-					}else{
-						if("up".equals(sortType))
-							category.setSort(category.getSort() - 1);
-						else
-							category.setSort(1);
-						proCategoryService.update(category);
-						success();
-					}
-				}else if("down".equals(sortType) || "last".equals(sortType)){
-					Map<String, Object> params = new HashMap<String, Object>();
-					List<ProCategory> list = proCategoryService.findList(params);
-					if(category.getSort() >= list.size()){
-						failed("该记录已经是最后一条");
-					}else{
-						if("down".equals(sortType))
-							category.setSort(category.getSort() + 1);
-						else
-							category.setSort(list.size());
-						proCategoryService.update(category);
-						success();
-					}
-				}
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-			failed();
-		}
-		return null;
+		return sort(new HashMap<String, Object>());
 	}
 	
 	public String del(){

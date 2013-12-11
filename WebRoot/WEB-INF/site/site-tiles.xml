@@ -8,5 +8,6 @@
 	</definition>
 	<definition name="site.index" extends="site.template">
 		<put-attribute name="site-content" value="/WEB-INF/site/jsp/index.jsp"/>
+		<put-attribute name="title" value="winsmoke"></put-attribute>
 	</definition>
 </tiles-definitions>

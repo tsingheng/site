@@ -115,43 +115,14 @@ public class InfoAction extends BaseAction<Info> {
 	}
 	
 	public String sort(){
-		if(id == null){
-			failed("请先选择需要操作的记录");
-		}else{
+		Map<String, Object> params = new HashMap<String, Object>();
+		if(id != null){
 			Info info = infoService.find(id);
-			if(info == null){
-				failed("请先选择需要操作的记录");
-				return null;
-			}
-			String sortType = request.getParameter("sortType");
-			if("up".equals(sortType) || "first".equals(sortType)){
-				if(info.getSort() <= 1){
-					failed("该记录已经是第一条");
-				}else{
-					if("up".equals(sortType))
-						info.setSort(info.getSort() - 1);
-					else
-						info.setSort(1);
-					infoService.update(info);
-					success();
-				}
-			}else if("down".equals(sortType) || "last".equals(sortType)){
-				Map<String, Object> params = new HashMap<String, Object>();
+			if(info != null){
 				params.put("typeCode", info.getTypeCode());
-				List<Info> list = infoService.findList(params);
-				if(info.getSort() >= list.size()){
-					failed("该记录已经是最后一条");
-				}else{
-					if("down".equals(sortType))
-						info.setSort(info.getSort() + 1);
-					else
-						info.setSort(list.size());
-					infoService.update(info);
-					success();
-				}
 			}
 		}
-		return null;
+		return sort(params);
 	}
 	
 	public String publish(){

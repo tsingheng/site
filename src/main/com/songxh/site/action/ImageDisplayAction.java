@@ -117,7 +117,7 @@ public class ImageDisplayAction extends BaseAction<ImageDisplay> {
 				obj.put("id", image.getId());
 				obj.put("title", image.getTitle());
 				obj.put("insertTime", DateUtils.format(image.getInsertTime()));
-				obj.put("creater", image.getCreater());
+				obj.put("creater", image.getCreater()==null?"":image.getCreater());
 				obj.put("sort", image.getSort());
 				obj.put("path", image.getAttachment().getPath());
 				obj.put("fileName", image.getAttachment().getOriginalName());
@@ -131,43 +131,14 @@ public class ImageDisplayAction extends BaseAction<ImageDisplay> {
 	}
 	
 	public String sort(){
-		if(id == null){
-			failed("请先选择需要操作的记录");
-		}else{
+		Map<String, Object> params = new HashMap<String, Object>();
+		if(id != null){
 			ImageDisplay image = imageDisplayService.find(id);
-			if(image == null){
-				failed("请先选择需要操作的记录");
-				return null;
-			}
-			String sortType = request.getParameter("sortType");
-			if("up".equals(sortType) || "first".equals(sortType)){
-				if(image.getSort() <= 1){
-					failed("该记录已经是第一条");
-				}else{
-					if("up".equals(sortType))
-						image.setSort(image.getSort() - 1);
-					else
-						image.setSort(1);
-					imageDisplayService.update(image);
-					success();
-				}
-			}else if("down".equals(sortType) || "last".equals(sortType)){
-				Map<String, Object> params = new HashMap<String, Object>();
+			if(image != null){
 				params.put("typeCode", image.getTypeCode());
-				List<ImageDisplay> list = imageDisplayService.findList(params);
-				if(image.getSort() >= list.size()){
-					failed("该记录已经是最后一条");
-				}else{
-					if("down".equals(sortType))
-						image.setSort(image.getSort() + 1);
-					else
-						image.setSort(list.size());
-					imageDisplayService.update(image);
-					success();
-				}
 			}
 		}
-		return null;
+		return sort(params);
 	}
 	
 	public String publish(){

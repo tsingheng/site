@@ -80,48 +80,11 @@ function delCate(){
  */
 function sortCate(sortType){
 	var list = $('#cate-list');
-	var url = admin + '/pro-category!sort.action';
+	var url = admin + '/pro-category!sort.action?v='+new Date().getTime();
 	var selected = list.datagrid('getSelected');
-	if(selected){
-		var msg = '';
-		if((sortType == 'up' || sortType == 'first') && selected.sort <= 1){
-			// 判断是不是第一个
-			showMsg('该记录已经是第一条');
-			return false;
-		}
-		var pager = list.datagrid('getPager');
-		if((sortType == 'down' || sortType == 'last') && selected.sort >= pager.pagination('options').total){
-			// 判断是不是已经是最后一个
-			showMsg('该记录已经是最后一条');
-			return false;
-		}
-		if(sortType == 'up'){
-			msg = '确定将[' + selected.categoryName + ']上移';
-		}else if(sortType == 'down'){
-			msg = '确定将[' + selected.categoryName + ']下移';
-		}else if(sortType == 'first'){
-			msg = '确定将[' + selected.categoryName + ']移至第一条';
-		}else if(sortType == 'last'){
-			msg = '确定将[' + selected.categoryName + ']移至最后一条';
-		}
-		confirm(msg, function(){
-			$.ajax({
-				url: url,
-				method: 'post',
-				dataType: 'json',
-				data: {sortType: sortType, id: selected.id},
-				success: function(response){
-					showMsg(response.msg, function(){
-						if(response.success){
-							reload('cate');
-						}
-					});
-				}
-			});
-		});
-	}else{
-		showMsg('请先选择需要操作的记录');
-	}
+	sort(sortType, selected, list.datagrid('getPager').pagination('options').total, url, function(){
+		reload('cate');
+	});
 }
 
 function onSearchCate(){

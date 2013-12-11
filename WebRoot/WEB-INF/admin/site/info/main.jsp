@@ -167,48 +167,11 @@ function onClearInfo${type}(){
 
 function sortInfo${type}(sortType){
 	var list = $('#${type}-info-list');
-	var url = admin + '/info!sort.action';
+	var url = admin + '/info!sort.action?type=${type}&v='+new Date().getTime();
 	var selected = list.datagrid('getSelected');
-	if(selected){
-		var msg = '';
-		if((sortType == 'up' || sortType == 'first') && selected.sort <= 1){
-			// 判断是不是第一个
-			showMsg('该记录已经是第一条');
-			return false;
-		}
-		var pager = list.datagrid('getPager');
-		if((sortType == 'down' || sortType == 'last') && selected.sort >= pager.pagination('options').total){
-			// 判断是不是已经是最后一个
-			showMsg('该记录已经是最后一条');
-			return false;
-		}
-		if(sortType == 'up'){
-			msg = '确定将此记录上移';
-		}else if(sortType == 'down'){
-			msg = '确定将此记录下移';
-		}else if(sortType == 'first'){
-			msg = '确定将此记录移至第一条';
-		}else if(sortType == 'last'){
-			msg = '确定将此记录移至最后一条';
-		}
-		confirm(msg, function(){
-			$.ajax({
-				url: url,
-				method: 'post',
-				dataType: 'json',
-				data: {sortType: sortType, id: selected.id, type: '${type}'},
-				success: function(response){
-					showMsg(response.msg, function(){
-						if(response.success){
-							reload('${type}-info');
-						}
-					});
-				}
-			});
-		});
-	}else{
-		showMsg('请先选择需要操作的记录');
-	}
+	sort(sortType, selected, list.datagrid('getPager').pagination('options').total, url, function(){
+		reload('${type}-info');
+	});
 }
 
 function publishInfo${type}(){

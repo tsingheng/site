@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 import com.songxh.core.BaseEntityL;
+import com.songxh.core.Sortable;
 
 /**
  * 文件名： Resource.java
@@ -17,7 +18,7 @@ import com.songxh.core.BaseEntityL;
  */
 @Entity
 @Table(name = "resource")
-public class Resource extends BaseEntityL {
+public class Resource extends BaseEntityL implements Sortable {
 	
 	/**
 	 * serialVersionUID:TODO(用一句话描述这个变量表示什么)

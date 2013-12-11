@@ -177,43 +177,14 @@ public class ProductAction extends BaseAction<Product> {
 	}
 	
 	public String sort(){
-		if(id == null){
-			failed("请先选择需要操作的记录");
-		}else{
+		Map<String, Object> params = new HashMap<String, Object>();
+		if(id != null){
 			Product product = productService.find(id);
-			if(product == null){
-				failed("请先选择需要操作的记录");
-				return null;
-			}
-			String sortType = request.getParameter("sortType");
-			if("up".equals(sortType) || "first".equals(sortType)){
-				if(product.getSort() <= 1){
-					failed("该记录已经是第一条");
-				}else{
-					if("up".equals(sortType))
-						product.setSort(product.getSort() - 1);
-					else
-						product.setSort(1);
-					productService.update(product);
-					success();
-				}
-			}else if("down".equals(sortType) || "last".equals(sortType)){
-				Map<String, Object> params = new HashMap<String, Object>();
+			if(product != null){
 				params.put("category.id", product.getCategory().getId());
-				List<Product> list = productService.findList(params);
-				if(product.getSort() >= list.size()){
-					failed("该记录已经是最后一条");
-				}else{
-					if("down".equals(sortType))
-						product.setSort(product.getSort() + 1);
-					else
-						product.setSort(list.size());
-					productService.update(product);
-					success();
-				}
 			}
 		}
-		return null;
+		return sort(params);
 	}
 	
 	public String publish(){

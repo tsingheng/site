@@ -10,11 +10,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.songxh.core.BaseEntityL;
+import com.songxh.core.Sortable;
 import com.songxh.system.entity.Attachment;
 
 @Entity
 @Table(name = "image_display")
-public class ImageDisplay extends BaseEntityL {
+public class ImageDisplay extends BaseEntityL implements Sortable {
 
 	/**
 	 * 

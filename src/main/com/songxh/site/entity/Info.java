@@ -7,10 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.songxh.core.BaseEntityL;
+import com.songxh.core.Sortable;
 
 @Entity
 @Table(name = "info")
-public class Info extends BaseEntityL {
+public class Info extends BaseEntityL implements Sortable {
 
 	/**
 	 * 

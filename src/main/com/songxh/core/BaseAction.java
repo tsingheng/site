@@ -2,6 +2,9 @@
 package com.songxh.core;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +15,7 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.opensymphony.xwork2.Preparable;
 import com.songxh.common.CommonConstraint;
+import com.songxh.product.entity.ProCategory;
 
 /**
  * 文件名： BaseAction.java
@@ -166,6 +170,50 @@ public abstract class BaseAction<T extends BaseEntityL> extends BaseMVC implemen
 
 	public void setRand(String rand) {
 		this.rand = rand;
+	}
+	
+	protected String sort(Map<String, Object> params){
+		try{
+			if(id == null){
+				failed("请先选择需要操作的记录");
+			}else{
+				Sortable model = (Sortable) getService().find(id);
+				if(model == null){
+					failed("请先选择需要操作的记录");
+					return null;
+				}
+				String sortType = request.getParameter("sortType");
+				if("down".equals(sortType) || "last".equals(sortType)){
+					if(model.getSort() <= 1){
+						failed("该记录已经是最后一条");
+					}else{
+						if("down".equals(sortType))
+							model.setSort(model.getSort() - 1);
+						else
+							model.setSort(1);
+						getService().update((T) model);
+						success();
+					}
+				}else if("up".equals(sortType) || "first".equals(sortType)){
+					List<T> list = getService().findList(params);
+					if(model.getSort() >= list.size()){
+						System.out.println(list.size());
+						failed("该记录已经是第一条");
+					}else{
+						if("down".equals(sortType))
+							model.setSort(model.getSort() + 1);
+						else
+							model.setSort(list.size());
+						getService().update((T) model);
+						success();
+					}
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			failed();
+		}
+		return null;
 	}
 
 }

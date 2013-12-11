@@ -126,48 +126,11 @@ function saveSuccess(api, response){
  */
 function sortResource(sortType){
 	var list = $('#resource-list');
-	var url = admin + '/resource!sort.action';
+	var url = admin + '/resource!sort.action?v='+new Date().getTime();
 	var selected = list.treegrid('getSelected');
-	if(selected){
-		var msg = '';
-		if((sortType == 'up' || sortType == 'first') && selected.sort <= 1){
-			// 判断是不是第一个
-			showMsg('该记录已经是第一条');
-			return false;
-		}
-		var brothers = list.treegrid('getChildren', selected.parent);
-		if((sortType == 'down' || sortType == 'last') && selected.sort >= brothers.length){
-			// 判断是不是已经是最后一个
-			showMsg('该记录已经是最后一条');
-			return false;
-		}
-		if(sortType == 'up'){
-			msg = '确定将此记录上移';
-		}else if(sortType == 'down'){
-			msg = '确定将此记录下移';
-		}else if(sortType == 'first'){
-			msg = '确定将此记录移至第一条';
-		}else if(sortType == 'last'){
-			msg = '确定将此记录移至最后一条';
-		}
-		confirm(msg, function(){
-			$.ajax({
-				url: url,
-				method: 'post',
-				dataType: 'json',
-				data: {sortType: sortType, id: selected.id},
-				success: function(response){
-					showMsg(response.msg, function(){
-						if(response.success){
-							reloadNode(selected.parent);
-						}
-					});
-				}
-			});
-		});
-	}else{
-		showMsg('请先选择需要操作的记录');
-	}
+	sort(sortType, selected, list.treegrid('getChildren', selected.parent).length, url, function(){
+		reloadNode(selected.parent);
+	});
 }
 
 function typeFormatter(value, row, index){
