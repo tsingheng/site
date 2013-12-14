@@ -1,6 +1,7 @@
 
 package com.songxh.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.songxh.common.CommonConstraint;
 import com.songxh.core.BaseController;
+import com.songxh.core.Page;
 import com.songxh.cust.service.MessageService;
 import com.songxh.product.entity.ProCategory;
+import com.songxh.product.entity.Product;
 import com.songxh.product.service.ProCategoryService;
 import com.songxh.product.service.ProImageService;
 import com.songxh.product.service.ProductService;
@@ -60,14 +63,39 @@ public class IndexController extends BaseController {
 	@RequestMapping("/product/p{pageNo}")
 	public String proCatePage(@PathVariable("pageNo") Integer pageNo){
 		request.setAttribute("type", "product");
+		request.setAttribute("title", "Products");
 		common();
+		if(pageNo == null) pageNo = 1;
+		Page<ProCategory> page = new Page<ProCategory>(pageNo, 4);
+		page = proCategoryService.findList(page, new HashMap<String, Object>());
+		for(ProCategory category : page.getResult()){
+			List<Product> products = productService.findList(0, 4, "where category.id=? order by sort desc", category.getId());
+			category.setProducts(products);
+			if(products != null && !products.isEmpty()){
+				category.setProCount(products.size());
+			}
+		}
+		request.setAttribute("page", page);
 		return "site.procate";
 	}
 
 	@RequestMapping("/product/{cate}/p{pageNo}")
-	public String proPage(@PathVariable("cate") Integer cate, @PathVariable("pageNo") Integer pageNo){
+	public String proPage(@PathVariable("cate") Long cate, @PathVariable("pageNo") Integer pageNo){
+		if(cate == null){
+			List<ProCategory> clist = proCategoryService.findList(0, 1, "");
+			if(clist != null && !clist.isEmpty()){
+				cate = clist.get(0).getId();
+			}
+		}
+		if(pageNo == null) pageNo = 1;
+		request.setAttribute("title", "Products");
 		request.setAttribute("type", "product");
 		common();
+		Page<Product> page = new Page<Product>(pageNo, 10);
+		page = productService.findList(page, new HashMap<String, Object>());
+		request.setAttribute("page", page);
+		ProCategory category = proCategoryService.find(cate);
+		request.setAttribute("category", category);
 		return "site.product";
 	}
 	

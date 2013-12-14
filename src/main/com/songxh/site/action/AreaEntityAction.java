@@ -113,18 +113,15 @@ public class AreaEntityAction extends BaseAction<AreaEntity> {
 					return target;
 				}
 			}
-			return null;
-		}else{
-			addSave();
-			return null;
 		}
+		return null;
 	}
 	
 	@Override
-	protected void addSave() {
+	public String add() {
 		boolean success = false;
 		String msg = "";
-		String type = request.getParameter("type");
+		String type = request.getParameter("ctype");
 		if(id == null){
 			msg = "请先选择要添加的记录";
 		}else if(StringUtils.isBlank(type)){
@@ -151,10 +148,11 @@ public class AreaEntityAction extends BaseAction<AreaEntity> {
 		obj.put("success", success);
 		obj.put("msg", msg);
 		outJson(obj.toJSONString());
+		return null;
 	}
 
 	@Override
-	protected void editSave() {
+	public String edit() {
 		boolean success = false;
 		String msg = "";
 		String areaIdStr = request.getParameter("areaId");
@@ -174,6 +172,7 @@ public class AreaEntityAction extends BaseAction<AreaEntity> {
 		obj.put("success", success);
 		obj.put("msg", msg);
 		outJson(obj.toJSONString());
+		return null;
 	}
 
 	@Override
@@ -246,6 +245,18 @@ public class AreaEntityAction extends BaseAction<AreaEntity> {
 			}
 		}
 		outJson(array.toJSONString());
+	}
+
+	@Override
+	protected void addSave() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void editSave() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

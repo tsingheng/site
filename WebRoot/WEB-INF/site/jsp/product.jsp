@@ -1,9 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 		<%@ include file="/components/common.jsp" %>
-		<c:forEach items="${page}" var="category">
+		<c:forEach items="${page.result}" var="category">
 		<c:if test="${fn:length(category.products) > 0}">
 		<dl class="dl dl4">
-            <dt><h2><a class="a12" href="${ctx}/category/cate-${category.id}/p1.htm" title="${category.categoryName}">${category.categoryName}</a> (<span>${category.size}</span>)</h2></dt>
+            <dt><h2><a class="a12" href="${ctx}/product/${category.id}/p1.htm" title="${category.categoryName}">${category.categoryName}</a> (<span>${category.proCount}</span>)</h2></dt>
             <dd>
                 <ul class="bpl public_ul">
                 	<c:forEach items="${category.products}" var="pro">
@@ -12,8 +12,8 @@
                         <a class="tl" href="${ctx}/proinfo/pro-${pro.id}.htm" title="${pro.productName}">${pro.productName}</a>
                     </li>
                     </c:forEach>
+                    <br clear="all"/>
                 </ul>
-                <div class="clear"></div>
             </dd>
         </dl>
         </c:if>

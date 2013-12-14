@@ -235,6 +235,10 @@ public abstract class BaseService<T extends BaseEntityL> {
 		return list;
 	}
 	
+	public List<T> findList(int start, int limit, String hql, Object...values){
+		return this.getBaseDAO().findList(start, limit, hql, values);
+	}
+	
 	private Class getEntityClass(){
 		return (Class) ((ParameterizedType) getBaseDAO().getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 	}

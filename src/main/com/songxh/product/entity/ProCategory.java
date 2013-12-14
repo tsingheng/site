@@ -1,6 +1,8 @@
 
 package com.songxh.product.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -43,6 +45,8 @@ public class ProCategory extends BaseEntityL implements Sortable {
 	
 	/** 该分类产品数量 **/
 	private Integer proCount;
+	
+	private List<Product> products;
 	
 	@Column(name = "CATEGORY_NAME", length = 30)
 	public String getCategoryName() {
@@ -90,6 +94,14 @@ public class ProCategory extends BaseEntityL implements Sortable {
 	}
 	public void setProCount(Integer proCount) {
 		this.proCount = proCount;
+	}
+	
+	@Transient
+	public List<Product> getProducts() {
+		return products;
+	}
+	public void setProducts(List<Product> products) {
+		this.products = products;
 	}
 
 }

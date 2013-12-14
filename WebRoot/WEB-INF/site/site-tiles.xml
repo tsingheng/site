@@ -11,10 +11,10 @@
 		<!--<put-attribute name="title" value="winsmoke"></put-attribute>-->
 	</definition>
 	<definition name="site.procate" extends="site.template">
-		<put-attribute name="site-content" value="/WEB-INF/site/jsp/category.jsp"></put-attribute>
+		<put-attribute name="site-content" value="/WEB-INF/site/jsp/product.jsp"></put-attribute>
 	</definition>
 	<definition name="site.product" extends="site.template">
-		<put-attribute name="site-content" value="/WEB-INF/site/jsp/product.jsp"></put-attribute>
+		<put-attribute name="site-content" value="/WEB-INF/site/jsp/category.jsp"></put-attribute>
 	</definition>
 	<definition name="site.proinfo" extends="site.template">
 		<put-attribute name="site-content" value="/WEB-INF/site/jsp/proinfo.jsp"></put-attribute>

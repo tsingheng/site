@@ -3,21 +3,21 @@
 		<%-- 分页开始 --%>
         <div id="pager">
 	        <ul class="public_ul">
-		        <li>Total <span>${total}</span> Records</li>
+		        <li>Total <span>${page.totalCount}</span> Records</li>
 		        <c:choose>
-		        <c:when test="${pageNo eq 1}">
+		        <c:when test="${page.pageNo eq 1}">
 		        <li><a style="color:#666;">First</a></li>
 		        <li><a style="color:#666;">Prev</a></li>
 		        </c:when>
 		        <c:otherwise>
 		        <li><a href="p1.htm">First</a></li>
-		        <li><a href="p${pageNo-1}.htm">Prev</a></li>
+		        <li><a href="p${page.pageNo-1}.htm">Prev</a></li>
 		        </c:otherwise>
 		        </c:choose>
 		        <li class="no">
-		        	<c:forEach begin="1" end="${pageNum}" var="i">
+		        	<c:forEach begin="1" end="${page.pageSize}" var="i">
 		        	<c:choose>
-			        <c:when test="${pageNo eq i}">
+			        <c:when test="${page.pageNo eq i}">
 			        <a class="dq">${i}</a>
 			        </c:when>
 			        <c:otherwise>
@@ -27,9 +27,9 @@
 		        	</c:forEach>
 		        <li>
 		        <c:choose>
-		        <c:when test="${pageNo lt pageNum}">
-		        <li><a href="p${pageNo+1}.htm">Next</a></li>
-		        <li><a href="p${pageNum}.htm">Last</a></li>
+		        <c:when test="${page.pageNo lt page.pageSize}">
+		        <li><a href="p${page.pageNo+1}.htm">Next</a></li>
+		        <li><a href="p${page.pageSize}.htm">Last</a></li>
 		        </c:when>
 		        <c:otherwise>
 		        <li><a style="color:#666;">Next</a></li>

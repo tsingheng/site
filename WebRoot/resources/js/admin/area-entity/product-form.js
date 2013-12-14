@@ -41,7 +41,7 @@ function onClearEntityPro(){
 	list.datagrid('reload');
 }
 function addEntityPro(){
-	var url = admin + '/area-entity!add.action';
+	var url = admin + '/area-entity!add.action?v='+new Date().getTime();
 	var list = $('#entity-pro-list');
 	var selected = list.datagrid('getSelected');
 	if(selected){
@@ -50,7 +50,7 @@ function addEntityPro(){
 				url: url,
 				method: 'post',
 				dataType: 'json',
-				data: {id: selected.id, type: 'product'},
+				data: {id: selected.id, ctype: '3'},
 				success: function(response){
 					showMsg(response.msg, function(){
 						

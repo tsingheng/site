@@ -32,12 +32,11 @@ public class Page<T> {
 	/**	是否分页查询  **/
 	private boolean isPage;
 	
-	public Page(int pageNo, int pageSize){
+	public Page(int pageNo, int limit){
 		this.pageNo = pageNo;
-		this.pageSize = pageSize;
 		this.isPage = true;
-		this.start = (pageNo-1)*pageSize - 1;
-		this.limit = pageSize;
+		this.start = (pageNo-1)*limit - 1;
+		this.limit = limit;
 	}
 	
 	public int getStart() {
@@ -75,6 +74,11 @@ public class Page<T> {
 	}
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
+		this.pageSize = totalCount/limit;
+		pageSize = totalCount%limit==0?pageSize:pageSize+1;
+		if(pageNo > pageSize) pageNo = pageSize;
+		if(pageNo <= 0) pageNo = 1;
+		this.start = (pageNo-1)*limit - 1;
 	}
 	public boolean isPage() {
 		return isPage;

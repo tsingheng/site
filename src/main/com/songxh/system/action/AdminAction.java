@@ -151,6 +151,7 @@ public class AdminAction extends BaseAction<User> {
 						resources.add(entry.getValue().getResource().getResourceCode());
 						if(entry.getValue().getResource().getResourceUri() == null)
 							continue;
+						//System.out.println(entry.getValue().getResource().getResourceUri());
 						urls.add(entry.getValue().getResource().getResourceUri());
 					}
 					loginUser.setResources(resources);

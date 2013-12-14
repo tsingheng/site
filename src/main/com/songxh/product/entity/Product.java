@@ -75,6 +75,14 @@ public class Product extends BaseEntityL implements Sortable {
 	/** 默认显示的图片,即第一张图片 **/
 	private String image;
 	
+	@Transient
+	public String getOneImage(){
+		if(images != null && !images.isEmpty()){
+			return images.iterator().next().getAttachment().getPath();
+		}
+		return "";
+	}
+	
 	@Column(name = "PRODUCT_NAME", length = 30)
 	public String getProductName() {
 		return productName;
