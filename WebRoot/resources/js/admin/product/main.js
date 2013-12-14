@@ -141,7 +141,7 @@ function onSearchPro(){
 	var list = $('#pro-list');
 	list.datagrid({
 		queryParams: {
-			userName: $('#productName').val()
+			productName: $('#productName').val()
 		}
 	});
 	list.datagrid('reload');

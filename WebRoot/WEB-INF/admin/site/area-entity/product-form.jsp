@@ -1,28 +1,42 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-  <head>
-    <base href="<%=basePath%>">
-    
-    <title>My JSP 'product-form.jsp' starting page</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-
-  </head>
-  
-  <body>
-    This is my JSP page. <br>
-  </body>
-</html>
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ include file="/components/common.jsp" %>
+<div class="easyui-layout" fit="true">
+	<div region="west" style="width:200px; border:none;">
+		<ul id="entity-cate-tree-list" class="easyui-tree">
+			<c:forEach items="${tree}" var="category">
+			<li id="${category.id}">${category.text}</li>
+			</c:forEach>
+		</ul>
+	</div>
+	<div region="center" style="border-top:none; border-right:none; border-bottom:none;">
+		<div class="easyui-layout" fit="true">
+		<div region="north" style="border:none;">
+			<ul class="condition">
+				<li><span class="label">产品名称：</span><input type="text" id="entity-productName" class="search"/></li>
+				<li>
+					<a href="#" onclick="onSearchEntityPro();" class="easyui-linkbutton">搜索</a>
+					<a href="#" onclick="onClearEntityPro();" class="easyui-linkbutton">清空</a>
+				</li>
+			</ul>
+		</div>
+		<div region="center" style="border:none;">
+			<div class="easyui-menu" id="entity-pro-menu">
+				<div onclick="addEntityPro();">在首页显示</div>
+			</div>
+			<table class="easyui-datagrid" singleSelect="true" rownumbers="true" idField="id" fitColumns="true"
+				pagination="true" id="entity-pro-list" fit="true" border="false">
+				<thead>
+					<tr>
+						<th field="productName" width="15%">产品名称</th>
+						<th field="sort" width="5%">排序</th>
+						<th field="creater" width="10%">添加者</th>
+						<th field="insertTime" width="20%">添加时间</th>
+						<th field="viewTimes" width="10%">浏览次数</th>
+						<th field="memo" width="40%">备注</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="${ctx}/resources/js/admin/area-entity/product-form.js"></script>

@@ -25,6 +25,13 @@ public class AreaEntityService extends BaseService<AreaEntity> {
 		map.put("area", areaId);
 		return areaEntityDAO.findList(map, CommonConstraint.SORT);
 	}
+	
+	public List<AreaEntity> findByAreaIdAndEntityId(Long areaId, Long entityId){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("area", areaId);
+		map.put("entityId", entityId);
+		return areaEntityDAO.findList(map, "");
+	}
 
 	@Override
 	public BaseDAO<AreaEntity> getBaseDAO() {

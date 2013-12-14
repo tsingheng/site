@@ -39,7 +39,7 @@ public class SiteProperty extends BaseEntityL {
 		this.propertyValue = propertyValue;
 	}
 	
-	@Column(name = "PROPERTY_NAME", length = 20)
+	@Column(name = "PROPERTY_NAME")
 	public String getPropertyName() {
 		return propertyName;
 	}

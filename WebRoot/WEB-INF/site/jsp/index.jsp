@@ -28,7 +28,7 @@
 					<li><a href="proinfo/pro-42.htm" title="BCC"><img src="http://winsmoke.com/uploadFiles/20130625065527319.JPG" alt="BCC" /></a><a class="tl" href="proinfo/pro-42.htm" title="BCC">BCC</a></li>
 					
 					<li><a href="proinfo/pro-62.htm" title="Metal injection bottle"><img src="http://winsmoke.com/uploadFiles/20130824135544056.JPG" alt="Metal injection bottle" /></a><a class="tl" href="proinfo/pro-62.htm" title="Metal injection bottle">Metal injection bottle</a></li>
-					<li><a href="proinfo/pro-63.htm" title="Protank"><img src="http://winsmoke.com/uploadFiles/20130824140516951.JPG" alt="Protank" /></a><a class="tl" href="proinfo/pro-63.htm" title="Protank">Protank</a></li>
+
 					<li><a href="proinfo/pro-63.htm" title="Protank"><img src="http://winsmoke.com/uploadFiles/20130824140516950.JPG" alt="Protank" /></a><a class="tl" href="proinfo/pro-63.htm" title="Protank">Protank</a></li>
 					
                </ul>

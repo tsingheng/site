@@ -1,6 +1,9 @@
 package com.songxh.site.action;
 
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,11 +62,11 @@ public class AreaEntityAction extends BaseAction<AreaEntity> {
 					}
 					if(sb.length() > 0) sb.deleteCharAt(0);
 					request.setAttribute("nodes", sb.toString());
-					String url = "";
-					JSONArray tree = new JSONArray();
+					String target = "";
+					List<Map<String, Object>> tree = new LinkedList<Map<String, Object>>();
 					if(IndexAreaTypes.ContentTypeEnums.INFO.getValue().equals(area.getContentType())){
-						JSONObject obj = null;
-						obj = new JSONObject();
+						Map<String, Object> obj = null;
+						obj = new HashMap<String, Object>();
 						obj.put("text", "公司新闻");
 						obj.put("id", "area-info-news");
 						obj.put("leaf", true);
@@ -81,32 +84,33 @@ public class AreaEntityAction extends BaseAction<AreaEntity> {
 						obj.put("leaf", true);
 						obj.put("url", "info.action?type=contact");
 						tree.add(obj);
+						target = "add-info";
 					}else if(IndexAreaTypes.ContentTypeEnums.IMAGE.getValue().equals(area.getContentType())){
-						JSONObject obj = null;
-						obj = new JSONObject();
+						Map<String, Object> obj = null;
+						obj = new HashMap<String, Object>();
 						obj.put("text", "公司照片");
 						obj.put("id", "area-image-factory");
 						obj.put("leaf", true);
 						obj.put("url", "image-display.action?type=factory");
 						tree.add(obj);
+						target = "add-image";
 					}else if(IndexAreaTypes.ContentTypeEnums.PRODUCT.getValue().equals(area.getContentType())){
-						JSONObject obj = null;
+						Map<String, Object> obj = null;
 						List<ProCategory> cateList = this.proCategoryService.findAll(CommonConstraint.SORT);
 						if(cateList != null && !cateList.isEmpty()){
 							for(ProCategory cate : cateList){
-								obj = new JSONObject();
-								obj.put("id", "area-product-" + cate.getId());
+								obj = new HashMap<String, Object>();
+								obj.put("id", cate.getId());
 								obj.put("text", cate.getCategoryName());
 								obj.put("leaf", true);
 								obj.put("url", "product.action?category=" + cate.getId());
 								tree.add(obj);
 							}
 						}
-						url = "product.action";
+						target = "add-product";
 					}
-					request.setAttribute("tree", tree.toString());
-					request.setAttribute("url", url);
-					return "form";
+					request.setAttribute("tree", tree);
+					return target;
 				}
 			}
 			return null;
@@ -117,10 +121,60 @@ public class AreaEntityAction extends BaseAction<AreaEntity> {
 	}
 	
 	@Override
-	protected void addSave() {}
+	protected void addSave() {
+		boolean success = false;
+		String msg = "";
+		String type = request.getParameter("type");
+		if(id == null){
+			msg = "请先选择要添加的记录";
+		}else if(StringUtils.isBlank(type)){
+			msg = "非法操作";
+		}else{
+			IndexArea area = indexAreaService.findByContentType(type);
+			if(area == null){
+				msg = "没有这个分类";
+			}else{
+				List<AreaEntity> list = areaEntityService.findByAreaIdAndEntityId(area.getId(), id);
+				if(list != null && !list.isEmpty()){
+					msg = "该记录已在首页显示";
+				}else{
+					AreaEntity entity = new AreaEntity();
+					entity.setArea(area.getId());
+					entity.setEntityId(id);
+					areaEntityService.insert(entity);
+					success = true;
+					msg = "操作成功";
+				}
+			}
+		}
+		JSONObject obj = new JSONObject();
+		obj.put("success", success);
+		obj.put("msg", msg);
+		outJson(obj.toJSONString());
+	}
 
 	@Override
-	protected void editSave() {}
+	protected void editSave() {
+		boolean success = false;
+		String msg = "";
+		String areaIdStr = request.getParameter("areaId");
+		if(StringUtils.isBlank(areaIdStr)){
+			msg = "请先选择首页区域";
+		}else if(id == null){
+			msg = "请先选择需要移除的记录";
+		}else{
+			List<AreaEntity> list = areaEntityService.findByAreaIdAndEntityId(Long.parseLong(areaIdStr), id);
+			if(list == null || list.isEmpty()){
+				msg = "不存在该记录";
+			}else{
+				areaEntityService.delete(list.get(0).getId());
+			}
+		}
+		JSONObject obj = new JSONObject();
+		obj.put("success", success);
+		obj.put("msg", msg);
+		outJson(obj.toJSONString());
+	}
 
 	@Override
 	protected BaseService<AreaEntity> getService() {

@@ -3,11 +3,12 @@
 body{margin:0;padding:0;font-size:12px;font-family:Arial,"宋体";color:#333;}
 a{color:#333;text-decoration:none;}
 a:hover{color:#f60;}
+table.form td,table.form th{padding:4px;}
 .wrap{width:1000px;margin:0 auto;}
 #header{height:100px;}
 #logo{width:140px;float:left;}
-#topr{width:860px;height:65px;float:left;}
-#topr .cname{}
+#topr{width:860px;height:100px;float:left;}
+#topr .cname{width:710px;float:left;}
 #topr .clist{width:150px;height:65px;float:right;text-align:right;}
 #topr .clist li a{font-size:13px;line-height:20px;}
 #logo img{height:100px;}

@@ -30,7 +30,7 @@
 <div id="area-win" class="easyui-window" cache="false" style="width:610px;height:430px;" closed="true">
 </div>
 </div>
-<div region="south" style="height:300px;" style="border-left:none;border-right:none;border-bottom:none;">
+<div region="south" style="height:400px;" style="border-left:none;border-right:none;border-bottom:none;">
 	<div class="easyui-layout" fit="true">
 		<div region="north" border="none">
 			<div class="toolbar">
@@ -59,7 +59,7 @@
 			<table class="easyui-cardview" singleSelect="true" idField="id" colNums="2" pagination="true" id="area-entity-card-list" 
 				fit="true" border="false" url="${ctx}/admin/area-entity.action">
 			</table>
-			<div id="area-entity-win" class="easyui-window" cache="false" style="width:610px;height:430px;" closed="true"></div>
+			<div id="area-entity-win" class="easyui-window" cache="false" style="width:910px;height:630px;" closed="true"></div>
 		</div>
 	</div>
 </div>

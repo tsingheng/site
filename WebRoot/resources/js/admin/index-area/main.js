@@ -96,7 +96,7 @@ function addAreaEntity(){
 	if(!selected){
 		showMsg('请先选择首页区域');
 	}else{
-		var url = admin + '/area-entity!add.action?areaId=' + selected.id + '&viewType=' + selected.viewType;
+		var url = admin + '/area-entity!form.action?areaId=' + selected.id + '&viewType=' + selected.viewType;
 		openForm('area-entity-win', url, '变更首页区域内容');
 	}
 }

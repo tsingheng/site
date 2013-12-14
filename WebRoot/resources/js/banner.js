@@ -69,12 +69,14 @@ $(function(){
 		item.fadeIn();
 		control.addClass('curr');
 	}
-	var speed = 30, scrollHot = $('#scroll_hot'), source = scrollHot.find('#source'), html = source.html(), height = source.height();
+	var speed = 30, scrollHot = $('#scroll_hot'), source = scrollHot.find('#source'), copy = scrollHot.find('#copy'), html = source.html();
 	if(source.height()>0){
-		while(source.height()<2*scrollHot.height()){
+		while(source.height()<scrollHot.height()){
 			source.append(html);
 		}
 	}
+	var height = source.height()-scrollHot.height();
+	copy.html(source.html());
 	var mar = setInterval(function(){
 		scroll();
 	}, speed);
@@ -86,8 +88,8 @@ $(function(){
 		}, speed);
 	});
 	function scroll(){
-		if(scrollHot.scrollTop()>=scrollHot.height()){
-			scrollHot.scrollTop(source.height()%height);
+		if(scrollHot.scrollTop()>=2*source.height()-scrollHot.height()){
+			scrollHot.scrollTop(height);
 		}else{
 			scrollHot.scrollTop(scrollHot.scrollTop()+1);
 		}

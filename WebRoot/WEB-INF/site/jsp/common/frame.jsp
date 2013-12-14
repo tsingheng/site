@@ -1,10 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ include file="/components/common.jsp" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
   <head>
-    <title><tiles:getAsString name="title"/></title>
+    <title>winsmoke-${title}-${site_title}</title>
     <%@ include file="/components/keyword.jsp" %>
     <script type="text/javascript" src="${ctx}/resources/js/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="${ctx}/resources/js/banner.js"></script>
@@ -15,23 +15,23 @@
   	<div id="header">
   		<div id="logo"><a href=""><img src="${ctx}/resources/images/logo.png"/></a></div>
   		<div id="topr">
-  			<div class="cname"></div>
+  			<div class="cname">${site_head}</div>
   			<div class="clist">
   				<ul class="public_ul">
-				    <li><a href="callto://winsmoke" class="ico_tel">winsmoke</a></li>
-				    <li><a class="ico_mail" href="mailto:winsmoke@163.com">winsmoke@163.com</a></li>
+				    <li><a href="callto://${skype }" class="ico_tel">${skype}</a></li>
+				    <li><a class="ico_mail" href="mailto:${email}">${email}</a></li>
 				</ul>
   			</div>
   			<br clear="all"/>
   			<div class="nav">
   				<ul class="menu public_ul" id="magic_nav">
-				    <li class="current"><a href="/index.htm">Home</a></li>
-				    <li><a href="/product/p.htm">Products</a></li>
-				    <li><a href="/about.htm">About Us</a></li>
-				    <li><a href="/fctphoto/p.htm">Factory Display</a></li>
-				    <li><a href="/contact.htm">Contact Us</a></li>
-				    <li><a href="/news/p.htm">Company News</a></li>
-				    <li><a href="/message.htm">Message</a></li>
+				    <li<c:if test="${type eq 'index'}"> class="current"</c:if>><a href="/index.htm">Home</a></li>
+				    <li<c:if test="${type eq 'product'}"> class="current"</c:if>><a href="/product/p.htm">Products</a></li>
+				    <li<c:if test="${type eq 'about'}"> class="current"</c:if>><a href="/info/about.htm">About Us</a></li>
+				    <li<c:if test="${type eq 'factory'}"> class="current"</c:if>><a href="/photo/factory.htm">Factory Display</a></li>
+				    <li<c:if test="${type eq 'contact'}"> class="current"</c:if>><a href="/info/contact.htm">Contact Us</a></li>
+				    <li<c:if test="${type eq 'news'}"> class="current"</c:if>><a href="/news/p.htm">Company News</a></li>
+				    <li<c:if test="${type eq 'message'}"> class="current"</c:if>><a href="/message.htm">Message</a></li>
 				</ul>
   			</div>
   		</div>
@@ -120,8 +120,7 @@
   		</div>
   		<div id="footer">
 			<div class="f_div">
-		        <div class="f_lnk"><a href="#" title="bbc" target="_blank"></a></div>
-		        <div class="f_cp"></div>
+		        <div class="f_lnk">${site_foot}</div>
 		    </div>
 		</div>
   	</div>
