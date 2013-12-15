@@ -5,28 +5,25 @@ $(document).ready(function(){
 		onSelect: onAreaSelect,
 		onLoadSuccess: function(data){
 			$('#area-entity-grid-list').datagrid('loadData', []);
-			$('#area-entity-card-list').cardview('loadData', []);
 		}
 	});
+	$('#area-entity-grid-list').datagrid({
+		onRowContextMenu: entityContextMenu
+	});
+	function entityContextMenu(e, index, data){
+		e.preventDefault();
+		$('#area-entity-menu').menu('show', {
+			left: e.pageX,
+			top: e.pageY
+		});
+		$('#area-entity-grid-list').datagrid('selectRow', index);
+	}
 });
 
 function onAreaSelect(index, data){
 	if($.data($('#area-list')[0], 'selected') == index) return;
 	$.data($('#area-list')[0], 'selected', index)
-	showList(data.viewType);
-	if(data.list){
-		if(data.viewType == '2'){
-			$('#area-entity-grid-list').datagrid('loadData', data.list);
-		}else{
-			$('#area-entity-card-list').cardview('loadData', data.list);
-		}
-	}else{
-		if(data.viewType == '2'){
-			$('#area-entity-grid-list').datagrid({url: admin + '/area-entity.action?areaId=' + data.id});
-		}else{
-			$('#area-entity-card-list').cardview({url: admin + '/area-entity.action?areaId=' + data.id});
-		}
-	}
+	$('#area-entity-grid-list').datagrid({url: admin + '/area-entity.action?areaId=' + data.id});
 }
 
 function areaContextMenu(e, index, data){
@@ -67,7 +64,7 @@ function editArea(){
  * @return {TypeName} 
  */
 function delArea(){
-	var url = admin + '/index-area!del.action';
+	var url = admin + '/index-area!del.action?v='+new Date().getTime();
 	var selected = $('#area-list').datagrid('getSelected');
 	if(selected){
 		confirm('确定删除首页区域[' + selected.areaName + ']吗', function(){
@@ -102,5 +99,33 @@ function addAreaEntity(){
 }
 
 function delAreaEntity(){
-	
+	var url = admin + '/area-entity!del.action?v='+new Date().getTime();
+	var selected = $('#area-entity-grid-list').datagrid('getSelected');
+	if(selected){
+		confirm('确定删除记录[' + selected.title + ']吗', function(){
+			$.ajax({
+				url: url,
+				method: 'post',
+				dataType: 'json',
+				data: {id: selected.id, areaId: $('#area-list').datagrid('getSelected').id},
+				success: function(response){
+					showMsg(response.msg, function(){
+						if(response.success){
+							reload('area-entity');
+						}
+					});
+				}
+			});
+		});
+	}else{
+		showMsg('请先选择需要删除的记录');
+	}
+}
+function sortEntity(sortType){
+	var list = $('#area-entity-grid-list');
+	var url = admin + '/area-entity!sort.action?v='+new Date().getTime();
+	var selected = list.datagrid('getSelected');
+	sort(sortType, selected, list.datagrid('getPager').pagination('options').total, url, function(){
+		reload('area-entity-grid');
+	});
 }

@@ -200,7 +200,7 @@ public abstract class BaseAction<T extends BaseEntityL> extends BaseMVC implemen
 						System.out.println(list.size());
 						failed("该记录已经是第一条");
 					}else{
-						if("down".equals(sortType))
+						if("up".equals(sortType))
 							model.setSort(model.getSort() + 1);
 						else
 							model.setSort(list.size());

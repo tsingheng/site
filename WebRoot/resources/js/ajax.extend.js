@@ -17,7 +17,7 @@
 							if(result.auth!=undefined&&!result.auth){
 								alert(result.msg);
 								if(data.reload)
-									window.location.reload();
+									document.location.reload();
 								return false;
 							}
 						}

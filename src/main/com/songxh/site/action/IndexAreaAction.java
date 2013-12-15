@@ -11,8 +11,8 @@ import com.songxh.common.IndexAreaTypes.OrientationEnums;
 import com.songxh.common.IndexAreaTypes.ViewTypeEnums;
 import com.songxh.core.BaseAction;
 import com.songxh.core.BaseService;
-import com.songxh.product.service.IndexAreaService;
 import com.songxh.site.entity.IndexArea;
+import com.songxh.site.service.IndexAreaService;
 
 public class IndexAreaAction extends BaseAction<IndexArea> {
 	

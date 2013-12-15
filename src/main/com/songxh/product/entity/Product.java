@@ -92,7 +92,7 @@ public class Product extends BaseEntityL implements Sortable {
 	}
 	
 	// 一般用到产品的地方不在需要他的分类信息了
-	@ManyToOne(targetEntity = ProCategory.class, fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity = ProCategory.class, fetch = FetchType.EAGER)
 	@JoinColumn(name = "CATEGORY")
 	public ProCategory getCategory() {
 		return category;

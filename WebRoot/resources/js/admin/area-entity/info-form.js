@@ -3,24 +3,24 @@ $(document).ready(function(){
 		onClick: onCateTreeClick
 	});
 	function onCateTreeClick(node){
-		var list = $('#entity-pro-list');
+		var list = $('#entity-info-list');
 		list.datagrid('unselectAll');
 		var url = list.datagrid('options').url;
-		if(url != admin + '/product.action?category='+node.id){
+		if(url != admin + '/info.action?type='+node.id){
 			list.datagrid({
-				url: admin + '/product.action?category='+node.id
+				url: admin + '/info.action?type='+node.id
 			});
 		}
 	}
-	$('#entity-pro-list').datagrid({
-		onRowContextMenu: proContextMenu
+	$('#entity-info-list').datagrid({
+		onRowContextMenu: infoContextMenu
 	});
-	function proContextMenu(e, index, data){
+	function infoContextMenu(e, index, data){
 		e.preventDefault();
-		$('#entity-pro-list').datagrid('selectRow', index);
+		$('#entity-info-list').datagrid('selectRow', index);
 		if($.inArray(data.id, nodes)>-1) return;
-		var menu = $('#entity-pro-menu');
-		var list = $('#entity-pro-list');
+		var menu = $('#entity-info-menu');
+		var list = $('#entity-info-list');
 		menu.menu('show', {
 			left: e.pageX,
 			top: e.pageY
@@ -34,34 +34,34 @@ function entityStyler(index, row){
 		return '';
 	}
 }
-function onSearchEntityPro(){
-	var list = $('#entity-pro-list');
+function onSearchEntityInfo(){
+	var list = $('#entity-info-list');
 	list.datagrid({
 		queryParams: {
-			productName: $('#entity-productName').val()
+			title: $('#entity-infoTitle').val()
 		}
 	});
 	list.datagrid('reload');
 }
-function onClearEntityPro(){
-	var list = $('#entity-pro-list');
+function onClearEntityInfo(){
+	var list = $('#entity-info-list');
 	list.datagrid({
 		queryParams: {}
 	});
-	$('#entity-productName').val('');
+	$('#entity-infoTitle').val('');
 	list.datagrid('reload');
 }
-function addEntityPro(){
+function addEntityInfo(){
 	var url = admin + '/area-entity!add.action?v='+new Date().getTime();
-	var list = $('#entity-pro-list');
+	var list = $('#entity-info-list');
 	var selected = list.datagrid('getSelected');
 	if(selected){
-		confirm('确定要将产品[' + selected.productName + ']放在首页显示吗', function(){
+		confirm('确定要将文章[' + selected.title + ']放在首页显示吗', function(){
 			$.ajax({
 				url: url,
 				method: 'post',
 				dataType: 'json',
-				data: {id: selected.id, ctype: '3'},
+				data: {id: selected.id, ctype: '2'},
 				success: function(response){
 					showMsg(response.msg, function(){
 						list.datagrid('reload');
@@ -70,6 +70,6 @@ function addEntityPro(){
 			});
 		});
 	}else{
-		showMsg('请先选择需要在首页显示的产品记录');
+		showMsg('请先选择需要在首页显示的文章记录');
 	}
 }

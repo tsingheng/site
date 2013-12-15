@@ -56,12 +56,12 @@ function addEntityPro(){
 	var list = $('#entity-pro-list');
 	var selected = list.datagrid('getSelected');
 	if(selected){
-		confirm('确定要将产品[' + selected.productName + ']放在首页显示吗', function(){
+		confirm('确定要将产品[' + selected.productName + ']的图片放在首页显示吗', function(){
 			$.ajax({
 				url: url,
 				method: 'post',
 				dataType: 'json',
-				data: {id: selected.id, ctype: '3'},
+				data: {id: selected.id, ctype: '1'},
 				success: function(response){
 					showMsg(response.msg, function(){
 						list.datagrid('reload');

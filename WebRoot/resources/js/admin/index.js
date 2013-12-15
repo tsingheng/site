@@ -88,7 +88,7 @@ $(document).ready(function() {
 				closeProgress();
 				if(result.success){
 					alert('密码修改成功，请使用新密码重新登录');
-					window.location.reload();
+					document.location.reload();
 				}else{
 					alert(result.msg);
 				}

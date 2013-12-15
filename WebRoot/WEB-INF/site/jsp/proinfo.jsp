@@ -1,13 +1,13 @@
 ﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 		<%@ include file="/components/common.jsp" %>
 		<dl class="dl dl4">
-            <dt><h2><a class="a12" href="${ctx}/category/cate-${product.productCategory.id}/p1.html">${product.productCategory.categoryName}</a></h2></dt>
+            <dt><h2><a class="a12" href="${ctx}/category/cate-${product.category.id}/p1.html">${product.category.categoryName}</a></h2></dt>
             <dd class="pinfo">
                 <div class="pro_lf">
                     <div id="gallery"><a href="${ctx}/${product.oneImage}" class="bimg"><img id="bimg"  src="${ctx}/${product.oneImage}" width="260" height="260" alt="" /></a></div>
                     <ul class="simg public_ul">
-                    	<c:forEach var="img" items="${product.productImages}">
-                    	<li><img src="${ctx}/${img.productImage}" href="${ctx}/${img.productImage}" alt="${product.productName}" title="${product.productName}" /></li>
+                    	<c:forEach var="img" items="${product.images}">
+                    	<li><img src="${ctx}/${img.attachment.path}" href="${ctx}/${img.attachment.path}" alt="${product.productName}" title="${product.productName}" /></li>
                     	</c:forEach>
                     </ul>
                 </div>
@@ -48,11 +48,12 @@
 
                 <div class="clear"></div>
                 <h3>Product Description</h3>
-                <div class="desc">${product.productDescription}</div>
+                <div class="desc">${product.description}</div>
             </dd>
         </dl>
         <%-- 产品信息结束 --%>
         <%-- 相关产品开始 --%>
+        <%--
         <dl class="dl dl4">
             <dt><h2><a class="a4">Related Product</a></h2></dt>
             <dd>
@@ -64,9 +65,11 @@
                 <div class="clear"></div>
             </dd>
         </dl>
+        --%>
         <%-- 相关产品结束 --%>
         <%-- 留言开始 --%>
         <dl class="dl dl4">
+    <div id="inquiry">
     <dt><h2><a class="a7">Send Inquiry Now!</a></h2></dt>
     <dd>
         <form id="messageform1" name="messageform1" action="${ctx}/message/post.htm" method="post" onsubmit="return mf1SubmitCheck(this);">
@@ -95,6 +98,7 @@
             </table>
         </form>
     </dd>
+    </div>
 </dl>
 <%-- 内容主体结束 --%>
 <script type="text/javascript">

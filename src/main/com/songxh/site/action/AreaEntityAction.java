@@ -17,15 +17,14 @@ import com.songxh.core.BaseAction;
 import com.songxh.core.BaseService;
 import com.songxh.product.entity.ProCategory;
 import com.songxh.product.entity.Product;
-import com.songxh.product.service.AreaEntityService;
-import com.songxh.product.service.IndexAreaService;
 import com.songxh.product.service.ProCategoryService;
 import com.songxh.product.service.ProductService;
 import com.songxh.site.entity.AreaEntity;
-import com.songxh.site.entity.ImageDisplay;
 import com.songxh.site.entity.IndexArea;
 import com.songxh.site.entity.Info;
+import com.songxh.site.service.AreaEntityService;
 import com.songxh.site.service.ImageDisplayService;
+import com.songxh.site.service.IndexAreaService;
 import com.songxh.site.service.InfoService;
 import com.songxh.tools.DateUtils;
 
@@ -68,31 +67,44 @@ public class AreaEntityAction extends BaseAction<AreaEntity> {
 						Map<String, Object> obj = null;
 						obj = new HashMap<String, Object>();
 						obj.put("text", "公司新闻");
-						obj.put("id", "area-info-news");
+						obj.put("id", "news");
 						obj.put("leaf", true);
 						obj.put("url", "info.action?type=news");
 						tree.add(obj);
 						obj = new JSONObject();
 						obj.put("text", "关于我们");
-						obj.put("id", "area-info-about");
+						obj.put("id", "about");
 						obj.put("leaf", true);
 						obj.put("url", "info.action?type=about");
 						tree.add(obj);
 						obj = new JSONObject();
 						obj.put("text", "联系我们");
-						obj.put("id", "area-info-contant");
+						obj.put("id", "contact");
 						obj.put("leaf", true);
 						obj.put("url", "info.action?type=contact");
 						tree.add(obj);
 						target = "add-info";
 					}else if(IndexAreaTypes.ContentTypeEnums.IMAGE.getValue().equals(area.getContentType())){
+//						Map<String, Object> obj = null;
+//						obj = new HashMap<String, Object>();
+//						obj.put("text", "公司照片");
+//						obj.put("id", "area-image-factory");
+//						obj.put("leaf", true);
+//						obj.put("url", "image-display.action?type=factory");
+//						tree.add(obj);
+//						target = "add-image";
 						Map<String, Object> obj = null;
-						obj = new HashMap<String, Object>();
-						obj.put("text", "公司照片");
-						obj.put("id", "area-image-factory");
-						obj.put("leaf", true);
-						obj.put("url", "image-display.action?type=factory");
-						tree.add(obj);
+						List<ProCategory> cateList = this.proCategoryService.findAll(CommonConstraint.SORT);
+						if(cateList != null && !cateList.isEmpty()){
+							for(ProCategory cate : cateList){
+								obj = new HashMap<String, Object>();
+								obj.put("id", cate.getId());
+								obj.put("text", cate.getCategoryName());
+								obj.put("leaf", true);
+								obj.put("url", "product.action?category=" + cate.getId());
+								tree.add(obj);
+							}
+						}
 						target = "add-image";
 					}else if(IndexAreaTypes.ContentTypeEnums.PRODUCT.getValue().equals(area.getContentType())){
 						Map<String, Object> obj = null;
@@ -138,6 +150,7 @@ public class AreaEntityAction extends BaseAction<AreaEntity> {
 					AreaEntity entity = new AreaEntity();
 					entity.setArea(area.getId());
 					entity.setEntityId(id);
+					entity.setSort(list.size()+1);
 					areaEntityService.insert(entity);
 					success = true;
 					msg = "操作成功";
@@ -152,7 +165,7 @@ public class AreaEntityAction extends BaseAction<AreaEntity> {
 	}
 
 	@Override
-	public String edit() {
+	public String del() {
 		boolean success = false;
 		String msg = "";
 		String areaIdStr = request.getParameter("areaId");
@@ -161,12 +174,8 @@ public class AreaEntityAction extends BaseAction<AreaEntity> {
 		}else if(id == null){
 			msg = "请先选择需要移除的记录";
 		}else{
-			List<AreaEntity> list = areaEntityService.findByAreaIdAndEntityId(Long.parseLong(areaIdStr), id);
-			if(list == null || list.isEmpty()){
-				msg = "不存在该记录";
-			}else{
-				areaEntityService.delete(list.get(0).getId());
-			}
+			areaEntityService.delete(id);
+			success = true;
 		}
 		JSONObject obj = new JSONObject();
 		obj.put("success", success);
@@ -192,18 +201,35 @@ public class AreaEntityAction extends BaseAction<AreaEntity> {
 					//查询关联实体分三种情况
 					if(IndexAreaTypes.ContentTypeEnums.IMAGE.getValue().equals(area.getContentType())){
 						//1.图片信息
+//						for(AreaEntity entity : list){
+//							ImageDisplay image = this.imageDisplayService.find(entity.getEntityId());
+//							if(image != null){
+//								JSONObject obj = new JSONObject();
+//								obj.put("id", entity.getId());
+//								obj.put("sort", entity.getSort());
+//								obj.put("title", image.getTitle());
+//								obj.put("memo", image.getMemo());
+//								obj.put("creater", image.getCreater());
+//								obj.put("publish", image.getPublished());
+//								obj.put("insertTime", DateUtils.format(image.getInsertTime()));
+//								obj.put("path", image.getAttachment().getPath());
+//								obj.put("type", ContentTypes.ImageTypeEnums.getText(image.getTypeCode()));
+//								array.add(obj);
+//							}
+//						}
 						for(AreaEntity entity : list){
-							ImageDisplay image = this.imageDisplayService.find(entity.getEntityId());
-							if(image != null && image.getPublished()){
+							Product product = productService.find(entity.getEntityId());
+							if(product != null){
 								JSONObject obj = new JSONObject();
 								obj.put("id", entity.getId());
 								obj.put("sort", entity.getSort());
-								obj.put("title", image.getTitle());
-								obj.put("memo", image.getMemo());
-								obj.put("creater", image.getCreater());
-								obj.put("insertTime", DateUtils.format(image.getInsertTime()));
-								obj.put("path", image.getAttachment().getPath());
-								obj.put("type", ContentTypes.ImageTypeEnums.getText(image.getTypeCode()));
+								obj.put("creater", product.getCreater());
+								obj.put("insertTime", DateUtils.format(product.getInsertTime()));
+								obj.put("title", product.getProductName());
+								obj.put("memo", product.getMemo());
+								obj.put("publish", product.getPublished());
+								obj.put("path", product.getImage());
+								obj.put("type", product.getCategory().getCategoryName());
 								array.add(obj);
 							}
 						}
@@ -211,14 +237,15 @@ public class AreaEntityAction extends BaseAction<AreaEntity> {
 						//2.文章信息
 						for(AreaEntity entity : list){
 							Info info = infoService.find(entity.getEntityId());
-							if(info != null && info.getPublished()){
+							if(info != null){
 								JSONObject obj = new JSONObject();
 								obj.put("id", entity.getId());
 								obj.put("sort", entity.getSort());
 								obj.put("title", info.getTitle());
 								obj.put("creater", info.getCreater());
-								obj.put("insertTime", info.getInsertTime());
+								obj.put("insertTime", DateUtils.format(info.getInsertTime()));
 								obj.put("memo", info.getMemo());
+								obj.put("publish", info.getPublished());
 								obj.put("type", ContentTypes.InfoTypeEnums.getText(info.getTypeCode()));
 								array.add(obj);
 							}
@@ -227,14 +254,15 @@ public class AreaEntityAction extends BaseAction<AreaEntity> {
 						//3.产品信息
 						for(AreaEntity entity : list){
 							Product product = productService.find(entity.getEntityId());
-							if(product != null && product.getPublished()){
+							if(product != null){
 								JSONObject obj = new JSONObject();
 								obj.put("id", entity.getId());
 								obj.put("sort", entity.getSort());
 								obj.put("creater", product.getCreater());
-								obj.put("insertTime", product.getInsertTime());
+								obj.put("insertTime", DateUtils.format(product.getInsertTime()));
 								obj.put("title", product.getProductName());
 								obj.put("memo", product.getMemo());
+								obj.put("publish", product.getPublished());
 								obj.put("path", product.getImage());
 								obj.put("type", product.getCategory().getCategoryName());
 								array.add(obj);
@@ -245,6 +273,17 @@ public class AreaEntityAction extends BaseAction<AreaEntity> {
 			}
 		}
 		outJson(array.toJSONString());
+	}
+	
+	public String sort(){
+		Map<String, Object> params = new HashMap<String, Object>();
+		if(id != null){
+			AreaEntity entity = areaEntityService.find(id);
+			if(entity != null){
+				params.put("area", entity.getArea());
+			}
+		}
+		return sort(params);
 	}
 
 	@Override

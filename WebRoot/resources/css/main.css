@@ -80,6 +80,7 @@ table.form td,table.form th{padding:4px;}
 .dl dt a.a12{background-position:6px -160px;padding-left:30px;}
 .dl dd{border:1px solid #ccc;padding:5px;}
 .dl h1{height:22px;line-height:15px;font-size:13px;background:url(../image/b.jpg) no-repeat -3px -201px;padding-left:15px;}
+.dl h1.tle{padding-left:0px;}
 .dl h3{height:22px;line-height:22px;font-size:13px;border-bottom:dashed 1px #ccc;background:url(../image/b.jpg) no-repeat -3px -199px;padding-left:15px;margin-top:10px;clear:both;overflow:hidden;}
 .dl h4{height:25px;line-height:25px;font-size:12px;margin-left:15px;clear:both;}
 .dl th{text-align:right;font-weight:normal;}
@@ -94,6 +95,7 @@ table.form td,table.form th{padding:4px;}
 .dl .cert{text-align:center;padding:10px 0;}
 .dl .cert img{width:90px;height:120px;margin:0 5px;}
 .dl .ppt li{white-space: normal;word-spacing: normal; padding:3px 8px 3px 8px; line-height:18px;}
+.dl .ppt li span.name{display:inline-block;width:50px;text-align:right;padding-right:10px;}
 .dl .ppt li span.prop{display:block; float:left;width:50px;text-align:right;}
 .dl .ppt li span.val{color:#A52222; padding-left:8px;}
 .dl .chat {clear:both;padding:5px 0;text-align:center;}
@@ -121,6 +123,7 @@ table.form td,table.form th{padding:4px;}
 .dl .lts li{line-height:28px;border-top:dashed 1px #ccc; overflow:hidden;}
 .dl .lts h2{float:left;width:620px;font-size:12px;font-weight:normal;background:url(../image/b.jpg) no-repeat 0 -220px;margin-top:5px;padding-left:18px;}
 .lts li h2 a{color: #333333;line-height:28px;text-decoration: none;}
+.lts li span{margin-top:5px;line-height:28px;vertical-align:middle;display:inline-block;}
 .dl .cimg{float:left;display:block;width:240px;}
 .dl .cimg img{border:solid 4px #ccc;width:240px;margin:5px;}
 .dl .ctxt{float:right;width:455px;margin:5px;}

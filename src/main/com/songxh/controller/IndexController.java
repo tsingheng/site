@@ -3,6 +3,7 @@ package com.songxh.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,8 @@ import com.songxh.product.entity.Product;
 import com.songxh.product.service.ProCategoryService;
 import com.songxh.product.service.ProImageService;
 import com.songxh.product.service.ProductService;
+import com.songxh.site.entity.ImageDisplay;
+import com.songxh.site.entity.Info;
 import com.songxh.site.entity.RotateImage;
 import com.songxh.site.entity.SiteProperty;
 import com.songxh.site.service.ImageDisplayService;
@@ -91,8 +94,11 @@ public class IndexController extends BaseController {
 		request.setAttribute("title", "Products");
 		request.setAttribute("type", "product");
 		common();
-		Page<Product> page = new Page<Product>(pageNo, 10);
-		page = productService.findList(page, new HashMap<String, Object>());
+		Page<Product> page = new Page<Product>(pageNo, 12);
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("published", true);
+		param.put("category.id", cate);
+		page = productService.findList(page, param);
 		request.setAttribute("page", page);
 		ProCategory category = proCategoryService.find(cate);
 		request.setAttribute("category", category);
@@ -101,6 +107,10 @@ public class IndexController extends BaseController {
 	
 	@RequestMapping("/product/info/{id}")
 	public String proinfo(@PathVariable("id") Long id){
+		if(id != null){
+			Product product = productService.find(id);
+			request.setAttribute("product", product);
+		}
 		request.setAttribute("type", "product");
 		common();
 		return "site.proinfo";
@@ -109,6 +119,15 @@ public class IndexController extends BaseController {
 	@RequestMapping("/info/{type}")
 	public String info(@PathVariable("type") String type){
 		request.setAttribute("type", type);
+		if("about".equals(type)){
+			request.setAttribute("title", "Company Info");
+		}else if("contact".equals(type)){
+			request.setAttribute("title", "Contact Us");
+		}
+		List<Info> list = infoService.findByType(type, 0, 1);
+		if(list != null && !list.isEmpty()){
+			request.setAttribute("info", list.get(0));
+		}
 		common();
 		return "site.info";
 	}
@@ -116,20 +135,44 @@ public class IndexController extends BaseController {
 	@RequestMapping("/news/p{pageNo}")
 	public String news(@PathVariable("pageNo") Integer pageNo){
 		request.setAttribute("type", "news");
+		request.setAttribute("title", "news");
 		common();
+		if(pageNo == null) pageNo = 0;
+		Page<Info> page = new Page<Info>(pageNo, 10);
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("published", true);
+		param.put("typeCode", "news");
+		page = infoService.findList(page, param, CommonConstraint.SORT);
+		request.setAttribute("page", page);
 		return "site.news";
 	}
 	
 	@RequestMapping("/news/info/{id}")
 	public String newsinfo(@PathVariable("id") Long id){
 		request.setAttribute("type", "news");
+		request.setAttribute("title", "news");
+		if(id != null){
+			Info news = infoService.find(id);
+			request.setAttribute("news", news);
+			if(news != null)
+				request.setAttribute("title", news.getTitle());
+		}
 		common();
 		return "site.newsinfo";
 	}
 	
-	@RequestMapping("/photo/{type}")
-	public String photo(@PathVariable("type") String type){
+	@RequestMapping("/photo/{type}/p{pageNo}")
+	public String photo(@PathVariable("type") String type, @PathVariable("pageNo") Integer pageNo){
 		request.setAttribute("type", type);
+		if("factory".equals(type)){
+			request.setAttribute("title", "Factory Display");
+		}
+		if(pageNo == null) pageNo = 1;
+		Page<ImageDisplay> page = new Page<ImageDisplay>(pageNo, 12);
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("published", true);
+		param.put("typeCode", type);
+		page = imageDisplayService.findList(page, param, CommonConstraint.SORT);
 		common();
 		return "site.photo";
 	}
@@ -137,6 +180,7 @@ public class IndexController extends BaseController {
 	@RequestMapping("/message")
 	public String message(){
 		request.setAttribute("type", "message");
+		
 		common();
 		return "site.message";
 	}
@@ -153,15 +197,23 @@ public class IndexController extends BaseController {
 				request.setAttribute(property.getPropertyCode(), property.getPropertyValue());
 			}
 		}
+		
 		//左侧产品分类
 		List<ProCategory> cates = proCategoryService.findAll(CommonConstraint.SORT);
 		if(cates != null && !cates.isEmpty()){
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("published", true);
 			for(ProCategory category : cates){
-				category.setProCount(productService.countByCategory(category.getId()));
+				param.put("category.id", category.getId());
+				category.setProCount(productService.count(param));
 			}
 		}
+		request.setAttribute("gcates", cates);
+		
 		//banner
-		List<RotateImage> banners = rotateImageService.findAll(CommonConstraint.SORT);
+		Map<String, Object> bannerMap = new HashMap<String, Object>();
+		bannerMap.put("published", true);
+		List<RotateImage> banners = rotateImageService.findList(bannerMap, CommonConstraint.SORT);
 		request.setAttribute("banners", banners);
 	}
 }

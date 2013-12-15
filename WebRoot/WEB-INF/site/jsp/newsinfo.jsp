@@ -3,10 +3,10 @@
 		<dl class="dl dl4">
             <dt><h2><a class="a12" title="News">News</a></h2></dt>
             <dd class="ninfo">
-                <h1 class="tle">${news.infoTitle}</h1>
+                <h1 class="tle">${news.title}</h1>
                 <p class="time"><fmt:formatDate pattern="yyyy-MM-dd" value="${news.insertTime}"/></p>
                 <div class="pic"></div>
-                <div class="desc">${news.infoContent}</div>
+                <div class="desc">${news.content}</div>
         	</dd>
         </dl>
         <%--

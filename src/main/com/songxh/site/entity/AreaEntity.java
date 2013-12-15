@@ -5,10 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.songxh.core.BaseEntityL;
+import com.songxh.core.Sortable;
 
 @Entity
 @Table(name = "area_entity")
-public class AreaEntity extends BaseEntityL {
+public class AreaEntity extends BaseEntityL implements Sortable {
 
 	/**
 	 * 

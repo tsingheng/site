@@ -5,10 +5,10 @@
             <dt><h2><a class="a12" href="#" title="Factory Display">Factory Display</a></h2></dt>
             <dd>
                 <ul class="bpl public_ul">
-                	<c:forEach items="${page}" var="photo">
+                	<c:forEach items="${page.result}" var="photo">
                 	<li>
-                        <img style="cursor:pointer;" src="${ctx}/${photo.factoryPhoto}" href="${ctx}/${photo.factoryPhoto}" alt="${photo.photoTitle}" />
-                        <a class="tl" title="${photo.photoTitle}">${photo.photoTitle}</a>
+                        <img style="cursor:pointer;" src="${ctx}/${photo.attachment.path}" href="${ctx}/${photo.attachment.path}" alt="${photo.title}" />
+                        <a class="tl" title="${photo.title}">${photo.title}</a>
                     </li>
                 	</c:forEach>
                 </ul>

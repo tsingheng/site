@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/components/common.jsp" %>
+<script type="text/javascript">var nodes = [${nodes}];</script>
 <div class="easyui-layout" fit="true">
 	<div region="west" style="width:200px; border:none;">
 		<ul id="entity-cate-tree-list" class="easyui-tree">
@@ -24,15 +25,15 @@
 				<div onclick="addEntityPro();">在首页显示</div>
 			</div>
 			<table class="easyui-datagrid" singleSelect="true" rownumbers="true" idField="id" fitColumns="true"
-				pagination="true" id="entity-pro-list" fit="true" border="false">
+				pagination="true" id="entity-pro-list" fit="true" border="false" rowStyler="entityStyler">
 				<thead>
 					<tr>
-						<th field="productName" width="15%">产品名称</th>
-						<th field="sort" width="5%">排序</th>
+						<th field="productName" width="20%">产品名称</th>
+						<th field="published" width="10%" formatter="yesOrNoFormatter" align="center">是否发布</th>
 						<th field="creater" width="10%">添加者</th>
 						<th field="insertTime" width="20%">添加时间</th>
 						<th field="viewTimes" width="10%">浏览次数</th>
-						<th field="memo" width="40%">备注</th>
+						<th field="memo" width="30%">备注</th>
 					</tr>
 				</thead>
 			</table>
