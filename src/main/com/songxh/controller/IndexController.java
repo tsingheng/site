@@ -5,14 +5,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.alibaba.fastjson.JSONObject;
 import com.songxh.common.CommonConstraint;
 import com.songxh.core.BaseController;
 import com.songxh.core.Page;
+import com.songxh.cust.entity.Message;
 import com.songxh.cust.service.MessageService;
 import com.songxh.product.entity.ProCategory;
 import com.songxh.product.entity.Product;
@@ -54,6 +61,7 @@ public class IndexController extends BaseController {
 	private RotateImageService rotateImageService;
 	@Autowired
 	private SitePropertyService sitePropertyService;
+	private static final String[] acceptAttacheType = {".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".pdf", ".jpg", ".jpeg", ".png", ".gif", ".bmp"};
 	private static final String TITLE = "title";
 	@RequestMapping("/index")
 	public String index(){
@@ -110,6 +118,11 @@ public class IndexController extends BaseController {
 		if(id != null){
 			Product product = productService.find(id);
 			request.setAttribute("product", product);
+			String tags = product.getTags();
+			if(StringUtils.isNotBlank(tags)){
+				request.setAttribute("tags", tags.split(","));
+			}
+			request.setAttribute("relates", productService.findByTags(tags));
 		}
 		request.setAttribute("type", "product");
 		common();
@@ -186,7 +199,31 @@ public class IndexController extends BaseController {
 	}
 	
 	@RequestMapping("/message/post")
-	public String postmsg(){
+	public String postmsg(Message message, HttpServletResponse response){
+		this.response = response;
+		boolean success = true;
+		String msg = "";
+		List<MultipartFile> files = null;
+		try{
+			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+			files = multipartRequest.getFiles("file");
+			if(files != null && !files.isEmpty()){
+				for(MultipartFile file : files){
+					for(String accept : acceptAttacheType){
+						file.getOriginalFilename().endsWith(accept);
+						success = false;
+						msg = file.getOriginalFilename() + " is not accepted!";
+						break;
+					}
+					if(!success) break;
+				}
+			}
+		}catch(ClassCastException e){}
+		messageService.saveMessage(message, files);
+		JSONObject obj = new JSONObject();
+		obj.put("success", success);
+		obj.put("msg", msg);
+		outJson(obj.toJSONString());
 		return null;
 	}
 	

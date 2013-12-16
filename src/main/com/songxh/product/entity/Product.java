@@ -2,6 +2,7 @@
 package com.songxh.product.entity;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -72,16 +73,11 @@ public class Product extends BaseEntityL implements Sortable {
 	/** 产品图片集合 **/
 	private Set<ProductImage> images = new HashSet<ProductImage>();
 	
+	/** 产品属性集合 **/
+	private List<ProProperty> properties;
+	
 	/** 默认显示的图片,即第一张图片 **/
 	private String image;
-	
-	@Transient
-	public String getOneImage(){
-		if(images != null && !images.isEmpty()){
-			return images.iterator().next().getAttachment().getPath();
-		}
-		return "";
-	}
 	
 	@Column(name = "PRODUCT_NAME", length = 30)
 	public String getProductName() {
@@ -198,7 +194,16 @@ public class Product extends BaseEntityL implements Sortable {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	
+
+	@Transient
+	public List<ProProperty> getProperties() {
+		return properties;
+	}
+
+	public void setProperties(List<ProProperty> properties) {
+		this.properties = properties;
+	}
+
 	public static void main(String[] args){
 		Set<String> set = new HashSet<String>();
 		set.add("aa");

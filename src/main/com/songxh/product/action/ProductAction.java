@@ -3,8 +3,10 @@ package com.songxh.product.action;
 
 import java.io.File;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,9 +21,11 @@ import com.songxh.core.BaseAction;
 import com.songxh.core.BaseService;
 import com.songxh.core.Page;
 import com.songxh.product.entity.ProCategory;
+import com.songxh.product.entity.ProProperty;
 import com.songxh.product.entity.Product;
 import com.songxh.product.entity.ProductImage;
 import com.songxh.product.service.ProCategoryService;
+import com.songxh.product.service.ProPropertyService;
 import com.songxh.product.service.ProductService;
 import com.songxh.system.entity.Attachment;
 import com.songxh.tools.DateUtils;
@@ -40,6 +44,8 @@ public class ProductAction extends BaseAction<Product> {
 	private ProductService productService;
 	@Autowired
 	private ProCategoryService proCategoryService;
+	@Autowired
+	private ProPropertyService proPropertyService;
 	
 	private File[] files;
 	private String[] filesFileName;
@@ -93,6 +99,7 @@ public class ProductAction extends BaseAction<Product> {
 				model.getImages().add(image);
 			}
 		}
+		setProperties();
 		model.setInsertTime(new Date());
 		model.setViewTimes(0);
 		model.setCategory(proCategoryService.find(model.getCategory().getId()));
@@ -102,12 +109,28 @@ public class ProductAction extends BaseAction<Product> {
 		productService.saveProductWithImages(model);
 		success();
 	}
+	
+	private void setProperties(){
+		Enumeration<?> names = request.getParameterNames();
+		List<ProProperty> properties = new LinkedList<ProProperty>();
+		while(names.hasMoreElements()){
+			String name = (String) names.nextElement();
+			if(name.startsWith("name_") && !name.endsWith("_value")){
+				ProProperty property = new ProProperty();
+				property.setPropertyName(request.getParameter(name));
+				property.setPropertyValue(request.getParameter(name+"_value"));
+				properties.add(property);
+			}
+		}
+		model.setProperties(properties);
+	}
 
 	@Override
 	protected void editSave() {
 		if(model.getSort() == null){
 			model.setSort(1);
 		}
+		setProperties();
 		productService.update(model);
 		success();
 	}
@@ -117,6 +140,16 @@ public class ProductAction extends BaseAction<Product> {
 			unselectDel();
 		}else{
 			productService.delete(id);
+			success();
+		}
+		return null;
+	}
+	
+	public String delprop(){
+		if(id == null){
+			unselectDel();
+		}else{
+			proPropertyService.delete(id);
 			success();
 		}
 		return null;

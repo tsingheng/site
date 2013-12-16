@@ -20,3 +20,8 @@ body{padding:0px; margin:0px; border:0px; font-size:14px;}
 .condition li.button{margin-left:20px;}
 input .date{width:80px;}
 .easyui-linkbutton{margin-right:10px;}
+.name_value{list-style-type:none;padding:0px;}
+.name_value li{list-style-type:none;width:100%;height:22px;margin-bottom:3px;}
+.name_value .name{width:160px;float:left;text-align:left;}
+.name_value .value{width:230px;float:left;text-align:left;}
+.name_value .value a{display:inline-block;padding:0 10px;margin-left:10px;text-decoration:none;}

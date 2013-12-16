@@ -1,10 +1,10 @@
 ﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 		<%@ include file="/components/common.jsp" %>
 		<dl class="dl dl4">
-            <dt><h2><a class="a12" href="${ctx}/category/cate-${product.category.id}/p1.html">${product.category.categoryName}</a></h2></dt>
+            <dt><h2><a class="a12" href="${ctx}/product/${product.category.id}/p.htm">${product.category.categoryName}</a></h2></dt>
             <dd class="pinfo">
                 <div class="pro_lf">
-                    <div id="gallery"><a href="${ctx}/${product.oneImage}" class="bimg"><img id="bimg"  src="${ctx}/${product.oneImage}" width="260" height="260" alt="" /></a></div>
+                    <div id="gallery"><a href="${ctx}/${product.image}" class="bimg"><img id="bimg"  src="${ctx}/${product.image}" width="260" height="260" alt="" /></a></div>
                     <ul class="simg public_ul">
                     	<c:forEach var="img" items="${product.images}">
                     	<li><img src="${ctx}/${img.attachment.path}" href="${ctx}/${img.attachment.path}" alt="${product.productName}" title="${product.productName}" /></li>
@@ -22,23 +22,6 @@
                         </table>
                     </div>
                     <div class="share">
-                        <%-- AddThis Button BEGIN --%>
-                        <!-- 
-                        <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
-                            <a class="addthis_button_preferred_1"></a>
-                            <a class="addthis_button_preferred_2"></a>
-                            <a class="addthis_button_preferred_3"></a>
-                            <a class="addthis_button_preferred_4"></a>
-                            <a class="addthis_button_preferred_5"></a>
-                            <a class="addthis_button_preferred_6"></a>
-                            <a class="addthis_button_preferred_7"></a>
-                            <a class="addthis_button_compact"></a>
-                            <a class="addthis_counter addthis_bubble_style"></a>
-                        </div>
-                        <script type="text/javascript">var addthis_config = {"data_track_addressbar":false};</script>
-                        <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-5010ab416e09b645"></script>
-                         -->
-                        <%-- AddThis Button END --%>
                     </div>
                     <div class="link">
                         <a href="#inquiry" class="inq" onclick="document.getElementById('subject').focus();">Send Inquiry Now</a>
@@ -59,7 +42,7 @@
             <dd>
                 <ul class="bpl public_ul">
                 	<c:forEach items="${relateList}" var="relate">
-                	<li><a href="${ctx}/proinfo/pro-${relate.id}.htm" title="${relate.productName}"><img src="${ctx}/${relate.oneImage}" alt="${relate.productName}" /></a><a class="tl" href="${ctx}/proinfo/pro-${relate.id}.htm" title="${relate.productName}">${relate.productName}</a></li>
+                	<li><a href="${ctx}/proinfo/pro-${relate.id}.htm" title="${relate.productName}"><img src="${ctx}/${relate.image}" alt="${relate.productName}" /></a><a class="tl" href="${ctx}/proinfo/pro-${relate.id}.htm" title="${relate.productName}">${relate.productName}</a></li>
                 	</c:forEach>
                 </ul>
                 <div class="clear"></div>

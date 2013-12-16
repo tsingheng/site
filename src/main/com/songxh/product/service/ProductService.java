@@ -1,10 +1,15 @@
 
 package com.songxh.product.service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.songxh.core.BaseDAO;
 import com.songxh.core.BaseService;
+import com.songxh.product.dao.ProPropertyDAO;
 import com.songxh.product.dao.ProductDAO;
+import com.songxh.product.entity.ProProperty;
 import com.songxh.product.entity.Product;
 import com.songxh.product.entity.ProductImage;
 import com.songxh.system.dao.AttachmentDAO;
@@ -36,6 +43,40 @@ public class ProductService extends BaseService<Product> {
 	private ProductDAO productDAO;
 	@Autowired
 	private AttachmentDAO attachmentDAO;
+	@Autowired
+	private ProPropertyDAO proPropertyDAO;
+	
+	public List<Product> findByTags(String tags){
+		List<Product> list = new ArrayList<Product>();
+		if(StringUtils.isNotBlank(tags)){
+			StringBuffer hql = new StringBuffer("where ");
+			String[] array = tags.split(",");
+			List<String> values = Arrays.asList(array);
+			Iterator<String> it = values.iterator();
+			List<String> nvalues = new LinkedList<String>();
+			while(it.hasNext()){
+				String tag = it.next();
+				if(StringUtils.isBlank(tag)){
+					it.remove();
+					continue;
+				}
+				hql.append("tags like ? or ");
+				nvalues.add("%" + tag + "%");
+			}
+			if(hql.toString().endsWith(" or ")){
+				hql.delete(hql.length()-4, hql.length());
+			}
+			list = productDAO.findList(0, 4, hql.toString(), nvalues.toArray());
+		}
+		return list;
+	}
+	
+	@Override
+	public Product find(long id){
+		Product product = productDAO.find(id);
+		product.setProperties(proPropertyDAO.findList("where productId=? order by id desc", id));
+		return product;
+	}
 	
 	public void saveProductWithImages(Product product){
 		try{
@@ -57,6 +98,13 @@ public class ProductService extends BaseService<Product> {
 				productDAO.sortDown(sortMap);
 			}
 			productDAO.insert(product);
+			List<ProProperty> properties = product.getProperties();
+			if(properties != null && !properties.isEmpty()){
+				for(ProProperty property : properties){
+					property.setProductId(product.getId());
+					proPropertyDAO.insert(property);
+				}
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 			String msg = "保存产品数据出错:" + e.getMessage();
@@ -86,6 +134,13 @@ public class ProductService extends BaseService<Product> {
 				productDAO.sortUp(sortMap);
 			}
 			productDAO.update(product);
+			List<ProProperty> properties = product.getProperties();
+			if(properties != null && !properties.isEmpty()){
+				for(ProProperty property : properties){
+					property.setProductId(product.getId());
+					proPropertyDAO.insert(property);
+				}
+			}
 			return true;
 		}catch(Exception e){
 			e.printStackTrace();

@@ -93,7 +93,7 @@
 			            <a href="callto://${skype}" title="${skype}" class="skype"></a>
 			            <a href="mailto:${email}" title="${email}" class="mail"></a>
 			        </div>
-			        <div class="chat"><a href="message.htm" title="message.htm" class="contact"></a></div>
+			        <div class="chat"><a href="${ctx}/message.htm" title="Contact Now" class="contact"></a></div>
 			    </dd>
 			</dl>
   			

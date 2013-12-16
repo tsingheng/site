@@ -44,7 +44,8 @@ public abstract class BaseMVC {
 		} catch (IOException ex) {
 			logger.error("向客户端输出json异常：" + ex.getMessage());
 		} finally {
-			out.close();
+			if(out != null)
+				out.close();
 		}
 	}
 	

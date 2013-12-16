@@ -7,7 +7,12 @@ function openForm(winid, url, title){
 	};
 	win.window(opts);
 	win.window('open');
-	win.window('refresh', url);
+	if(url.indexOf('?')>-1){
+		url = url+'&';
+	}else{
+		url = url + '?';
+	}
+	win.window('refresh', url+'v='+new Date().getTime());
 }
 
 function showMsg(msg, callBack){

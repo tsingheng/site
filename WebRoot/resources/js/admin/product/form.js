@@ -46,6 +46,45 @@ $(document).ready(function(){
 	$('#proForm').find('.btnCancel').click(function(){
 		closeWin('pro');
 	});
+	$('#oname_value a.remove').click(function(){
+		var me = $(this);
+		var id = me.attr('index');
+		$.ajax({
+			url: admin+'/product!delprop.action?v='+new Date().getTime(),
+			method: 'POST',
+			dataType: 'json',
+			data: {id: id},
+			success: function(result){
+				if(result.success){
+					me.parent().remove();
+				}else{
+					showMsg(result.msg);
+				}
+			}
+		});
+	});
+	$('#nname_value .value a').click(function(){
+		addProp();
+	});
+	function addProp(){
+		var me = $('#nname_value .value:last a')
+			.unbind()
+			.html('移除')
+			.click(function(){
+				me.parent().parent().remove();
+			});
+		i = i+1;
+		var li = $('<li></li>');
+		var namediv = $('<div class="name"></div>'), valuediv = $('<div class="value"></div>');
+		var nameinput = $('<input class="input1" type="text" name="name_'+i+'"/>'), valueinput = $('<input class="input1" type="text" name="name_'+i+'_value"/>');
+		var a = $('<a href="#nogo">添加</a>');
+		a.click(function(){
+			addProp();
+		});
+		namediv.append(nameinput);
+		valuediv.append(valueinput).append(a);
+		li.append(namediv).append(valuediv).appendTo($('#nname_value')).append('<br clear="all"/>');
+	}
 });
 
 function onSubmit(){

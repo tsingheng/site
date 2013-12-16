@@ -8,7 +8,7 @@
                 <ul class="bpl public_ul">
                 	<c:forEach items="${category.products}" var="pro">
                     <li>
-                        <a href="${ctx}/product/info/${pro.id}.htm" title="${pro.productName}"><img src="${ctx}/${pro.oneImage}" alt="${pro.productName}" /></a>
+                        <a href="${ctx}/product/info/${pro.id}.htm" title="${pro.productName}"><img src="${ctx}/${pro.image}" alt="${pro.productName}" /></a>
                         <a class="tl" href="${ctx}/product/info/${pro.id}.htm" title="${pro.productName}">${pro.productName}</a>
                     </li>
                     </c:forEach>

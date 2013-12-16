@@ -2,6 +2,7 @@
 <%@ include file="/components/common.jsp" %>
 <script type="text/javascript">
 	var editor;
+	var i = 0;
 </script>
 <form id="proForm" method="post" enctype="multipart/form-data"
 	<c:if test="${empty model.id}">action="${ctx}/admin/product!add.action"</c:if>
@@ -46,6 +47,20 @@
 		<td>
 			<input type="text" name="model.sort" value="${model.sort}" style="width:40px;"
 				class="easyui-numberspinner" min="1" max="${max}"/>
+		</td>
+	</tr>
+	<tr>
+		<td valign="middle">属性：</td>
+		<td>
+			<ul class="name_value" id="oname_value">
+				<c:forEach var="prop" items="${model.properties}">
+				<li><span class="name">${prop.propertyName}</span><span class="value">${prop.propertyValue}</span><a index="${prop.id}" href="#nogo" class="remove">移除</a></li>
+				</c:forEach>
+			</ul>
+			<ul class="name_value" id="nname_value">
+				<li><div class="name">属性名称</div><div class="value">属性值</div><br clear="all"/></li>
+				<li><div class="name"><input class="input1" type="text" name="name_0"/></div><div class="value"><input class="input1" type="text" name="name_0_value"/><a href="#nogo">添加</a></div><br clear="all"/></li>
+			</ul>
 		</td>
 	</tr>
 	<tr>
