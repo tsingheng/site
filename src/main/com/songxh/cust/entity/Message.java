@@ -2,16 +2,10 @@
 package com.songxh.cust.entity;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.songxh.core.BaseEntityL;
@@ -79,7 +73,7 @@ public class Message extends BaseEntityL {
 	private String ip;
 	
 	/** 客户反馈信息附件表 **/
-	private Set<MessageFile> msgFiles = new HashSet<MessageFile>();
+	//private Set<MessageFile> msgFiles = new HashSet<MessageFile>();
 
 	@Column(name = "SUBJECT", length = 200)
 	public String getSubject() {
@@ -194,6 +188,7 @@ public class Message extends BaseEntityL {
 		this.ip = ip;
 	}
 	
+	/**
 	@OneToMany(targetEntity = MessageFile.class, fetch = FetchType.EAGER
 			, cascade = CascadeType.ALL)
 	@JoinColumn(name = "MESSAGE")
@@ -203,6 +198,7 @@ public class Message extends BaseEntityL {
 	public void setMsgFiles(Set<MessageFile> msgFiles) {
 		this.msgFiles = msgFiles;
 	}
+	**/
 	
 	@Column(name = "DEALED")
 	public Boolean getDealed() {

@@ -1,11 +1,15 @@
 
 package com.songxh.cust.action;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +21,7 @@ import com.songxh.core.BaseService;
 import com.songxh.core.Page;
 import com.songxh.cust.entity.Message;
 import com.songxh.cust.entity.MessageFile;
+import com.songxh.cust.service.MessageFileService;
 import com.songxh.cust.service.MessageService;
 import com.songxh.tools.DateUtils;
 
@@ -31,6 +36,8 @@ public class MessageAction extends BaseAction<Message> {
 
 	@Autowired
 	private MessageService messageService;
+	@Autowired
+	private MessageFileService messageFileService;
 	
 	@Override
 	protected void addSave() {
@@ -96,23 +103,60 @@ public class MessageAction extends BaseAction<Message> {
 				obj.put("address", message.getAddress());
 				obj.put("memo", message.getMemo());
 				obj.put("ip", message.getIp());
-				Set<MessageFile> fileSet = message.getMsgFiles();
-				JSONArray files = new JSONArray();
-				if(fileSet != null && !fileSet.isEmpty()){
-					for(MessageFile file : fileSet){
-						JSONObject fileObj = new JSONObject();
-						fileObj.put("originalName", file.getAttachment().getOriginalName());
-						fileObj.put("path", file.getAttachment().getPath());
-						files.add(fileObj);
-					}
-				}
-				obj.put("files", files);
+//				Set<MessageFile> fileSet = message.getMsgFiles();
+//				JSONArray files = new JSONArray();
+//				if(fileSet != null && !fileSet.isEmpty()){
+//					for(MessageFile file : fileSet){
+//						JSONObject fileObj = new JSONObject();
+//						fileObj.put("originalName", file.getAttachment().getOriginalName());
+//						fileObj.put("path", file.getAttachment().getPath());
+//						files.add(fileObj);
+//					}
+//				}
+//				obj.put("files", files);
 				array.add(obj);
 			}
 		}
 		result.put("total", page.getTotalCount());
 		result.put("rows", array);
 		outJson(result.toJSONString());
+	}
+	
+	public String detail(){
+		if(id != null){
+			Message message = messageService.find(id);
+			List<MessageFile> files = messageFileService.findByMessage(id);
+			request.setAttribute("msg", message);
+			request.setAttribute("files", files);
+		}
+		return "detail";
+	}
+	
+	public String file(){
+		if(id != null){
+			MessageFile mf = messageFileService.find(id);
+			if(mf != null){
+				File file = new File(request.getSession().getServletContext().getRealPath("/")+"/"+mf.getAttachment().getPath());
+				if(file.exists()){
+					try {
+						response.setContentType("application/octet-stream;");
+						response.setHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(mf.getAttachment().getOriginalName(), "utf-8"));
+						FileInputStream is = new FileInputStream(file);
+						OutputStream os = response.getOutputStream();
+						byte[] bytes = new byte[1024];
+						int len = 0;
+						while((len=is.read(bytes)) != -1){
+							os.write(bytes, 0, len);
+						}
+						os.close();
+						is.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		return null;
 	}
 	
 	private Map<String, Object> buildPrams(){

@@ -64,6 +64,7 @@
 		<action name="message" class="com.songxh.cust.action.MessageAction">
 			<result name="main">/WEB-INF/admin/cust/message/main.jsp</result>
 			<result name="deal">/WEB-INF/admin/cust/message/deal.jsp</result>
+			<result name="detail">/WEB-INF/admin/cust/message/detail.jsp</result>
 		</action>
 		
 		<action name="info" class="com.songxh.site.action.InfoAction">

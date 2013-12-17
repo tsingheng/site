@@ -63,6 +63,8 @@
 	</thead>
 </table>
 <div id="msg-deal-win" class="easyui-window" cache="false" style="width:610px;height:250px;" closed="true"></div>
+<div id="msg-detail-win" class="easyui-window" cache="false" style="width:710px;height:450px;" closed="true"></div>
+<!--  
 <div id="msgDlg" class="easyui-window" style="width:600px;height:auto;" data-options="resizable:true,modal:true"
 		minimizable="false" maximizable="false" closed="true" title="查看留言">
 	<table width="100%" height="100%">
@@ -101,6 +103,7 @@
 		<a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)" onclick="closeMsgWin();">关闭</a>
 	</div>
 </div>
+-->
 </div>
 </div>
 <script type="text/javascript" src="${ctx}/resources/js/admin/message/main.js"></script>

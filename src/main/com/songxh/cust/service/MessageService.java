@@ -44,7 +44,7 @@ public class MessageService extends BaseService<Message> {
 			for(MultipartFile file : files){
 				MessageFile msgFile = new MessageFile();
 				Attachment attachment = new Attachment();
-				attachment.setOriginalName(file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("/")));
+				attachment.setOriginalName(file.getOriginalFilename());
 				attachment.setInsertTime(new Date());
 				try {
 					attachment.setPath(FileUtils.saveStreamToFile(file.getInputStream(), file.getOriginalFilename()));

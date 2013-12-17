@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
@@ -199,7 +200,7 @@ public class IndexController extends BaseController {
 	}
 	
 	@RequestMapping("/message/post")
-	public String postmsg(Message message, HttpServletResponse response){
+	public String postmsg(Message message, HttpServletResponse response, HttpServletRequest request){
 		this.response = response;
 		boolean success = true;
 		String msg = "";
@@ -209,17 +210,24 @@ public class IndexController extends BaseController {
 			files = multipartRequest.getFiles("file");
 			if(files != null && !files.isEmpty()){
 				for(MultipartFile file : files){
+					boolean accepted = false;
 					for(String accept : acceptAttacheType){
-						file.getOriginalFilename().endsWith(accept);
+						if(file.getOriginalFilename().endsWith(accept)){
+							accepted = true;
+							break;
+						}
+					}
+					if(!accepted){
 						success = false;
-						msg = file.getOriginalFilename() + " is not accepted!";
+						msg += "The type of file " + file.getOriginalFilename() + " is not accepted!";
 						break;
 					}
-					if(!success) break;
 				}
 			}
 		}catch(ClassCastException e){}
-		messageService.saveMessage(message, files);
+		if(success){
+			messageService.saveMessage(message, files);
+		}
 		JSONObject obj = new JSONObject();
 		obj.put("success", success);
 		obj.put("msg", msg);

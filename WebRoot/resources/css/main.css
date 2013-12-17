@@ -178,3 +178,12 @@ table.form td,table.form th{padding:4px;}
 
 .public_ul{list-style-type:none;list-style:none;}
 .public_ul li{list-style:none;}
+
+.vderror { border: solid 1px #C30; background: #fff url(../image/invalid_line.gif) repeat-x bottom; }
+
+#filetd div{margin:3px 0;}
+.add{display:inline-block;width:36px;height:20px;background:url("../image/add.gif") no-repeat center;margin-left:20px;line-height:20px;padding:5px;}
+.remove{display:inline-block;width:36px;height:20px;background:url("../image/remove.gif") no-repeat center;margin-left:20px;line-height:20px;padding:5px;}
+
+
+

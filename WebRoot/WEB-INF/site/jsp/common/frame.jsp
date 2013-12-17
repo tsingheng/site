@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
   <head>
-    <title>winsmoke-${type}-${site_title}</title>
+    <title>${site_title}</title>
     <%@ include file="/components/keyword.jsp" %>
     <script type="text/javascript" src="${ctx}/resources/js/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="${ctx}/resources/js/banner.js"></script>
@@ -41,7 +41,7 @@
   			<c:forEach items="${banners}" var="banner">
   			<li>
   				<a href="${banner.link}">
-  				<img src="${ctx}/banner.attachment.path"/>
+  				<img src="${ctx}/${banner.attachment.path}"/>
   				</a>
   			</li>
   			</c:forEach>
