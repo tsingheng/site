@@ -29,7 +29,7 @@ function onProImageSelect(index, data){
 }
 
 function refreshProImage(path){
-	var img = $('<img src="' + ctx + path + '" style="width:200px; height:200px;"/>');
+	var img = $('<img src="' + ctx + '/' + path + '" style="width:200px; height:200px;"/>');
 	var old = $('#image-default').find('img');
 	if(old && old.attr('src') != (ctx + path)){
 		$('#image-default').html('');
@@ -82,6 +82,7 @@ function proImageContextMenu(e, index, data){
 }
 
 function onCateTreeClick(node){
+	if(!$('#pro-list').tree('isLeaf', node.target)) return false;
 	var list = $('#pro-list');
 	list.datagrid('unselectAll');
 	var url = list.datagrid('options').url;
@@ -94,6 +95,7 @@ function onCateTreeClick(node){
 
 function addPro(){
 	var category = $('#cate-tree-list').tree('getSelected');
+	if(!$('#pro-list').tree('isLeaf', category.target)) category = false;
 	if(category){
 		url = admin + '/product!add.action?category=' + category.id;
 		openForm('pro-win', url, '添加产品');

@@ -4,7 +4,20 @@
 	<div region="west" style="width:200px; border:none;">
 		<ul id="cate-tree-list" class="easyui-tree">
 			<c:forEach items="${list}" var="category">
-			<li id="${category.id}">${category.categoryName}</li>
+			<li id="${category.id}"
+				<c:if test="${(not empty category.children) && (fn:length(category.children) gt 0)}">
+				state="closed"
+				</c:if>
+				>
+				<span>${category.categoryName}</span>
+				<c:if test="${(not empty category.children) && (fn:length(category.children) gt 0)}">
+				<ul>
+					<c:forEach items="${category.children}" var="child">
+					<li id="${child.id}">${child.categoryName}</li>
+					</c:forEach>
+				</ul>
+				</c:if>
+			</li>
 			</c:forEach>
 		</ul>
 	</div>

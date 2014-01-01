@@ -13,7 +13,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.songxh.common.CommonConstraint;
 import com.songxh.core.BaseAction;
 import com.songxh.core.BaseService;
-import com.songxh.core.Page;
 import com.songxh.product.entity.ProCategory;
 import com.songxh.product.service.ProCategoryService;
 import com.songxh.tools.DateUtils;
@@ -29,11 +28,15 @@ public class ProCategoryAction extends BaseAction<ProCategory> {
 	@Autowired
 	private ProCategoryService proCategoryService;
 	
-	@SuppressWarnings("unchecked")
 	public void prepareAdd(){
 		prepareModel();
-		@SuppressWarnings("rawtypes")
-		int num = proCategoryService.count(new HashMap());
+		Map<String, Object> param = new HashMap<String, Object>();
+		String parent = request.getParameter("parent");
+		if(StringUtils.isBlank(parent)){
+			parent = "0";
+		}
+		param.put("parent.id", Long.parseLong(parent));
+		int num = proCategoryService.count(param);
 		request.setAttribute("max", num+1);
 		model.setSort(num+1);
 	}
@@ -45,14 +48,25 @@ public class ProCategoryAction extends BaseAction<ProCategory> {
 		}
 		model.setInsertTime(new java.util.Date());
 		proCategoryService.insert(model);
-		success();
+		JSONObject obj = new JSONObject();
+		obj.put("success", true);
+		obj.put("msg", CommonConstraint.SAVE_SUCCESS);
+		JSONObject category = new JSONObject();
+		category.put("id", model.getId());
+		category.put("parent", model.getParent().getId());
+		obj.put("category", category);
+		outJson(obj.toJSONString());
 	}
 	
-	@SuppressWarnings("unchecked")
 	public void prepareEdit(){
 		prepareModel();
-		@SuppressWarnings("rawtypes")
-		int num = proCategoryService.count(new HashMap());
+		Map<String, Object> param = new HashMap<String, Object>();
+		String parent = request.getParameter("parent");
+		if(StringUtils.isBlank(parent)){
+			parent = "0";
+		}
+		param.put("parent.id", Long.parseLong(parent));
+		int num = proCategoryService.count(param);
 		request.setAttribute("max", num);
 	}
 
@@ -62,20 +76,31 @@ public class ProCategoryAction extends BaseAction<ProCategory> {
 			model.setSort(1);
 		}
 		proCategoryService.update(model);
-		success();
+		JSONObject obj = new JSONObject();
+		obj.put("success", true);
+		obj.put("msg", CommonConstraint.SAVE_SUCCESS);
+		JSONObject category = new JSONObject();
+		category.put("id", model.getId());
+		category.put("parent", model.getParent().getId());
+		obj.put("category", category);
+		outJson(obj.toJSONString());
 	}
 
 	@Override
 	protected void list() {
-		Page<ProCategory> page = new Page<ProCategory>(getPageNo(), getPageSize());
+		boolean leaf = false;
 		Map<String, Object> params = new HashMap<String, Object>();
+		if(id != null){
+			leaf = true;
+			params.put("parent.id", id);
+		}else{
+			params.put("parent.id", 0);
+		}
 		String categoryName = request.getParameter("categoryName");
 		if(StringUtils.isNotBlank(categoryName)){
 			params.put("categoryName", categoryName);
 		}
-		page = proCategoryService.findList(page, params, CommonConstraint.SORT);
-		List<ProCategory> list = page.getResult();
-		JSONObject result = new JSONObject();
+		List<ProCategory> list = proCategoryService.findList(params, CommonConstraint.SORT);
 		JSONArray array = new JSONArray();
 		if(list != null && !list.isEmpty()){
 			for(ProCategory category : list){
@@ -84,14 +109,18 @@ public class ProCategoryAction extends BaseAction<ProCategory> {
 				obj.put("categoryName", category.getCategoryName());
 				obj.put("sort", category.getSort());
 				obj.put("memo", category.getMemo());
+				obj.put("parent", category.getParent().getId());
 				obj.put("insertTime", DateUtils.format(category.getInsertTime()));
 				obj.put("creater", category.getCreater());
+				if(!leaf && proCategoryService.countByParent(category.getId()) > 0){
+					obj.put("state", "closed");
+				}else{
+					obj.put("state", "");
+				}
 				array.add(obj);
 			}
 		}
-		result.put("total", page.getTotalCount());
-		result.put("rows", array);
-		outJson(result.toJSONString());
+		outJson(array.toJSONString());
 	}
 	
 	public String sort(){

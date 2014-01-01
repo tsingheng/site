@@ -38,12 +38,14 @@
 				class="easyui-numberspinner" min="1" max="${max}"/>
 		</td>
 	</tr>
+	<!--
 	<tr>
-		<td>产品标签：</td>
+		<td>文章标签：</td>
 		<td>
 			<textarea name="model.tags" rows="4" cols="50">${model.tags}</textarea>
 		</td>
 	</tr>
+	-->
 	<tr>
 		<td>备注：</td>
 		<td>

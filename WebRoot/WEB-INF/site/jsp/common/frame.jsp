@@ -8,18 +8,21 @@
     <%@ include file="/components/keyword.jsp" %>
     <script type="text/javascript" src="${ctx}/resources/js/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="${ctx}/resources/js/banner.js"></script>
+    <script type="text/javascript" src="${ctx}/resources/js/jquery.lightbox-0.5.js"></script>
+	<link type="text/css" rel="stylesheet" href="${ctx}/resources/css/jquery.lightbox-0.5.css" media="screen" />
+	<script type="text/javascript">var ctx = "${ctx}";</script>
   </head>
   
   <body>
   <div class="wrap">
   	<div id="header">
-  		<div id="logo"><a href=""><img src="${ctx}/resources/images/logo.png"/></a></div>
+  		<div id="logo"><a href="http://www.winsmoke.com/"><img alt="${site_title}" src="${ctx}/resources/images/logo.png"/></a></div>
   		<div id="topr">
   			<div class="cname">${site_head}</div>
   			<div class="clist">
   				<ul class="public_ul">
-				    <li><a href="callto://${skype }" class="ico_tel">${skype}</a></li>
-				    <li><a class="ico_mail" href="mailto:${email}">${email}</a></li>
+				    <li><a href="callto://${skype}" class="ico tel">${skype}</a></li>
+				    <li><a class="ico mail" href="mailto:${email}">${email}</a></li>
 				</ul>
   			</div>
   			<br clear="all"/>
@@ -50,17 +53,36 @@
   			<c:forEach items="${banners}" var="banner" varStatus="i"><span>${i.index+1}</span></c:forEach>
   		</div>
   	</div>
-  	<div id="hun"><a href="/index.htm">Home</a></div>
+  	<%-- <div id="hun"><a href="/index.htm">Home</a></div>--%>
   	<div id="body">
   		<div class="left">
   			<dl class="dl dl1">
 				<dt><h2><a class="a6">Product Categories</a></h2></dt>
 				<dd>
-		            <ul class="ls ls0 public_ul">
+		            <ul class="ls ls0 public_ul category">
 		            	<c:forEach items="${gcates}" var="cate">
-		            	<c:if test="${cate.proCount gt 0}">
-		            	<li><a href="${ctx}/product/${cate.id}/p.htm" title="${cate.categoryName}">${cate.categoryName}</a>(<span>${cate.proCount}</span>)</li>
-		            	</c:if>
+		            	<li class="
+		            				<c:if test="${category.id eq cate.id}">on </c:if>
+		            				<c:if test="${category.parent.id eq cate.id}">cp </c:if>
+		            		">
+		            		<a <c:if test="${fn:length(cate.children) eq 0}">
+		            			href="${ctx}/product/${cate.id}/p.htm"
+		            			</c:if>
+		            			<c:if test="${fn:length(cate.children) gt 0}">
+		            			href="#nogo"
+		            			</c:if>
+		            			title="${cate.categoryName}">
+		            			${cate.categoryName}
+		            			<c:if test="${fn:length(cate.children) eq 0}">(<span>${cate.proCount}</span>)</c:if>
+		            		</a>
+		            		<c:if test="${fn:length(cate.children) gt 0}">
+		            		<ul class="subcate">
+		            			<c:forEach items="${cate.children}" var="child">
+		            			<li<c:if test="${child.id eq category.id}"> class="on"</c:if>><a href="${ctx}/product/${child.id}/p.htm" title="${child.categoryName}">${child.categoryName}(<span>${child.proCount}</span>)</a></li>
+		            			</c:forEach>
+		            		</ul>
+		            		</c:if>
+		            	</li>
 		            	</c:forEach>
 		           </ul>
 		       	 </dd>
@@ -70,17 +92,7 @@
 			    <dt><h2><a class="a6">Contact Details</a></h2></dt>
 			    <dd>
 			        <dl class="ppt public_ul">
-			        	
-			        	<li><span class="name">Contact:</span><span class="value">Mr.Hunk</span></li>
-			        	
-			        	<li><span class="name">MSN:</span><span>winsmoke100@msn.com</span></li>
-			        	
-			        	<li><span class="name">Skype:</span><span>winsmoke</span></li>
-			        	
-			        	<li><span class="name">Email:</span><span>winsmoke@163.com</span></li>
-			        	
-			        	<li><span class="name">Mobile:</span><span>+86-18664330742</span></li>
-			        	
+			        	${site_contact}
 			        </dl>
 			    </dd>
 			</dl>

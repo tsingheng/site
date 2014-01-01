@@ -94,4 +94,23 @@ $(function(){
 			scrollHot.scrollTop(scrollHot.scrollTop()+1);
 		}
 	}
-})
+	$('.category>li>a').each(function(){
+		var me = $(this);
+		var li = me.parent();
+		if(li.find('.subcate li').length > 0){
+			if(li.hasClass('cp')){
+				li.data('open', true);
+			}else{
+				li.data('open', false);
+			}
+			me.click(function(){
+				if(li.data('open')){
+					li.find('.subcate').slideUp();
+				}else{
+					li.find('.subcate').slideDown();
+				}
+				li.data('open', !li.data('open'));
+			});
+		}
+	});
+});

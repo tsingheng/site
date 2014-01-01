@@ -20,7 +20,7 @@ $(document).ready(function() {
 					showMsg(response.msg, function(){
 						if(response.success){
 							closeWin('cate');
-							reload('cate');
+							$('#cate-list').treegrid('reload', response.category.parent);
 						}
 					});
 				}

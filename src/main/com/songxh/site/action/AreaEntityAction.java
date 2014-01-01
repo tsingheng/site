@@ -93,32 +93,30 @@ public class AreaEntityAction extends BaseAction<AreaEntity> {
 //						obj.put("url", "image-display.action?type=factory");
 //						tree.add(obj);
 //						target = "add-image";
-						Map<String, Object> obj = null;
-						List<ProCategory> cateList = this.proCategoryService.findAll(CommonConstraint.SORT);
-						if(cateList != null && !cateList.isEmpty()){
-							for(ProCategory cate : cateList){
-								obj = new HashMap<String, Object>();
-								obj.put("id", cate.getId());
-								obj.put("text", cate.getCategoryName());
-								obj.put("leaf", true);
-								obj.put("url", "product.action?category=" + cate.getId());
-								tree.add(obj);
+						Map<String, Object> param = new HashMap<String, Object>();
+						param.put("parent.id", 0);
+						List<ProCategory> plist = proCategoryService.findList(param,CommonConstraint.SORT);
+						if(plist != null && !plist.isEmpty()){
+							for(ProCategory category : plist){
+								param.put("parent.id", category.getId());
+								List<ProCategory> children = proCategoryService.findList(param, CommonConstraint.SORT);
+								category.setChildren(children);
 							}
 						}
+						request.setAttribute("plist", plist);
 						target = "add-image";
 					}else if(IndexAreaTypes.ContentTypeEnums.PRODUCT.getValue().equals(area.getContentType())){
-						Map<String, Object> obj = null;
-						List<ProCategory> cateList = this.proCategoryService.findAll(CommonConstraint.SORT);
-						if(cateList != null && !cateList.isEmpty()){
-							for(ProCategory cate : cateList){
-								obj = new HashMap<String, Object>();
-								obj.put("id", cate.getId());
-								obj.put("text", cate.getCategoryName());
-								obj.put("leaf", true);
-								obj.put("url", "product.action?category=" + cate.getId());
-								tree.add(obj);
+						Map<String, Object> param = new HashMap<String, Object>();
+						param.put("parent.id", 0);
+						List<ProCategory> plist = proCategoryService.findList(param,CommonConstraint.SORT);
+						if(plist != null && !plist.isEmpty()){
+							for(ProCategory category : plist){
+								param.put("parent.id", category.getId());
+								List<ProCategory> children = proCategoryService.findList(param, CommonConstraint.SORT);
+								category.setChildren(children);
 							}
 						}
+						request.setAttribute("plist", plist);
 						target = "add-product";
 					}
 					request.setAttribute("tree", tree);
@@ -133,13 +131,13 @@ public class AreaEntityAction extends BaseAction<AreaEntity> {
 	public String add() {
 		boolean success = false;
 		String msg = "";
-		String type = request.getParameter("ctype");
+		String areaId = request.getParameter("areaId");
 		if(id == null){
 			msg = "请先选择要添加的记录";
-		}else if(StringUtils.isBlank(type)){
+		}else if(StringUtils.isBlank(areaId)){
 			msg = "非法操作";
 		}else{
-			IndexArea area = indexAreaService.findByContentType(type);
+			IndexArea area = indexAreaService.find(Long.parseLong(areaId));
 			if(area == null){
 				msg = "没有这个分类";
 			}else{

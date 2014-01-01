@@ -79,6 +79,11 @@ public class Product extends BaseEntityL implements Sortable {
 	/** 默认显示的图片,即第一张图片 **/
 	private String image;
 	
+	/** 购买链接,可以指向阿里巴巴等等 **/
+	private String buyLink;
+	
+	private String desc;//简介
+	
 	@Column(name = "PRODUCT_NAME", length = 30)
 	public String getProductName() {
 		return productName;
@@ -186,7 +191,7 @@ public class Product extends BaseEntityL implements Sortable {
 	public String getImage() {
 		if(!images.isEmpty() && image == null){
 			image = images.iterator().next().getAttachment().getPath();
-		}else{
+		}else if(image == null){
 			image = CommonConstraint.DEFAULT_IMAGE;
 		}
 		return image;
@@ -204,6 +209,22 @@ public class Product extends BaseEntityL implements Sortable {
 		this.properties = properties;
 	}
 
+	@Column(name = "BUY_LINK")
+	public String getBuyLink() {
+		return buyLink;
+	}
+	
+	public void setBuyLink(String buyLink) {
+		this.buyLink = buyLink;
+	}
+	
+	@Transient
+	public String getDesc() {
+		return desc;
+	}
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
 	public static void main(String[] args){
 		Set<String> set = new HashSet<String>();
 		set.add("aa");

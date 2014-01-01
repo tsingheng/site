@@ -50,6 +50,12 @@
 		</td>
 	</tr>
 	<tr>
+		<td>购买链接：</td>
+		<td>
+			<textarea name="model.buyLink" rows="4" cols="50">${model.buyLink}</textarea>
+		</td>
+	</tr>
+	<tr>
 		<td valign="middle">属性：</td>
 		<td>
 			<ul class="name_value" id="oname_value">

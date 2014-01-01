@@ -10,6 +10,12 @@
 		<td width="120">产品系列名称：</td>
 		<td>
 			<input name="model.categoryName" value="${model.categoryName}" class="input1"/>
+			<c:if test="${not empty param.parent}">
+				<input type="hidden" name="model.parent.id" value="${param.parent}"/>
+			</c:if>
+			<c:if test="${empty param.parent}">
+				<input type="hidden" name="model.parent.id" value="${model.parent.id}"/>
+			</c:if>
 		</td>
 	</tr>
 	<tr>

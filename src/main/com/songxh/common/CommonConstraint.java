@@ -12,7 +12,7 @@ public class CommonConstraint {
 	public static final Long DEFAULT_PARENT = 0L; // 默认父节点id,一般即为顶级节点id
 	public static final String SORT = "sort desc"; // 排序字段
 	public static final String SAVE_SUCCESS = "保存成功";
-	public static final String DEFAULT_IMAGE = "/resources/image/default.gif";
+	public static final String DEFAULT_IMAGE = "resources/image/default.gif";
 	public static final String USER_SESSION_KEY = "user_session_key";
 	public enum RESOURCE_TYPE{
 		/** 系统菜单 **/

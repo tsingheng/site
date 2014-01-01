@@ -1,14 +1,17 @@
 package com.songxh.system.action;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,7 @@ import com.songxh.system.entity.User;
 import com.songxh.system.service.ResourceService;
 import com.songxh.system.service.RoleService;
 import com.songxh.system.service.UserService;
+import com.songxh.tools.FileUtils;
 
 public class AdminAction extends BaseAction<User> {
 
@@ -36,6 +40,9 @@ public class AdminAction extends BaseAction<User> {
 	private RoleService roleService;
 	@Autowired
 	private ResourceService resourceService;
+	private File file;
+	private String fileFileName;
+	private static String[] acceptTypes = {".gif", ".jpeg", ".jpg", ".png", ".bmp", ".pdf", ".rar", ".doc"};
 	
 	public String execute(){
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -137,8 +144,11 @@ public class AdminAction extends BaseAction<User> {
 			if(list == null || list.isEmpty()){
 				msg = "用户名或密码错误";
 			}else{
-				if(list.get(0).getPassword().equals(MD5Utils.md5(password))){
-					User user = list.get(0);
+				User user = list.get(0);
+				if(user.getFailedTimes() != null && user.getFailedTimes() >= 5){
+					msg = "该账户已被冻结";
+				}else if(user.getPassword().equals(MD5Utils.md5(password))){
+					user.setFailedTimes(0);
 					LoginUser loginUser = new LoginUser();
 					loginUser.setLogIp(request.getRemoteAddr());
 					loginUser.setUserId(list.get(0).getId());
@@ -158,14 +168,47 @@ public class AdminAction extends BaseAction<User> {
 					loginUser.setUrls(urls);
 					request.getSession().setAttribute(CommonConstraint.USER_SESSION_KEY, loginUser);
 					result = true;
-				}
-				else
+				}else{
+					if(user.getFailedTimes() == null){
+						user.setFailedTimes(0);
+					}
+					user.setFailedTimes(user.getFailedTimes() + 1);
 					msg = "用户名或密码错误";
+				}
+				userService.update(user);
 			}
 		}
 		JSONObject obj = new JSONObject();
 		obj.put("success", result);
 		obj.put("msg", msg);
+		outJson(obj.toJSONString());
+		return null;
+	}
+	
+	public String upfile(){
+		boolean success = false;
+		String msg = "";
+		if(file == null){
+			msg = "请选择文件";
+		}else if(file.length() > 2*1024*1024){
+			msg = "不能上传大于2M的文件";
+		}else if(fileFileName.indexOf(".") < 0){
+			msg = "文件不合法";
+		}else if(!Arrays.asList(acceptTypes).contains(fileFileName.substring(fileFileName.lastIndexOf(".")).toLowerCase())){
+			msg = "文件格式不合法";
+		}else{
+			try {
+				msg = FileUtils.saveFile(file, fileFileName);
+				success = true;
+			} catch (IOException e) {
+				e.printStackTrace();
+				msg = "文件保存错误";
+			}
+		}
+		JSONObject obj = new JSONObject();
+		obj.put("error", success ? 0 : 1);
+		obj.put("message", msg);
+		obj.put("url", msg);
 		outJson(obj.toJSONString());
 		return null;
 	}
@@ -179,6 +222,22 @@ public class AdminAction extends BaseAction<User> {
 	@Override
 	protected BaseService<User> getService() {
 		return null;
+	}
+
+	public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+
+	public String getFileFileName() {
+		return fileFileName;
+	}
+
+	public void setFileFileName(String fileFileName) {
+		this.fileFileName = fileFileName;
 	}
 
 	@Override

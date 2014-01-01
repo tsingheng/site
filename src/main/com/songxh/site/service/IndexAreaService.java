@@ -24,6 +24,14 @@ public class IndexAreaService extends BaseService<IndexArea> {
 		}
 		return null;
 	}
+	
+	public IndexArea findByCode(String code){
+		List<IndexArea> list = indexAreaDAO.findList("where areaCode=?", code);
+		if(list != null && !list.isEmpty()){
+			return list.get(0);
+		}
+		return null;
+	}
 
 	@Override
 	public BaseDAO<IndexArea> getBaseDAO() {

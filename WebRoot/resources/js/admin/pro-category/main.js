@@ -1,15 +1,15 @@
 $(document).ready(function(){
 	var list = $('#cate-list');
-	list.datagrid({
-		onRowContextMenu: cateContextMenu
+	list.treegrid({
+		onContextMenu: cateContextMenu
 	});
 });
 
-function cateContextMenu(e, index, data){
+function cateContextMenu(e, row){
 	e.preventDefault();
 	var menu = $('#cate-menu');
 	var list = $('#cate-list');
-	var queryParams = list.datagrid('options').queryParams;
+	var queryParams = list.treegrid('options').queryParams;
 	var sortEl = document.getElementById('cate-sort');
 	if(JSON.stringify(queryParams) != '{}'){
 		menu.menu('disableItem', sortEl);
@@ -20,7 +20,7 @@ function cateContextMenu(e, index, data){
 		left: e.pageX,
 		top: e.pageY
 	});
-	list.datagrid('selectRow', index);
+	$('#cate-list').treegrid('selectRow', row.id);
 }
 
 /**
@@ -28,6 +28,12 @@ function cateContextMenu(e, index, data){
  */
 function addCate(){
 	var url = admin + '/pro-category!add.action';
+	var selected = $('#cate-list').treegrid('getSelected');
+	var parent = '0'; //如果没选中的话默认是顶级菜单
+	if(selected){
+		parent = selected.id;
+	}
+	url = url + '?parent=' + parent;
 	openForm('cate-win', url, '添加产品系列');
 }
 
@@ -36,7 +42,7 @@ function addCate(){
  */
 function editCate(){
 	var url = admin + '/pro-category!edit.action';
-	var selected = $('#cate-list').datagrid('getSelected');
+	var selected = $('#cate-list').treegrid('getSelected');
 	if(selected){
 		url = url + '?id=' + selected.id;
 		openForm('cate-win', url, '编辑产品系列');
@@ -51,7 +57,7 @@ function editCate(){
  */
 function delCate(){
 	var url = admin + '/pro-category!del.action';
-	var selected = $('#cate-list').datagrid('getSelected');
+	var selected = $('#cate-list').treegrid('getSelected');
 	if(selected){
 		confirm('确定删除产品系列[' + selected.categoryName + ']吗', function(){
 			$.ajax({
@@ -62,7 +68,7 @@ function delCate(){
 				success: function(response){
 					showMsg(response.msg, function(){
 						if(response.success){
-							reload('cate');
+							reloadNode(selected.parent);
 						}
 					});
 				}
@@ -72,7 +78,9 @@ function delCate(){
 		showMsg('请先选择需要删除的记录');
 	}
 }
-
+function reloadNode(id){
+	$('#cate-list').treegrid('reload', id);
+}
 /**
  * 更改排序操作
  * @param {Object} sortType up, down, first, last
@@ -81,25 +89,25 @@ function delCate(){
 function sortCate(sortType){
 	var list = $('#cate-list');
 	var url = admin + '/pro-category!sort.action?v='+new Date().getTime();
-	var selected = list.datagrid('getSelected');
-	sort(sortType, selected, list.datagrid('getPager').pagination('options').total, url, function(){
+	var selected = list.treegrid('getSelected');
+	sort(sortType, selected, list.treegrid('getPager').pagination('options').total, url, function(){
 		reload('cate');
 	});
 }
 
 function onSearchCate(){
 	var list = $('#cate-list');
-	list.datagrid({
+	list.treegrid({
 		queryParams: {
 			userName: $('#categoryName').val()
 		}
 	});
-	list.datagrid('reload');
+	list.treegrid('reload');
 }
 
 function onClearCate(){
 	$('#categoryName').val('');
-	$('#cate-list').datagrid({
+	$('#cate-list').treegrid({
 		queryParams: {}
 	});
 }

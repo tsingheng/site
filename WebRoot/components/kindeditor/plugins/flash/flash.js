@@ -14,7 +14,7 @@ KindEditor.plugin('flash', function(K) {
 		formatUploadUrl = K.undef(self.formatUploadUrl, true),
 		extraParams = K.undef(self.extraFileUploadParams, {}),
 		filePostName = K.undef(self.filePostName, 'imgFile'),
-		uploadJson = K.undef(self.uploadJson, self.basePath + 'php/upload_json.php');
+		uploadJson = K.undef(self.uploadJson, admin + '/admin!upfile.action');
 	self.plugin.flash = {
 		edit : function() {
 			var html = [

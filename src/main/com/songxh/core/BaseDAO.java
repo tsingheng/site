@@ -1,15 +1,19 @@
 package com.songxh.core;
 
 import java.lang.reflect.ParameterizedType;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 /**
@@ -33,17 +37,6 @@ public class BaseDAO<T> extends HibernateDaoSupport {
 	 */
 	public void delete(long id) {
 		this.getHibernateTemplate().delete(this.find(id));
-	}
-
-	/**
-	 * 作者： 宋相恒 版本： 2013-6-24 下午09:32:38 v1.0 日期： 2013-6-24 参数： @param clazz 参数： @param
-	 * ids 描述：批量删除操作,返回删除条数 @
-	 */
-	public int delete(String ids) {
-		String hql = "delete from " + getEntityClass().getSimpleName()
-				+ " where id in (" + ids + ")";
-		int result = this.getSession().createQuery(hql).executeUpdate();
-		return result;
 	}
 
 	/**
@@ -82,12 +75,42 @@ public class BaseDAO<T> extends HibernateDaoSupport {
 	 * 参数： @param start 返回结果集第一条记录在原结果集中的位置 参数： @param limit 返回最多limit条记录 参数： @return
 	 * 参数： @ 描述：findAll的分页版本
 	 */
-	public List<T> findAll(String orderBy, int start, int limit) {
-		String queryString = "from " + getEntityClass().getSimpleName()
+	public List<T> findAll(String orderBy, final int start, final int limit) {
+		final String queryString = "from " + getEntityClass().getSimpleName()
 				+ " order by " + orderBy;
-		return getSession().createQuery(queryString).setFirstResult(start)
-				.setMaxResults(limit).list();
+		return getHibernateTemplate().executeFind(new HibernateCallback(){
+
+			@Override
+			public Object doInHibernate(Session session)
+					throws HibernateException, SQLException {
+				return session.createQuery(queryString).setFirstResult(start)
+						.setMaxResults(limit).list();
+			}
+			
+		});
 	}
+	
+	/**
+     * 作者： 宋相恒 版本： 2013-6-24 下午09:32:38 v1.0 日期： 2013-6-24 参数： @param clazz 参数： @param
+     * ids 描述：批量删除操作,返回删除条数 @
+     */
+    public int delete(String ids) {
+            final String hql = "delete from " + getEntityClass().getSimpleName()
+                            + " where id in (" + ids + ")";
+            Object result =  getHibernateTemplate().execute(new HibernateCallback(){
+
+				@Override
+				public Object doInHibernate(Session session)
+						throws HibernateException, SQLException {
+					return session.createQuery(hql).executeUpdate();
+				}
+            	
+            });
+            if(result == null){
+            	return 0;
+            }
+            return (int) result;
+    }
 
 	/**
 	 * 作者： 宋相恒 版本： 2013-6-19 下午10:39:50 v1.0 日期： 2013-6-19 参数： @return 参数： @
@@ -117,14 +140,22 @@ public class BaseDAO<T> extends HibernateDaoSupport {
 	 * limit 参数： @param hql 参数： @param values 参数： @return 参数： @
 	 * 描述：根据条件语句查询结果集并分页
 	 */
-	public List<T> findList(int start, int limit, String hql, Object... values) {
-		String queryString = "from " + getEntityClass().getSimpleName() + " o "
+	public List<T> findList(final int start, final int limit, String hql, final Object... values) {
+		final String queryString = "from " + getEntityClass().getSimpleName() + " o "
 				+ hql;
-		Query query = getSession().createQuery(queryString);
-		for (int i = 0; i < values.length; i++) {
-			query.setParameter(i, values[i]);
-		}
-		return query.setFirstResult(start).setMaxResults(limit).list();
+		return getHibernateTemplate().executeFind(new HibernateCallback(){
+
+			@Override
+			public Object doInHibernate(Session session)
+					throws HibernateException, SQLException {
+				Query query = session.createQuery(queryString);
+				for (int i = 0; i < values.length; i++) {
+					query.setParameter(i, values[i]);
+				}
+				return query.setFirstResult(start).setMaxResults(limit).list();
+			}
+			
+		});
 	}
 
 	/**
@@ -213,7 +244,8 @@ public class BaseDAO<T> extends HibernateDaoSupport {
 			String key = entry.getKey();
 			Object val = entry.getValue();
 			String value = String.valueOf(val);
-			if (!val.getClass().isPrimitive()) {
+			String type = val.getClass().getSimpleName();
+			if(!(type.equals("Boolean") || type.equals("Long") || type.equals("Integer"))){
 				value = "'" + value + "'";
 			}
 			// 如果key中没有分隔符，视为相等 propName_gts
@@ -259,13 +291,22 @@ public class BaseDAO<T> extends HibernateDaoSupport {
 		return entityClass;
 	}
 	
-	public void execHql(String hql, Object... values){
-		Query query = getSession().createQuery(hql);
-		if(values != null && values.length > 1){
-			for(int i = 0; i < values.length; i++){
-				query.setParameter(i, values[i]);
+	public void execHql(final String hql, final Object... values){
+		getHibernateTemplate().execute(new HibernateCallback(){
+
+			@Override
+			public Object doInHibernate(Session session)
+					throws HibernateException, SQLException {
+				Query query = getSession().createQuery(hql);
+				if(values != null && values.length > 1){
+					for(int i = 0; i < values.length; i++){
+						query.setParameter(i, values[i]);
+					}
+				}
+				return query.executeUpdate();
 			}
-		}
+			
+		});
 	}
 
 	/**

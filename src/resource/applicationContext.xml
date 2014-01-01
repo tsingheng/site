@@ -22,7 +22,7 @@
 		</property>
 		<property name="initialSize" value="10"></property>
 		<property name="maxActive" value="100"></property>
-		<property name="maxIdle" value="5"></property>
+		<property name="maxIdle" value="50"></property>
 		<property name="maxWait" value="600000"></property>
 		<property name="validationQuery" value="SELECT 1" />
 		<property name="testOnBorrow" value="true" />

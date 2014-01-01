@@ -1,11 +1,24 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/components/common.jsp" %>
-<script type="text/javascript">var nodes = [${nodes}];</script>
+<script type="text/javascript">var nodes = [${nodes}];var areaId = '${param.areaId}';</script>
 <div class="easyui-layout" fit="true">
 	<div region="west" style="width:200px; border:none;">
 		<ul id="entity-cate-tree-list" class="easyui-tree">
-			<c:forEach items="${tree}" var="category">
-			<li id="${category.id}">${category.text}</li>
+			<c:forEach items="${plist}" var="category">
+			<li id="${category.id}"
+				<c:if test="${(not empty category.children) && (fn:length(category.children) gt 0)}">
+				state="closed"
+				</c:if>
+				>
+				<span>${category.categoryName}</span>
+				<c:if test="${(not empty category.children) && (fn:length(category.children) gt 0)}">
+				<ul>
+					<c:forEach items="${category.children}" var="child">
+					<li id="${child.id}">${child.categoryName}</li>
+					</c:forEach>
+				</ul>
+				</c:if>
+			</li>
 			</c:forEach>
 		</ul>
 	</div>

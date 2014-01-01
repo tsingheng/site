@@ -15,7 +15,11 @@
 		        </c:otherwise>
 		        </c:choose>
 		        <li class="no">
-		        	<c:forEach begin="1" end="${page.pageSize}" var="i">
+		        	<c:if test="${page.leftPoints}">
+		        		<a href="p1.htm">1</a>
+		        		<a>...</a>
+		        	</c:if>
+		        	<c:forEach begin="${page.pageStart}" end="${page.pageEnd}" var="i">
 		        	<c:choose>
 			        <c:when test="${page.pageNo eq i}">
 			        <a class="dq">${i}</a>
@@ -25,6 +29,10 @@
 			        </c:otherwise>
 			        </c:choose>
 		        	</c:forEach>
+		        	<c:if test="${page.rightPoints}">
+		        		<a>···</a>
+		        		<a href="p${page.pageSize}.htm">${page.pageSize}</a>
+		        	</c:if>
 		        <li>
 		        <c:choose>
 		        <c:when test="${page.pageNo lt page.pageSize}">

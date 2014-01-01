@@ -52,7 +52,7 @@ $(document).ready(function(){
 				published += 'no.png';
 			}
 			published += '"/>';
-			td.push('<img src="' + rowData['path'] + '" style="width:294px; height:294px; float:left; margin: 3px;"/>');
+			td.push('<img src="' + ctx + '/' + rowData['path'] + '" style="width:294px; height:294px; float:left; margin: 3px;"/>');
 			td.push('<div style="float:left; margin-left:20px; margin-top: 10px;">');
 				td.push('<p><span class="op-title">排序: </span>' + rowData['sort'] + '</p>');
 				td.push('<p><span class="op-title">是否发布: </span>' + published + '</p>');

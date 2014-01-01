@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/components/common.jsp" %>
-<script type="text/javascript">var nodes = [${nodes}];</script>
+<script type="text/javascript">var nodes = [${nodes}];var areaId = '${param.areaId}';</script>
 <div class="easyui-layout" fit="true">
 	<div region="west" style="width:200px; border:none;">
 		<ul id="entity-cate-tree-list" class="easyui-tree">

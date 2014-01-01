@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 import com.songxh.core.BaseEntityL;
 @Entity
-@Table(name="PRO_PROPERTY")
+@Table(name="pro_property")
 public class ProProperty extends BaseEntityL {
 
 	/**
@@ -19,6 +19,8 @@ public class ProProperty extends BaseEntityL {
 	private String propertyName;
 	/** 属性值 **/
 	private String propertyValue;
+	
+	private Integer sort;
 	
 	@Column(name = "PRODUCT_ID")
 	public Long getProductId() {
@@ -42,6 +44,14 @@ public class ProProperty extends BaseEntityL {
 	}
 	public void setPropertyValue(String propertyValue) {
 		this.propertyValue = propertyValue;
+	}
+	
+	@Column(name = "SORT")
+	public Integer getSort() {
+		return sort;
+	}
+	public void setSort(Integer sort) {
+		this.sort = sort;
 	}
 	
 }

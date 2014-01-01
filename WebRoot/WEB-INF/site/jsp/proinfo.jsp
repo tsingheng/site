@@ -19,70 +19,61 @@
                                 <th>Product Name</th>
                                 <td>${product.productName}</td>
                             </tr>
+                            <c:forEach items="${product.properties}" var="property">
+                            <tr>
+                                <th>${property.propertyName}</th>
+                                <td>${property.propertyValue}</td>
+                            </tr>
+                            </c:forEach>
                         </table>
                     </div>
                     <div class="share">
                     </div>
                     <div class="link">
                         <a href="#inquiry" class="inq" onclick="document.getElementById('subject').focus();">Send Inquiry Now</a>
+                        <c:if test="${not empty product.buyLink}">
+                        <a href="http://winsmok.en.alibaba.com${product.buyLink}" class="buy">Buy Now</a>
+                        </c:if>
                     </div>
                 </div>
-                <div class="clear"></div>
-
                 <div class="clear"></div>
                 <h3>Product Description</h3>
                 <div class="desc">${product.description}</div>
             </dd>
         </dl>
-        <%-- 产品信息结束 --%>
-        <%-- 相关产品开始 --%>
-        <%--
         <dl class="dl dl4">
-            <dt><h2><a class="a4">Related Product</a></h2></dt>
-            <dd>
-                <ul class="bpl public_ul">
-                	<c:forEach items="${relateList}" var="relate">
-                	<li><a href="${ctx}/proinfo/pro-${relate.id}.htm" title="${relate.productName}"><img src="${ctx}/${relate.image}" alt="${relate.productName}" /></a><a class="tl" href="${ctx}/proinfo/pro-${relate.id}.htm" title="${relate.productName}">${relate.productName}</a></li>
-                	</c:forEach>
-                </ul>
-                <div class="clear"></div>
-            </dd>
-        </dl>
-        --%>
-        <%-- 相关产品结束 --%>
-        <%-- 留言开始 --%>
-        <dl class="dl dl4">
-    <div id="inquiry">
-    <dt><h2><a class="a7">Send Inquiry Now!</a></h2></dt>
-    <dd>
-        <form id="messageform1" name="messageform1" action="${ctx}/message/post.htm" method="post" onsubmit="return mf1SubmitCheck(this);">
-            <input type="hidden" id="pid" name="pid" value="0" />
-            <table cellspacing="0" cellpadding="4" class="form">
-                <tr>
-                    <th>Subject : <span>*</span></th>
-                    <td><input type="text" id="subject" name="msgSubject" vformat="required" style="width:500px;" /></td>
-                </tr>
-                <tr>
-                    <th>Email : <span>*</span></th>
-                    <td><input type="text" id="email" name="msgEmail" style="width:300px;" vformat="required/email" /></td>
-                </tr>
-                <tr>
-                    <th style="padding-right:12px;">Name : </th>
-                    <td><input type="text" id="name" name="msgName" style="width:200px;" /></td>
-                </tr>
-                <tr>
-                    <th>Message : <span>*</span></th>
-                    <td><textarea id="message" name="msgContent" style="width:600px;height:80px;" vformat="required"></textarea></td>
-                </tr>
-                <tr>
-                    <th></th>
-                    <td><input class="post" type="submit" value="Submit"></td>
-                </tr>
-            </table>
-        </form>
-    </dd>
-    </div>
-</dl>
+		    <div id="inquiry">
+		    <dt><h2><a class="a7">Send Inquiry Now!</a></h2></dt>
+		    <dd>
+		        <form id="messageform1" name="messageform1" action="${ctx}/message/post.htm" method="post" onsubmit="return mf1SubmitCheck(this);">
+		            <input type="hidden" id="pid" name="pid" value="0" />
+		            <table cellspacing="0" cellpadding="4" class="form">
+		                <tr>
+		                    <th>Subject : <span>*</span></th>
+		                    <td><input type="text" id="subject" name="subject" vformat="required" style="width:500px;" /></td>
+		                </tr>
+		                <tr>
+		                    <th>Email : <span>*</span></th>
+		                    <td><input type="text" id="email" name="email" style="width:300px;" vformat="required/email" /></td>
+		                </tr>
+		                <tr>
+		                    <th style="padding-right:12px;">Name : </th>
+		                    <td><input type="text" id="name" name="custName" style="width:200px;" /></td>
+		                </tr>
+		                <tr>
+		                    <th>Message : <span>*</span></th>
+		                    <td><textarea id="message" name="msgContent" style="width:600px;height:80px;" vformat="required"></textarea></td>
+		                </tr>
+		                <tr>
+		                    <th></th>
+		                    <td><input class="post" type="submit" value="Submit"></td>
+		                </tr>
+		            </table>
+		        </form>
+		    </dd>
+		    </div>
+		</dl>
+<script type="text/javascript" src="${ctx}/resources/jquery.extend.js"></script>
 <%-- 内容主体结束 --%>
 <script type="text/javascript">
     var pname = '${product.productName}';
@@ -130,4 +121,9 @@
         $('.simg li:eq(0)').trigger('click');
     }
     mf1valid = $('#messageform1').FormValidtor(); simgs();;
+    $(document).ready(function(){
+    	$('.detail-content img[data-src]').each(function(){
+    		$(this).attr('src', '${ctx}/' + $(this).attr('data-src'));
+    	});
+    });
 </script>

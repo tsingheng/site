@@ -3,6 +3,7 @@
 		<dl class="dl dl4">
             <dt><h2><a class="a12" href="news/p${page.pageNo}.htm" title="News">News</a></h2></dt>
             <dd>
+            	<c:if test="${fn:length(page.result) gt 0}">
             	<ul class="lts public_ul">
             		<c:forEach items="${page.result}" var="news">
             		<li>
@@ -10,8 +11,13 @@
 						<span><fmt:formatDate pattern="yyyy-MM-dd" value="${news.insertTime}"/></span>
 					</li>
             		</c:forEach>
-            		<li></li>
             	</ul>
+            	</c:if>
+            	<c:if test="${fn:length(page.result) eq 0}">
+            	<div class="nodata">There are currently no data to show.</div>
+            	</c:if>
             </dd>
         </dl>
+        <c:if test="${fn:length(page.result) gt 0}">
         <jsp:include page="common/page.jsp"></jsp:include> 
+		</c:if>

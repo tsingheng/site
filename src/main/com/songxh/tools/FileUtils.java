@@ -50,7 +50,7 @@ public class FileUtils {
         fout.close();
         is.close();
 		logger.debug("sysPath=" + sysPath);
-		String filePath =  "/upload/" + datePath + randomName + extend;
+		String filePath =  "upload/" + datePath + randomName + extend;
 		return filePath;
 	}
 	
@@ -85,7 +85,7 @@ public class FileUtils {
 			logger.error("保存文件出错！" + e.getMessage());
 			e.printStackTrace();
 		}
-        String filePath =  "/upload/" + datePath + randomName + extend;
+        String filePath =  "upload/" + datePath + randomName + extend;
         return filePath;
 	}
 	

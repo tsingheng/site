@@ -21,7 +21,7 @@ $(document).ready(function() {
 					if(response.success){
 						if(response.site_logo != undefined){
 							$('#sitePropertyForm .file').val('');
-							$('#site-logo-pre').attr('src', response.site_logo);
+							$('#site-logo-pre').attr('src', response.siteLogo);
 						}
 					}
 				});

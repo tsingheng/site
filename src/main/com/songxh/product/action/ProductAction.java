@@ -55,7 +55,16 @@ public class ProductAction extends BaseAction<Product> {
 	public void prepareExecute(){
 		String method = request.getMethod();
 		if(method.equals(CommonConstraint.REQUEST_METHOD.GET.getMethod())){
-			List<ProCategory> list = proCategoryService.findAll(CommonConstraint.SORT);
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("parent.id", 0);
+			List<ProCategory> list = proCategoryService.findList(param,CommonConstraint.SORT);
+			if(list != null && !list.isEmpty()){
+				for(ProCategory category : list){
+					param.put("parent.id", category.getId());
+					List<ProCategory> children = proCategoryService.findList(param, CommonConstraint.SORT);
+					category.setChildren(children);
+				}
+			}
 			request.setAttribute("list", list);
 		}
 	}

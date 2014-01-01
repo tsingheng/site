@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 		<%@ include file="/components/common.jsp" %>
+		<c:if test="${fn:length(page.result) gt 0}">
 		<c:forEach items="${page.result}" var="category">
-		<c:if test="${fn:length(category.products) > 0}">
 		<dl class="dl dl4">
             <dt><h2><a class="a12" href="${ctx}/product/${category.id}/p.htm" title="${category.categoryName}">${category.categoryName}</a> (<span>${category.proCount}</span>)</h2></dt>
             <dd>
@@ -16,6 +16,9 @@
                 </ul>
             </dd>
         </dl>
-        </c:if>
 		</c:forEach>
         <jsp:include page="common/page.jsp"></jsp:include>
+        </c:if>
+        <c:if test="${fn:length(page.result) eq 0}">
+        <div class="nodata">There are currently no data to show.</div>
+        </c:if>

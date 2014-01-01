@@ -5,7 +5,7 @@
 	<constant name="struts.configuration.xml.reload" value="true" />
 	<constant name="struts.multipart.saveDir" value="C:/tmp"/>
 	<constant name="struts.devMode" value="false" />
-	<constant name="struts.multipart.maxSize" value="10701096"/>
+	<constant name="struts.multipart.maxSize" value="2097152"/>
 	<package name="default" namespace="/admin" extends="tiles-default">
 		<interceptors>
 			<interceptor name="userAuthInterceptor" class="com.songxh.system.interceptor.AuthInterceptor"></interceptor>

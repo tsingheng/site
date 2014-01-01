@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -45,6 +48,10 @@ public class ProCategory extends BaseEntityL implements Sortable {
 	
 	/** 该分类产品数量 **/
 	private Integer proCount;
+	
+	private ProCategory parent;
+	
+	private List<ProCategory> children;
 	
 	private List<Product> products;
 	
@@ -102,6 +109,23 @@ public class ProCategory extends BaseEntityL implements Sortable {
 	}
 	public void setProducts(List<Product> products) {
 		this.products = products;
+	}
+	
+	@ManyToOne(targetEntity = ProCategory.class, fetch = FetchType.EAGER)
+	@JoinColumn(name = "PARENT_ID")
+	public ProCategory getParent() {
+		return parent;
+	}
+	public void setParent(ProCategory parent) {
+		this.parent = parent;
+	}
+	
+	@Transient
+	public List<ProCategory> getChildren() {
+		return children;
+	}
+	public void setChildren(List<ProCategory> children) {
+		this.children = children;
 	}
 
 }

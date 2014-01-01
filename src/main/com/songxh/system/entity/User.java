@@ -52,6 +52,9 @@ public class User extends BaseEntityL {
 	/** 用户邮箱 **/
 	private String email;
 	
+	/** 密码错误次数,超过5次错误锁定 **/
+	private Integer failedTimes;
+	
 	/** 用户角色 **/
 	private Role userRole = new Role();
 
@@ -126,6 +129,14 @@ public class User extends BaseEntityL {
 	}
 	public void setUserRole(Role userRole) {
 		this.userRole = userRole;
+	}
+	
+	@Column(name = "FAILED_TIMES")
+	public Integer getFailedTimes() {
+		return failedTimes;
+	}
+	public void setFailedTimes(Integer failedTimes) {
+		this.failedTimes = failedTimes;
 	}
 	
 	

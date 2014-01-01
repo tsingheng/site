@@ -3,6 +3,7 @@ $(document).ready(function(){
 		onClick: onCateTreeClick
 	});
 	function onCateTreeClick(node){
+		if(!$('#entity-cate-tree-list').tree('isLeaf', node.target)) return false;
 		var list = $('#entity-pro-list');
 		list.datagrid('unselectAll');
 		var url = list.datagrid('options').url;
@@ -61,7 +62,7 @@ function addEntityPro(){
 				url: url,
 				method: 'post',
 				dataType: 'json',
-				data: {id: selected.id, ctype: '3'},
+				data: {id: selected.id, areaId: areaId},
 				success: function(response){
 					showMsg(response.msg, function(){
 						list.datagrid('reload');

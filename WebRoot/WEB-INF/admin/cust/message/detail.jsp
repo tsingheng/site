@@ -34,6 +34,10 @@
 		</td>
 	</tr>
 	<tr>
+		<td>IP地址：</td>
+		<td colspan="3">${msg.ip}</td>
+	</tr>
+	<tr>
 		<td>附件下载：</td>
 		<td colspan="3">
 		<c:if test="${empty files}">未上传附件</c:if>

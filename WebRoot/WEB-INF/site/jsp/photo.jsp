@@ -12,7 +12,7 @@
                     </li>
                 	</c:forEach>
                 </ul>
-                <div class="clear"></div>
+                <br clear="all"/>
             </dd>
         </dl>
         <script type="text/javascript">

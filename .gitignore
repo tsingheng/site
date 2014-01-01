@@ -8,6 +8,7 @@
 bin/
 tmp/
 WebRoot/WEB-INF/classes/*
+WebRoot/upload/*
 *.tmp
 *.bak
 *.swp

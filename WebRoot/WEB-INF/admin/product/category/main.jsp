@@ -30,15 +30,15 @@
 		</div>
 	</div>
 </div>
-<table class="easyui-datagrid" url="${ctx}/admin/pro-category.action" id="cate-list" singleSelect="true"
-	rownumbers="true" idField="id" fitColumns="true" pagination="true" fit="true" border="false">
+<table class="easyui-treegrid" url="${ctx}/admin/pro-category.action" id="cate-list" singleSelect="true"
+	rownumbers="true" idField="id" fitColumns="true" treeField="categoryName" pagination="false" fit="true" border="false">
 	<thead>
 		<tr>
-			<th field="categoryName" width="15%">产品系列名称</th>
+			<th field="categoryName" width="25%">产品系列名称</th>
 			<th field="sort" width="3%">排序</th>
 			<th field="creater" width="15%">添加者</th>
 			<th field="insertTime" width="17%">添加时间</th>
-			<th field="memo" width="50%">备注</th>
+			<th field="memo" width="40%">备注</th>
 		</tr>
 	</thead>
 </table>

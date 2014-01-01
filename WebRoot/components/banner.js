@@ -1,12 +1,12 @@
-//»¬¿éÌõ
+//æ»‘å—æ¡
 $(function(){
 	setTimeout(function(){
-		//´¢´æÔ­Ê¼Î»ÖÃ
+		//å‚¨å­˜åŸå§‹ä½ç½®
 		var orLeft,orWidth; 
 		$('#magic_nav').append('<li id="margic_line"></li>');
-		//»ñÈ¡»¬¿é
+		//è·å–æ»‘å—
 		var $line = $('#margic_line');
-		//¸ù¾İcurrentÉèÖÃ¿í,Î»ÖÃ;Í¬Ê±´æÔ­Ê¼Î»ÖÃ
+		//æ ¹æ®currentè®¾ç½®å®½,ä½ç½®;åŒæ—¶å­˜åŸå§‹ä½ç½®
 		var $cur = $('.current');
 		$line
 			.width($cur.width())
@@ -15,21 +15,21 @@ $(function(){
 			.data('orWidth',$line.width());
 		$('#magic_nav li').find('a').hover(function(){
 			$tar = $(this);
-			//»ñÈ¡»¬ÈëÄ¿±êµÄ¿í¶È(°üº¬padding)
+			//è·å–æ»‘å…¥ç›®æ ‡çš„å®½åº¦(åŒ…å«padding)
 			var _w = $tar.innerWidth();
-			//»ñÈ¡»¬ÈëÄ¿±êµÄÎ»ÖÃ£¨¼õµô±ß¿òºÍ×ó°ë²¿·Ö²¹°×£©
+			//è·å–æ»‘å…¥ç›®æ ‡çš„ä½ç½®ï¼ˆå‡æ‰è¾¹æ¡†å’Œå·¦åŠéƒ¨åˆ†è¡¥ç™½ï¼‰
 			var _l = $tar.position().left - 38;
-			//ÉèÖÃ»¬Èëµ±Ç°Ê±»¬¿éµÄ¿íÎ»ÖÃ
+			//è®¾ç½®æ»‘å…¥å½“å‰æ—¶æ»‘å—çš„å®½ä½ç½®
 			$line.stop().animate({
 				left:_l,
 				width:_w
 			});
 		},function(){
-			//»¬³öÊ±»Ö¸´µ½Ô­Î»ÖÃ
+			//æ»‘å‡ºæ—¶æ¢å¤åˆ°åŸä½ç½®
 			$line.stop().animate({
 				left:$line.data('orLeft'),
 				width:$line.data('orWidth')
 			});	
 		});
 	},300);
-})
+});

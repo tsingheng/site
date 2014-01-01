@@ -74,7 +74,8 @@ public class ProductService extends BaseService<Product> {
 	@Override
 	public Product find(long id){
 		Product product = productDAO.find(id);
-		product.setProperties(proPropertyDAO.findList("where productId=? order by id desc", id));
+		if(product != null)
+			product.setProperties(proPropertyDAO.findList("where productId=? order by sort desc", id));
 		return product;
 	}
 	

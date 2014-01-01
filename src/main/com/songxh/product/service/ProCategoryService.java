@@ -33,7 +33,7 @@ public class ProCategoryService extends BaseService<ProCategory> {
 	
 	public boolean insert(ProCategory category){
 		try{
-			Long numL = (Long) proCategoryDAO.countAll();
+			Long numL = (long) this.countByParent(category.getParent().getId());
 			if(numL == null){
 				numL = 0L;
 			}
@@ -43,8 +43,10 @@ public class ProCategoryService extends BaseService<ProCategory> {
 			}else{
 				Map<String, Object> sortMap = new HashMap<String, Object>();
 				sortMap.put("sort_gts", category.getSort());
+				sortMap.put("parent.id", category.getParent().getId());
 				proCategoryDAO.sortDown(sortMap);
 			}
+			category.setParent(proCategoryDAO.find(category.getParent().getId()));
 			proCategoryDAO.insert(category);
 			return true;
 		}catch(Exception e){
@@ -67,10 +69,12 @@ public class ProCategoryService extends BaseService<ProCategory> {
 			if(category.getSort() < old.getSort()){
 				sortMap.put("sort_gts", category.getSort());
 				sortMap.put("sort_lt", old.getSort());
+				sortMap.put("parent.id", old.getParent().getId());
 				proCategoryDAO.sortDown(sortMap);
 			}else if(category.getSort() > old.getSort()){
 				sortMap.put("sort_gt", old.getSort());
 				sortMap.put("sort_lts", category.getSort());
+				sortMap.put("parent.id", old.getParent().getId());
 				proCategoryDAO.sortUp(sortMap);
 			}
 			proCategoryDAO.update(category);
@@ -89,6 +93,7 @@ public class ProCategoryService extends BaseService<ProCategory> {
 			// 删除之后要把排在后面的sort都-1
 			proCategoryDAO.delete(id);
 			Map<String, Object> sortMap = new HashMap<String, Object>();
+			sortMap.put("parent.id", category.getParent().getId());
 			sortMap.put("sort_gt", category.getSort());
 			proCategoryDAO.sortUp(sortMap);
 			return true;
@@ -98,6 +103,12 @@ public class ProCategoryService extends BaseService<ProCategory> {
 			logger.error(msg);
 			throw new RuntimeException(msg);
 		}
+	}
+	
+	public int countByParent(long id){
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("parent.id", id);
+		return super.count(param);
 	}
 	
 	@Override

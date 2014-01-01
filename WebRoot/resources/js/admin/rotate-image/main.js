@@ -5,7 +5,7 @@ $(document).ready(function(){
 			var td = [];
 			var columns = $.data(list[0], 'datagrid').options.columns[0];
 			var header = $.data(list[0], 'datagrid').dc.view2.find('.datagrid-header .datagrid-header-inner table');
-			td.push('<div style="text-align:center;margin:3px;"><img src="' + ctx + rowData['path'] + '" style="width:1000px; height:240px;"/></div>');
+			td.push('<div style="text-align:center;margin:3px;"><img src="' + ctx + '/' + rowData['path'] + '" style="width:1000px; height:240px;"/></div>');
 			td.push('<div style="margin-top: 0px;">');
 				td.push('<table class="datagrid-btable" width="100%" cellspacing="0" cellspadding="0">');
 					td.push('<tr style="height:25px;">');

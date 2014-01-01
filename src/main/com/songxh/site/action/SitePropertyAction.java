@@ -53,7 +53,10 @@ public class SitePropertyAction extends BaseAction<SiteProperty> {
 			List<SiteProperty> list = sitePropertyService.updateProps(map, file, fileFileName);
 			JSONObject result = new JSONObject();
 			for(SiteProperty property : list){
-				result.put(property.getPropertyCode(), property.getPropertyValue());
+				if("site_logo".equals(property.getPropertyCode())){
+					result.put(property.getPropertyCode(), property.getPropertyValue());
+					break;
+				}
 			}
 			result.put("success", true);
 			result.put("msg", "操作成功");
