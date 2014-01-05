@@ -7,12 +7,12 @@
                 <ul class="lps public_ul">
                 	<c:forEach items="${page.result}" var="pro">
                 	<li>
-                        <a class="pimg" href="${ctx}/product/info/${pro.id}.htm" title="${pro.productName}"><img src="${ctx}/${pro.image}" alt="${pro.productName}" /></a>
+                        <a class="pimg" href="${ctx}/${key}-product/info/${st:replace(pro.productName, regs)}-${pro.id}.htm" title="${pro.productName}"><img src="${ctx}/${pro.image}" alt="${key} ${pro.productName}" /></a>
                         <div class="ptxt">
-                            <h3 class="tle" title="${pro.productName}"><a href="${ctx}/product/info/${pro.id}.htm">${pro.productName}</a></h3>
+                            <h3 class="tle" title="${pro.productName}"><a href="${ctx}/${key}-product/info/${st:replace(pro.productName, regs)}-${pro.id}.htm">${pro.productName}</a></h3>
                             <div class="desc">${pro.desc}</div>
                             <div class="time"><fmt:formatDate value="${pro.insertTime}" pattern="yyyy-MM-dd"/></div>
-                            <a class="more" href="${ctx}/product/info/${pro.id}.htm" title="${pro.productName}">Read More</a>
+                            <a class="more" href="${ctx}/${key}-product/info/${st:replace(pro.productName, regs)}-${pro.id}.htm" title="${pro.productName}">Read More</a>
                         </div>
                         <br clear="all"/>
                     </li>

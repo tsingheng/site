@@ -1,10 +1,10 @@
 ﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 		<%@ include file="/components/common.jsp" %>
 		<dl class="dl dl4">
-            <dt><h2><a class="a12" href="${ctx}/product/${product.category.id}/p.htm">${product.category.categoryName}</a></h2></dt>
+            <dt><h2><a class="a12" href="${ctx}/${key}-product/${st:replace(product.category.categoryName, regs)}-${product.category.id}/p.htm">${product.category.categoryName}</a></h2></dt>
             <dd class="pinfo">
                 <div class="pro_lf">
-                    <div id="gallery"><a href="${ctx}/${product.image}" class="bimg"><img id="bimg"  src="${ctx}/${product.image}" width="260" height="260" alt="" /></a></div>
+                    <div id="gallery"><a href="${ctx}/${product.image}" class="bimg"><img id="bimg"  src="${ctx}/${product.image}" width="260" height="260" alt="${key} ${product.productName}" /></a></div>
                     <ul class="simg public_ul">
                     	<c:forEach var="img" items="${product.images}">
                     	<li><img src="${ctx}/${img.attachment.path}" href="${ctx}/${img.attachment.path}" alt="${product.productName}" title="${product.productName}" /></li>

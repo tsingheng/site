@@ -79,5 +79,11 @@
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
-
+	
+	<jsp-config>
+		<taglib>
+			<taglib-uri>http://www.shangtech.net/tags</taglib-uri>
+			<taglib-location>/WEB-INF/shang.tld</taglib-location>
+		</taglib>
+	</jsp-config>
 </web-app>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+  version="2.0">
+    <tlib-version>1.0</tlib-version>
+    <short-name>st</short-name>
+    <uri>http://www.shangtech.net/tags</uri>
+    <function>
+    	<description>字符串内容替换,第一个参数是原字符串,后面子串跟要替换的结果成对出现</description>
+    	<name>replace</name>
+    	<function-class>net.shangtech.jsp.tags.ShangTags</function-class>
+    	<function-signature>java.lang.String replace(java.lang.String, java.lang.String[])</function-signature>
+    	<example>${st:replace(str, "a|%|/", "", " ", "_")</example>
+    </function>
+</taglib>

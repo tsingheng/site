@@ -4,8 +4,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
   <head>
-    <title>${site_title}</title>
+    <title><c:if test="${not empty mi_title}">${mi_title} | </c:if>${site_title}</title>
     <%@ include file="/components/keyword.jsp" %>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
     <script type="text/javascript" src="${ctx}/resources/js/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="${ctx}/resources/js/banner.js"></script>
     <script type="text/javascript" src="${ctx}/resources/js/jquery.lightbox-0.5.js"></script>
@@ -29,11 +30,11 @@
   			<div class="nav">
   				<ul class="menu public_ul" id="magic_nav">
 				    <li<c:if test="${type eq 'index'}"> class="current"</c:if>><a href="/index.htm">Home</a></li>
-				    <li<c:if test="${type eq 'product'}"> class="current"</c:if>><a href="/product/p.htm">Products</a></li>
-				    <li<c:if test="${type eq 'about'}"> class="current"</c:if>><a href="/info/about.htm">About Us</a></li>
-				    <li<c:if test="${type eq 'factory'}"> class="current"</c:if>><a href="/photo/factory/p.htm">Factory Display</a></li>
-				    <li<c:if test="${type eq 'contact'}"> class="current"</c:if>><a href="/info/contact.htm">Contact Us</a></li>
-				    <li<c:if test="${type eq 'news'}"> class="current"</c:if>><a href="/news/p.htm">Company News</a></li>
+				    <li<c:if test="${type eq 'product'}"> class="current"</c:if>><a href="/${key}-product/p.htm">Products</a></li>
+				    <li<c:if test="${type eq 'about'}"> class="current"</c:if>><a href="/${key}-info/about-${key}.htm">About Us</a></li>
+				    <li<c:if test="${type eq 'factory'}"> class="current"</c:if>><a href="/${key}-photo/factory-${key}/p.htm">Factory Display</a></li>
+				    <li<c:if test="${type eq 'contact'}"> class="current"</c:if>><a href="/${key}-info/contact-${key}.htm">Contact Us</a></li>
+				    <li<c:if test="${type eq 'news'}"> class="current"</c:if>><a href="/${key}-news/p.htm">Company News</a></li>
 				    <li<c:if test="${type eq 'message'}"> class="current"</c:if>><a href="/message.htm">Message</a></li>
 				</ul>
   			</div>
@@ -44,7 +45,7 @@
   			<c:forEach items="${banners}" var="banner">
   			<li>
   				<a href="${banner.link}">
-  				<img src="${ctx}/${banner.attachment.path}"/>
+  				<img alt="${site_title}" src="${ctx}/${banner.attachment.path}"/>
   				</a>
   			</li>
   			</c:forEach>
@@ -66,7 +67,7 @@
 		            				<c:if test="${category.parent.id eq cate.id}">cp </c:if>
 		            		">
 		            		<a <c:if test="${fn:length(cate.children) eq 0}">
-		            			href="${ctx}/product/${cate.id}/p.htm"
+		            			href="${ctx}/${key}-product/${st:replace(cate.categoryName, regs)}-${cate.id}/p.htm"
 		            			</c:if>
 		            			<c:if test="${fn:length(cate.children) gt 0}">
 		            			href="#nogo"
@@ -78,7 +79,7 @@
 		            		<c:if test="${fn:length(cate.children) gt 0}">
 		            		<ul class="subcate">
 		            			<c:forEach items="${cate.children}" var="child">
-		            			<li<c:if test="${child.id eq category.id}"> class="on"</c:if>><a href="${ctx}/product/${child.id}/p.htm" title="${child.categoryName}">${child.categoryName}(<span>${child.proCount}</span>)</a></li>
+		            			<li<c:if test="${child.id eq category.id}"> class="on"</c:if>><a href="${ctx}/${key}-product/${st:replace(child.categoryName, regs)}-${child.id}/p.htm" title="${child.categoryName}">${child.categoryName}(<span>${child.proCount}</span>)</a></li>
 		            			</c:forEach>
 		            		</ul>
 		            		</c:if>

@@ -29,7 +29,7 @@
 		<property name="timeBetweenEvictionRunsMillis" value="300000"></property>
 		<property name="numTestsPerEvictionRun" value="3"></property>
 		<property name="minEvictableIdleTimeMillis" value="300000"></property>
-		<property name="url" value="jdbc:mysql://127.0.0.1:3306/winsmoke?useUnicode=true&amp;characterEncoding=utf-8"></property>
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/winsmoke?useUnicode=true&amp;characterEncoding=utf-8&amp;autoReconnect=true"></property>
 		<property name="username" value="root"></property>
 		<property name="password" value="19900212"></property>
 	</bean>

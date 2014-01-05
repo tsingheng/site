@@ -13,7 +13,7 @@
             	<div id="in_scroll">
                 <ul class="spl public_ul" id="source">
                 	<c:forEach items="${hot_product}" var="pro">
-					<li><a href="${ctx}/product/info/${pro.id}.htm" title="${pro.productName}"><img src="${ctx}/${pro.image}" alt="${pro.productName}" /></a><a class="tl" href="${ctx}/product/info/${pro.id}.htm" title="${pro.productName}">${pro.productName}</a></li>
+					<li><a href="${ctx}/${key}-product/info/${st:replace(pro.productName, regs)}-${pro.id}.htm" title="${pro.productName}"><img src="${ctx}/${pro.image}" alt="${key} ${pro.productName}" /></a><a class="tl" href="${ctx}/${key}-product/info/${st:replace(pro.productName, regs)}-${pro.id}.htm" title="${pro.productName}">${pro.productName}</a></li>
 					</c:forEach>
                </ul>
                <ul class="spl public_ul" id="copy"></ul>
@@ -26,7 +26,7 @@
             <dd>
                 <ul class="bpl  public_ul">
                 	<c:forEach items="${top_product}" var="pro">
-					<li><a href="${ctx}/product/info/${pro.id}.htm" title="${pro.productName}"><img src="${ctx}/${pro.image}" alt="${pro.productName}" /></a><a class="tl" href="${ctx}/product/info/${pro.id}.htm" title="${pro.productName}">${pro.productName}</a></li>
+					<li><a href="${ctx}/${key}-product/info/${st:replace(pro.productName, regs)}-${pro.id}.htm" title="${pro.productName}"><img src="${ctx}/${pro.image}" alt="${key} ${pro.productName}" /></a><a class="tl" href="${ctx}/${key}-product/info/${st:replace(pro.productName, regs)}-${pro.id}.htm" title="${pro.productName}">${pro.productName}</a></li>
 					</c:forEach>
                 </ul>
                 <br clear="all"/>
@@ -35,18 +35,18 @@
 		<dl class="dl dl1">
             <dt><h2><a class="a5" title="Company Info">Company Info</a></h2></dt>
             <dd>
-                <a class="cimg" href="${ctx}/info/about.htm" title="Shenzhen Winsmoke Technology Co., Limited"><img src="${ctx}/${image.attachment.path}" align="Shenzhen Winsmoke Technology Co., Limited" /></a>
+                <a class="cimg" href="${ctx}/${key}-info/about-${key}.htm" title="Shenzhen Winsmoke Technology Co., Limited"><img src="${ctx}/${image.attachment.path}" alt="Shenzhen Winsmoke Technology Co., Limited" /></a>
                 <div class="ctxt">
-                    <h3><a href="${ctx}/info/about.htm" title="Company Info">About Us</a></h3>
+                    <h3><a href="${ctx}/${key}-info/about-${key}.htm" title="Company Info">About Us</a></h3>
                     <p>${fn:substring(about, 0, 300)}...</p>
-                    <div><a class="more" href="${ctx}/info/about.htm" title="Company Info">Read More</a></div>
-                    <h3><a href="${ctx}/news/p.htm" title="Company News">Company News</a></h3>
+                    <div><a class="more" href="${ctx}/${key}-info/about-${key}.htm" title="Company Info">Read More</a></div>
+                    <h3><a href="${ctx}/${key}-news/p.htm" title="Company News">Company News</a></h3>
                     <ul class="ls public_ul">
                     	<c:forEach items="${newslist}" var="news">
-                    	<li><a href="${ctx}/news/info/${news.id}.htm" title="${news.title}">${news.title}</a></li>
+                    	<li><a href="${ctx}/${key}-news/info/${st:replace(news.title, regs)}-${news.id}.htm" title="${news.title}">${news.title}</a></li>
                     	</c:forEach>
                     </ul>
-                    <div><a class="more" href="${ctx}/photo/factory/p.htm" title="Factory Display">Factory Display</a><a class="more" href="${ctx}/news/p.htm" title="News">News</a></div>
+                    <div><a class="more" href="${ctx}/${key}-photo/factory-${key}/p.htm" title="Factory Display">Factory Display</a><a class="more" href="${ctx}/${key}-news/p.htm" title="News">News</a></div>
                 </div>
                 <br clear="all"/>
             </dd>

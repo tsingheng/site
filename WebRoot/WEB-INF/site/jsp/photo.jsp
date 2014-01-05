@@ -8,7 +8,7 @@
                 	<c:forEach items="${page.result}" var="photo">
                 	<li>
                         <img style="cursor:pointer;" src="${ctx}/${photo.attachment.path}" href="${ctx}/${photo.attachment.path}" alt="${photo.title}" />
-                        <a class="tl" title="${photo.title}">${photo.title}</a>
+                        <a class="tl" title="${key} ${photo.title}">${photo.title}</a>
                     </li>
                 	</c:forEach>
                 </ul>
