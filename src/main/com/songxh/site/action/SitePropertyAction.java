@@ -29,7 +29,6 @@ public class SitePropertyAction extends BaseAction<SiteProperty> {
 	
 	public void prepareEdit(){}
 	
-	@SuppressWarnings("unchecked")
 	public String edit(){
 		String method = request.getMethod();
 		if(method.equals(CommonConstraint.REQUEST_METHOD.GET.getMethod())){

@@ -34,6 +34,18 @@
 		</td>
 	</tr>
 	<tr>
+		<td>网站关键字：</td>
+		<td>
+			<textarea rows="4" style="width:670px;" name="site_prop_${propertyMap.keywords.propertyCode}">${propertyMap.keywords.propertyValue}</textarea>
+		</td>
+	</tr>
+	<tr>
+		<td>网站描述：</td>
+		<td>
+			<textarea rows="4" style="width:670px;" name="site_prop_${propertyMap.description.propertyCode}">${propertyMap.description.propertyValue}</textarea>
+		</td>
+	</tr>
+	<tr>
 		<td>${propertyMap.site_head.propertyName}：</td>
 		<td>
 			<textarea rows="4" style="width:670px;" id="head_editor" name="site_prop_${propertyMap.site_head.propertyCode}">${propertyMap.site_head.propertyValue}</textarea>

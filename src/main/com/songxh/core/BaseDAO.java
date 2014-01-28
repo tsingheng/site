@@ -109,7 +109,7 @@ public class BaseDAO<T> extends HibernateDaoSupport {
             if(result == null){
             	return 0;
             }
-            return (int) result;
+            return (Integer) result;
     }
 
 	/**
