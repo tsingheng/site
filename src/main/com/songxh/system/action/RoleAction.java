@@ -149,7 +149,7 @@ public class RoleAction extends BaseAction<Role> {
 		}else{
 			if(id != null){
 				String resourceIds = request.getParameter("resources");
-				roleService.auth(model.getId(), resourceIds);
+				roleService.auth(id, resourceIds);
 				success();
 			}else{
 				this.failed("提交编辑表单却未选择记录,非法操作！");

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,6 +43,8 @@ public class MessageService extends BaseService<Message> {
 		messageDAO.insert(message);
 		if(files != null && !files.isEmpty()){
 			for(MultipartFile file : files){
+				if(file == null || StringUtils.isBlank(file.getOriginalFilename()))
+					continue;
 				MessageFile msgFile = new MessageFile();
 				Attachment attachment = new Attachment();
 				attachment.setOriginalName(file.getOriginalFilename());

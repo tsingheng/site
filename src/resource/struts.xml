@@ -3,7 +3,7 @@
 <struts>
 	<constant name="struts.i18n.encoding" value="utf-8"/>
 	<constant name="struts.configuration.xml.reload" value="true" />
-	<constant name="struts.multipart.saveDir" value="C:/tmp"/>
+	<constant name="struts.multipart.saveDir" value="/tmp"/>
 	<constant name="struts.devMode" value="false" />
 	<constant name="struts.multipart.maxSize" value="2097152"/>
 	<package name="default" namespace="/admin" extends="tiles-default">

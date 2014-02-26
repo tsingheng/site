@@ -46,6 +46,7 @@ import com.songxh.site.service.InfoService;
 import com.songxh.site.service.RotateImageService;
 import com.songxh.site.service.SitePropertyService;
 import com.songxh.system.service.SiteLogService;
+import com.songxh.tools.MailUtils;
 
 /**
  * 文件名： IndexController.java
@@ -314,6 +315,8 @@ public class IndexController extends BaseController {
 			files = multipartRequest.getFiles("file");
 			if(files != null && !files.isEmpty()){
 				for(MultipartFile file : files){
+					if(file == null || StringUtils.isBlank(file.getOriginalFilename()))
+						continue;
 					boolean accepted = false;
 					for(String accept : acceptAttacheType){
 						if(file.getOriginalFilename().endsWith(accept)){
@@ -332,6 +335,17 @@ public class IndexController extends BaseController {
 		if(success){
 			message.setIp(request.getRemoteAddr());
 			messageService.saveMessage(message, files);
+			final Message _message = message;
+			new Thread(){
+				@Override
+				public void run(){
+					StringBuffer content = new StringBuffer();
+					content.append("email:").append(_message.getEmail() + System.getProperty("line.separator"));
+					content.append("content:").append(_message.getMsgContent() + System.getProperty("line.separator"));
+					content.append("详情请<a href=\"http://www.winsmoke.com:8180/admin\">点此<a>登录系统");
+					MailUtils.sendEmail("winsmoke.com留言[" + _message.getSubject() + "]", content.toString());
+				}
+			}.start();
 		}
 		JSONObject obj = new JSONObject();
 		obj.put("success", success);
