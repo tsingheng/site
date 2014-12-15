@@ -60,7 +60,7 @@ public class AuthInterceptor implements Interceptor {
 			return invocation.invoke();
 		if(request.getSession().getAttribute(CommonConstraint.USER_SESSION_KEY) == null)
 			return login(uri, request, response);
-		uri = uri.substring(authPrefix.length());
+		uri = uri.substring(uri.indexOf(authPrefix) + authPrefix.length());
 		if(nonAuth.contains(uri))
 			return invocation.invoke();
 		String param = request.getParameter(authParam);

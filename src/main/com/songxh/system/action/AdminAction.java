@@ -145,6 +145,7 @@ public class AdminAction extends BaseAction<User> {
 				msg = "用户名或密码错误";
 			}else{
 				User user = list.get(0);
+				System.out.println(MD5Utils.md5(password));
 				if(user.getFailedTimes() != null && user.getFailedTimes() >= 5){
 					msg = "该账户已被冻结";
 				}else if(user.getPassword().equals(MD5Utils.md5(password))){

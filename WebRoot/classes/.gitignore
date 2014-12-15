@@ -1,0 +1,10 @@
+/.struts.mex
+/applicationContext.xml
+/auth.properties
+/com/
+/dispatcher-servlet.xml
+/log4j.properties
+/mail.properties
+/net/
+/port.properties
+/struts.xml
