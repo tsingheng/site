@@ -2,22 +2,21 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
-Source Server Version : 50515
+Source Server Version : 50168
 Source Host           : localhost:3306
 Source Database       : winsmoke
 
 Target Server Type    : MYSQL
-Target Server Version : 50515
+Target Server Version : 50168
 File Encoding         : 65001
 
-Date: 2013-12-20 23:54:12
+Date: 2014-12-16 10:00:37
 */
-create database winsmoke;
-use winsmoke;
+
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `area_entity`
+-- Table structure for area_entity
 -- ----------------------------
 DROP TABLE IF EXISTS `area_entity`;
 CREATE TABLE `area_entity` (
@@ -46,7 +45,7 @@ INSERT INTO `area_entity` VALUES ('16', '10', '4', '1');
 INSERT INTO `area_entity` VALUES ('17', '10', '3', '1');
 
 -- ----------------------------
--- Table structure for `attachment`
+-- Table structure for attachment
 -- ----------------------------
 DROP TABLE IF EXISTS `attachment`;
 CREATE TABLE `attachment` (
@@ -57,7 +56,7 @@ CREATE TABLE `attachment` (
   `CREATER` varchar(10) DEFAULT NULL,
   `CONTENT_TYPE` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COMMENT='系统附件';
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COMMENT='系统附件';
 
 -- ----------------------------
 -- Records of attachment
@@ -95,9 +94,10 @@ INSERT INTO `attachment` VALUES ('30', 'upload/20131218/20131218231820452.jpg', 
 INSERT INTO `attachment` VALUES ('31', 'upload/20131218/20131218232801680.jpg', '2013.5.24_1.50.53_1084.jpg', '2013-12-18 23:28:01', null, 'image/jpeg');
 INSERT INTO `attachment` VALUES ('32', 'upload/20131218/20131218232810637.jpg', '2013.5.24_1.54.17_7061.jpg', '2013-12-18 23:28:10', null, 'image/jpeg');
 INSERT INTO `attachment` VALUES ('33', 'upload/20131218/20131218232818103.jpg', '2013.5.24_2.11.14_4528.jpg', '2013-12-18 23:28:18', null, 'image/jpeg');
+INSERT INTO `attachment` VALUES ('34', 'upload/20141216/20141216095421840.jpg', 'Koala.jpg', '2014-12-16 09:54:21', null, 'image/jpeg');
 
 -- ----------------------------
--- Table structure for `image_display`
+-- Table structure for image_display
 -- ----------------------------
 DROP TABLE IF EXISTS `image_display`;
 CREATE TABLE `image_display` (
@@ -124,7 +124,7 @@ INSERT INTO `image_display` VALUES ('3', 'factory', '28', 'Products', null, '201
 INSERT INTO `image_display` VALUES ('4', 'factory', '29', 'Production Line', null, '2013-12-18 22:21:28', null, '4', '');
 
 -- ----------------------------
--- Table structure for `index_area`
+-- Table structure for index_area
 -- ----------------------------
 DROP TABLE IF EXISTS `index_area`;
 CREATE TABLE `index_area` (
@@ -146,7 +146,7 @@ INSERT INTO `index_area` VALUES ('9', 'Hot Product', '3', '4', 'hot_product', ''
 INSERT INTO `index_area` VALUES ('10', 'Top Product', '3', '1', 'top_product', '', '1');
 
 -- ----------------------------
--- Table structure for `info`
+-- Table structure for info
 -- ----------------------------
 DROP TABLE IF EXISTS `info`;
 CREATE TABLE `info` (
@@ -168,11 +168,11 @@ CREATE TABLE `info` (
 -- ----------------------------
 -- Records of info
 -- ----------------------------
-INSERT INTO `info` VALUES ('1', 'About Us', '', 'about', '2013-09-22 15:31:12', null, null, '', '1', '<p>\n	Shenzhen Winsmoke Technology Co., Ltd. was founded in 2009, by a unique team of researchers, developers, and business experts, having been devoting itself to an enterprise that integrated production,R&amp;D,sales and service.\n</p>\n<p>\n	<br />\n</p>\n<p>\n	We have been developing healthier and safer electronic cigarette with innovative and higher technology all the time as an experienced researcher and leader in the field of electronic cigarette.\n</p>\n<p>\n	<br />\n</p>\n<p>\n	Our team has extensive experience in product and brand&nbsp;development, manufacturing, and have been in the smoking industry for years. We, personally, tried and tested each and every product before offering them to you. Being one of the finest industry to offer electronic cigarettes to the whole world, we are obligated to bring you only the BEST!!! Winsmoke is known for its exceptionally high quality products at affordable prices, outstanding customer service, and user friendly ordering process.\n</p>\n<p>\n	<br />\n</p>\n<p>\n	Winsmoke&nbsp;has several advantages over traditional cigarettes:\n</p>\n<ul>\n	<li>\n		No ashes or flames to deal with.\n	</li>\n	<li>\n		High quality and flavorful Vapor for a Smoke-Like Feeling, without the messy ashes and residue.\n	</li>\n	<li>\n		No offensive odors that stick to linen, clothing, furniture walls or your office, house or car.\n	</li>\n	<li>\n		Save tons of money compared to highly taxed traditional cigarettes.\n	</li>\n	<li>\n		Smoke your electronic cigarette virtually anywhere, inside many restaurants, bars, airports and in many places where traditional smoking is restricted or prohibited. After all, it is just vapor and leaves no lingering effect.\n	</li>\n</ul>\n<p>\n	At Winsmoke we strive to provide our customers with friendly, knowledgeable and effective customer service.&nbsp;&nbsp;We value your opinions, comments and concerns.\n</p>\n<p>\n	So please feel free to contact us for any reason!\n</p>', '', '');
+INSERT INTO `info` VALUES ('1', 'About Us', '', 'about', '2013-09-22 15:31:12', null, null, '', '1', '<p>\n	Shenzhen Winsmoke Technology Co., Ltd. was founded in 2009, by a unique team of researchers, developers, and business experts, having been devoting itself to an enterprise that integrated production,R&amp;D,sales and service.\n</p>\n<p>\n	<br />\n</p>\n<p>\n	We have been developing healthier and safer electronic cigarette with innovative and higher technology all the time as an experienced researcher and leader in the field of electronic cigarette.\n</p>\n<p>\n	<br />\n</p>\n<p>\n	Our team has extensive experience in product and brand&nbsp;development, manufacturing, and have been in the smoking industry for years. We, personally, tried and tested each and every product before offering them to you. Being one of the finest industry to offer electronic cigarettes to the whole world, we are obligated to bring you only the BEST!!! Winsmoke is known for its exceptionally high quality products at affordable prices, outstanding customer service, and user friendly ordering process.\n</p>\n<p>\n	<br />\n</p>\n<p>\n	Winsmoke&nbsp;has several advantages over traditional cigarettes:\n</p>\n<ul>\n	<li>\n		No ashes or flames to deal with.\n	</li>\n	<li>\n		High quality and flavorful Vapor for a Smoke-Like Feeling, without the messy ashes and residue.\n	</li>\n	<li>\n		No offensive odors that stick to linen, clothing, furniture walls or your office, house or car.\n	</li>\n	<li>\n		Save tons of money compared to highly taxed traditional cigarettes.\n	</li>\n	<li>\n		Smoke your electronic cigarette virtually anywhere, inside many restaurants, bars, airports and in many places where traditional smoking is restricted or prohibited. After all, it is just vapor and leaves no lingering effect.\n	</li>\n</ul>\n<p>\n	At Winsmoke we strive to provide our customers with friendly, knowledgeable and effective customer service.&nbsp;&nbsp;We value your opinions, comments and concerns.\n</p>\n<p>\n	So please feel free to contact us for any reason!\n</p>', '\0', '');
 INSERT INTO `info` VALUES ('2', 'Contact Us', '', 'contact', '2013-09-22 15:31:31', null, null, '', '1', '<h2>\n	Shenzhen Winsmoke Technology Co., Ltd.\n</h2>\n<p>\n	<br />\n</p>\n<p>\n	<table cellspacing=\"1\" cellpadding=\"4\" class=\"tbl1 ke-zeroborder\" style=\"background-color:#E6E6E6;width:728px;color:#333333;font-family:Arial, 宋体;font-size:12px;height:30px;\">\n		<tbody>\n			<tr>\n				<th style=\"background-color:#F5F5F5;text-align:right;font-weight:normal;\">\n					<span style=\"font-size:16px;\">Company :</span> \n				</th>\n				<td style=\"background-color:#FFFFFF;\">\n					<span style=\"font-size:16px;\">Shenzhen Winsmoke Technology Co., Ltd.</span> \n				</td>\n			</tr>\n			<tr>\n				<th style=\"background-color:#F5F5F5;text-align:right;font-weight:normal;\">\n					<span style=\"font-size:16px;\">Contact :</span> \n				</th>\n				<td style=\"background-color:#FFFFFF;\">\n					<span style=\"font-size:16px;\">Mr.Peter</span><br />\n				</td>\n			</tr>\n			<tr>\n				<th style=\"background-color:#F5F5F5;text-align:right;font-weight:normal;\">\n					<span style=\"font-size:16px;\">Mobile :</span> \n				</th>\n				<td style=\"background-color:#FFFFFF;\">\n					<span style=\"font-size:16px;\">+86 18201554585</span> \n				</td>\n			</tr>\n			<tr>\n				<th style=\"background-color:#F5F5F5;text-align:right;font-weight:normal;\">\n					<span style=\"font-size:16px;\">Tel:</span> \n				</th>\n				<td style=\"background-color:#FFFFFF;\">\n					<span style=\"font-size:16px;\">+86 18201554585</span> \n				</td>\n			</tr>\n			<tr>\n				<th style=\"background-color:#F5F5F5;text-align:right;font-weight:normal;\">\n					<span style=\"font-size:16px;\">Fax :</span> \n				</th>\n				<td style=\"background-color:#FFFFFF;\">\n					<span style=\"font-size:16px;\">+86 18201554585</span> \n				</td>\n			</tr>\n			<tr>\n				<th style=\"background-color:#F5F5F5;text-align:right;font-weight:normal;\">\n					<span style=\"font-size:16px;\">Zip Code :</span> \n				</th>\n				<td style=\"background-color:#FFFFFF;\">\n					<span style=\"font-size:16px;\">518104</span> \n				</td>\n			</tr>\n			<tr>\n				<th style=\"background-color:#F5F5F5;text-align:right;font-weight:normal;\">\n					<span style=\"font-size:16px;\">Web Site:</span> \n				</th>\n				<td style=\"background-color:#FFFFFF;\">\n					<span style=\"font-size:16px;\"><a href=\"http://www.winsmoke.com/\" target=\"_blank\">www.winsmoke.com</a></span> \n				</td>\n			</tr>\n			<tr>\n				<th style=\"background-color:#F5F5F5;text-align:right;font-weight:normal;\">\n					<span style=\"font-size:16px;\">E-mail:</span> \n				</th>\n				<td style=\"background-color:#FFFFFF;\">\n					<span style=\"font-size:16px;\"><a href=\"mailto:winsmoke@163.com\" target=\"_blank\">winsmoke@163.com</a></span> \n				</td>\n			</tr>\n			<tr>\n				<th style=\"background-color:#F5F5F5;text-align:right;font-weight:normal;\">\n					<span style=\"font-size:16px;\">MSN :</span> \n				</th>\n				<td style=\"background-color:#FFFFFF;\">\n					<span style=\"font-size:16px;\"><a href=\"mailto:winsmoke100@msn.cn\" target=\"_blank\">winsmoke100@msn.cn</a></span> \n				</td>\n			</tr>\n			<tr>\n				<th style=\"background-color:#F5F5F5;text-align:right;font-weight:normal;\">\n					<span style=\"font-size:16px;\">Address :</span> \n				</th>\n				<td style=\"background-color:#FFFFFF;\">\n					<span style=\"font-size:16px;\">Shajing, Shenzhen, Guangdong, China, 518104</span> \n				</td>\n			</tr>\n		</tbody>\n	</table>\n</p>\n<p>\n	<br />\n</p>', '', '');
 
 -- ----------------------------
--- Table structure for `login_log`
+-- Table structure for login_log
 -- ----------------------------
 DROP TABLE IF EXISTS `login_log`;
 CREATE TABLE `login_log` (
@@ -188,7 +188,7 @@ CREATE TABLE `login_log` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `message`
+-- Table structure for message
 -- ----------------------------
 DROP TABLE IF EXISTS `message`;
 CREATE TABLE `message` (
@@ -216,7 +216,7 @@ CREATE TABLE `message` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `message_file`
+-- Table structure for message_file
 -- ----------------------------
 DROP TABLE IF EXISTS `message_file`;
 CREATE TABLE `message_file` (
@@ -235,7 +235,7 @@ CREATE TABLE `message_file` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `product`
+-- Table structure for product
 -- ----------------------------
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
@@ -260,13 +260,13 @@ CREATE TABLE `product` (
 -- ----------------------------
 -- Records of product
 -- ----------------------------
-INSERT INTO `product` VALUES ('1', 'Metal injection bottle', '7', 'Easy to carry, can be filled with 5 ml of smoke oil', '2013-12-18 22:13:37', '0', null, '', '1', null, '', '', '');
+INSERT INTO `product` VALUES ('1', 'Metal injection bottle', '7', 'Easy to carry, can be filled with 5 ml of smoke oil<img src=\"/test/upload/20141216/20141216095345722.jpg\" alt=\"\" /><img src=\"/test/upload/20141216/20141216095346628.jpg\" alt=\"\" /><img src=\"/test/upload/20141216/20141216095329181.jpg\" alt=\"\" />', '2013-12-18 22:13:37', '0', null, '', '1', null, '', '', '');
 INSERT INTO `product` VALUES ('2', 'Protank', '6', 'Protank is a detachable, at the bottom of the heater, the heater can be replaced, a handstand is a product of oil atomizer', '2013-12-18 22:16:11', '0', null, '', '1', null, '', '', '');
 INSERT INTO `product` VALUES ('3', 'BCC', '5', '', '2013-12-18 22:17:47', '0', null, '', '1', null, '', '', '');
 INSERT INTO `product` VALUES ('4', 'BCC', '5', '', '2013-12-18 22:19:19', '0', null, '', '2', null, '', '', '');
 
 -- ----------------------------
--- Table structure for `product_image`
+-- Table structure for product_image
 -- ----------------------------
 DROP TABLE IF EXISTS `product_image`;
 CREATE TABLE `product_image` (
@@ -282,7 +282,7 @@ CREATE TABLE `product_image` (
   KEY `FK_Reference_3` (`PRODUCT`),
   CONSTRAINT `FK_Reference_2` FOREIGN KEY (`ATTACHMENT`) REFERENCES `attachment` (`ID`),
   CONSTRAINT `FK_Reference_3` FOREIGN KEY (`PRODUCT`) REFERENCES `product` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of product_image
@@ -306,15 +306,15 @@ INSERT INTO `product_image` VALUES ('16', '3', '16', '3', null, '2013-12-18 22:1
 INSERT INTO `product_image` VALUES ('17', '3', '17', '6', null, '2013-12-18 22:17:47', null);
 INSERT INTO `product_image` VALUES ('18', '3', '18', '4', null, '2013-12-18 22:17:47', null);
 INSERT INTO `product_image` VALUES ('19', '3', '19', '1', null, '2013-12-18 22:17:47', null);
-INSERT INTO `product_image` VALUES ('20', '4', '20', '6', null, '2013-12-18 22:19:19', null);
 INSERT INTO `product_image` VALUES ('21', '4', '21', '4', null, '2013-12-18 22:19:19', null);
 INSERT INTO `product_image` VALUES ('22', '4', '22', '1', null, '2013-12-18 22:19:19', null);
 INSERT INTO `product_image` VALUES ('23', '4', '23', '5', null, '2013-12-18 22:19:19', null);
 INSERT INTO `product_image` VALUES ('24', '4', '24', '3', null, '2013-12-18 22:19:19', null);
 INSERT INTO `product_image` VALUES ('25', '4', '25', '2', null, '2013-12-18 22:19:19', null);
+INSERT INTO `product_image` VALUES ('26', '4', '34', '6', null, '2014-12-16 09:54:21', null);
 
 -- ----------------------------
--- Table structure for `pro_category`
+-- Table structure for pro_category
 -- ----------------------------
 DROP TABLE IF EXISTS `pro_category`;
 CREATE TABLE `pro_category` (
@@ -324,18 +324,20 @@ CREATE TABLE `pro_category` (
   `MEMO` varchar(100) DEFAULT NULL,
   `INSERT_TIME` datetime DEFAULT NULL,
   `CREATER` varchar(10) DEFAULT NULL,
+  `PARENT_ID` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='产品类别';
 
 -- ----------------------------
 -- Records of pro_category
 -- ----------------------------
-INSERT INTO `pro_category` VALUES ('5', 'BCC', '1', '', '2013-12-17 23:07:21', null);
-INSERT INTO `pro_category` VALUES ('6', 'Protank', '2', '', '2013-12-17 23:07:32', null);
-INSERT INTO `pro_category` VALUES ('7', 'Metal injection bottle', '3', '', '2013-12-17 23:07:41', null);
+INSERT INTO `pro_category` VALUES ('0', 'ROOT', '1', ' ', '2013-12-17 23:07:41', null, null);
+INSERT INTO `pro_category` VALUES ('5', 'BCC', '1', '', '2013-12-17 23:07:21', null, '0');
+INSERT INTO `pro_category` VALUES ('6', 'Protank', '2', '', '2013-12-17 23:07:32', null, '0');
+INSERT INTO `pro_category` VALUES ('7', 'Metal injection bottle', '3', '', '2013-12-17 23:07:41', null, '0');
 
 -- ----------------------------
--- Table structure for `pro_property`
+-- Table structure for pro_property
 -- ----------------------------
 DROP TABLE IF EXISTS `pro_property`;
 CREATE TABLE `pro_property` (
@@ -343,23 +345,26 @@ CREATE TABLE `pro_property` (
   `PRODUCT_ID` bigint(20) DEFAULT NULL,
   `PROPERTY_NAME` varchar(255) DEFAULT NULL,
   `PROPERTY_VALUE` varchar(255) DEFAULT NULL,
+  `SORT` int(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of pro_property
 -- ----------------------------
-INSERT INTO `pro_property` VALUES ('1', '1', '', '');
-INSERT INTO `pro_property` VALUES ('2', '2', '', '');
-INSERT INTO `pro_property` VALUES ('3', '3', '', '');
-INSERT INTO `pro_property` VALUES ('4', '4', '', '');
-INSERT INTO `pro_property` VALUES ('5', '3', '', '');
-INSERT INTO `pro_property` VALUES ('6', '1', '', '');
-INSERT INTO `pro_property` VALUES ('7', '2', '', '');
-INSERT INTO `pro_property` VALUES ('8', '4', '', '');
+INSERT INTO `pro_property` VALUES ('1', '1', '', '', '1');
+INSERT INTO `pro_property` VALUES ('2', '2', '', '', '2');
+INSERT INTO `pro_property` VALUES ('3', '3', '', '', '3');
+INSERT INTO `pro_property` VALUES ('4', '4', '', '', '4');
+INSERT INTO `pro_property` VALUES ('5', '3', '', '', '5');
+INSERT INTO `pro_property` VALUES ('6', '1', '', '', '6');
+INSERT INTO `pro_property` VALUES ('7', '2', '', '', '7');
+INSERT INTO `pro_property` VALUES ('8', '4', '', '', '8');
+INSERT INTO `pro_property` VALUES ('9', '1', '', '', null);
+INSERT INTO `pro_property` VALUES ('10', '1', '', '', null);
 
 -- ----------------------------
--- Table structure for `resource`
+-- Table structure for resource
 -- ----------------------------
 DROP TABLE IF EXISTS `resource`;
 CREATE TABLE `resource` (
@@ -379,95 +384,95 @@ CREATE TABLE `resource` (
 -- ----------------------------
 -- Records of resource
 -- ----------------------------
-INSERT INTO `resource` VALUES ('1', '系统管理', 'sys', '', '', '0', '4', '', '', '系统管理模块');
-INSERT INTO `resource` VALUES ('2', '资源管理', 'sys_res', '', '/resource.action', '1', '1', '', '', '系统资源管理');
-INSERT INTO `resource` VALUES ('3', '添加资源', 'sys_res_add', '', '/resource!add.action', '2', '1', '', '', '添加系统资源按钮');
-INSERT INTO `resource` VALUES ('13', '编辑资源', 'sys_res_edit', '', '/resource!edit.action', '2', '2', '', '', '');
-INSERT INTO `resource` VALUES ('14', '移动顺序', 'sys_res_sort', '', '/resource!sort.action', '2', '4', '', '', '');
-INSERT INTO `resource` VALUES ('22', '删除资源', 'sys_res_del', '', '/resource!del.action', '2', '3', '', '', '');
-INSERT INTO `resource` VALUES ('23', '角色管理', 'sys_role', '', '/role.action', '1', '2', '', '', '系统角色管理');
-INSERT INTO `resource` VALUES ('24', '用户管理', 'sys_user', '', '/user.action', '1', '3', '', '', '');
-INSERT INTO `resource` VALUES ('25', '产品管理', 'pro', '', '', '0', '1', '', '', '产品管理模块');
-INSERT INTO `resource` VALUES ('26', '产品系列管理', 'pro_cate', '', '/pro-category.action', '25', '1', '', '', '');
-INSERT INTO `resource` VALUES ('27', '产品管理', 'pro_pro', '', '/product.action', '25', '2', '', '', '');
-INSERT INTO `resource` VALUES ('28', '客户关系管理', 'cust', '', '', '0', '2', '', '', '');
-INSERT INTO `resource` VALUES ('29', '客户留言管理', 'cust_msg', '', '/message.action', '28', '1', '', '', '');
-INSERT INTO `resource` VALUES ('30', '网站内容管理', 'site', '', '', '0', '3', '', '', '');
-INSERT INTO `resource` VALUES ('31', '关于我们', 'site_info_about', '', '/info.action?type=about', '30', '1', '', '', '');
-INSERT INTO `resource` VALUES ('32', '联系我们', 'site_info_contact', '', '/info.action?type=contact', '30', '2', '', '', '');
-INSERT INTO `resource` VALUES ('33', '新闻管理', 'site_info_news', '', '/info.action?type=news', '30', '3', '', '', '');
-INSERT INTO `resource` VALUES ('34', '照片展示', 'site_img_factory', '', '/image-display.action?type=factory', '30', '4', '', '', '');
-INSERT INTO `resource` VALUES ('35', '幻灯片', 'site_rotate', '', '/rotate-image.action', '30', '5', '', '', '');
-INSERT INTO `resource` VALUES ('36', '网站属性', 'site_property', '', '/site-property!edit.action', '30', '6', '', '', '');
-INSERT INTO `resource` VALUES ('37', '添加角色', 'sys_role_add', '', '/role!add.action', '23', '1', '', '', '');
-INSERT INTO `resource` VALUES ('38', '编辑角色', 'sys_role_edit', '', '/role!edit.action', '23', '2', '', '', '');
-INSERT INTO `resource` VALUES ('39', '角色授权', 'sys_role_auth', '', '/role!auth.action', '23', '3', '', '', '');
-INSERT INTO `resource` VALUES ('40', '删除角色', 'sys_role_del', '', '/role!del.action', '23', '4', '', '', '');
+INSERT INTO `resource` VALUES ('1', '系统管理', 'sys', '\0', '', '0', '4', '', '\0', '系统管理模块');
+INSERT INTO `resource` VALUES ('2', '资源管理', 'sys_res', '\0', '/resource.action', '1', '1', '', '', '系统资源管理');
+INSERT INTO `resource` VALUES ('3', '添加资源', 'sys_res_add', '', '/resource!add.action', '2', '1', '', '\0', '添加系统资源按钮');
+INSERT INTO `resource` VALUES ('13', '编辑资源', 'sys_res_edit', '', '/resource!edit.action', '2', '2', '', '\0', '');
+INSERT INTO `resource` VALUES ('14', '移动顺序', 'sys_res_sort', '', '/resource!sort.action', '2', '4', '', '\0', '');
+INSERT INTO `resource` VALUES ('22', '删除资源', 'sys_res_del', '', '/resource!del.action', '2', '3', '', '\0', '');
+INSERT INTO `resource` VALUES ('23', '角色管理', 'sys_role', '\0', '/role.action', '1', '2', '', '', '系统角色管理');
+INSERT INTO `resource` VALUES ('24', '用户管理', 'sys_user', '\0', '/user.action', '1', '3', '', '', '');
+INSERT INTO `resource` VALUES ('25', '产品管理', 'pro', '\0', '', '0', '1', '', '\0', '产品管理模块');
+INSERT INTO `resource` VALUES ('26', '产品系列管理', 'pro_cate', '\0', '/pro-category.action', '25', '1', '', '', '');
+INSERT INTO `resource` VALUES ('27', '产品管理', 'pro_pro', '\0', '/product.action', '25', '2', '', '', '');
+INSERT INTO `resource` VALUES ('28', '客户关系管理', 'cust', '\0', '', '0', '2', '', '\0', '');
+INSERT INTO `resource` VALUES ('29', '客户留言管理', 'cust_msg', '\0', '/message.action', '28', '1', '', '', '');
+INSERT INTO `resource` VALUES ('30', '网站内容管理', 'site', '\0', '', '0', '3', '', '\0', '');
+INSERT INTO `resource` VALUES ('31', '关于我们', 'site_info_about', '\0', '/info.action?type=about', '30', '1', '', '', '');
+INSERT INTO `resource` VALUES ('32', '联系我们', 'site_info_contact', '\0', '/info.action?type=contact', '30', '2', '', '', '');
+INSERT INTO `resource` VALUES ('33', '新闻管理', 'site_info_news', '\0', '/info.action?type=news', '30', '3', '', '', '');
+INSERT INTO `resource` VALUES ('34', '照片展示', 'site_img_factory', '\0', '/image-display.action?type=factory', '30', '4', '', '', '');
+INSERT INTO `resource` VALUES ('35', '幻灯片', 'site_rotate', '\0', '/rotate-image.action', '30', '5', '', '', '');
+INSERT INTO `resource` VALUES ('36', '网站属性', 'site_property', '\0', '/site-property!edit.action', '30', '6', '', '', '');
+INSERT INTO `resource` VALUES ('37', '添加角色', 'sys_role_add', '', '/role!add.action', '23', '1', '', '\0', '');
+INSERT INTO `resource` VALUES ('38', '编辑角色', 'sys_role_edit', '', '/role!edit.action', '23', '2', '', '\0', '');
+INSERT INTO `resource` VALUES ('39', '角色授权', 'sys_role_auth', '', '/role!auth.action', '23', '3', '', '\0', '');
+INSERT INTO `resource` VALUES ('40', '删除角色', 'sys_role_del', '', '/role!del.action', '23', '4', '', '\0', '');
 INSERT INTO `resource` VALUES ('41', '添加用户', 'sys_user_add', '', '/user!add.action', '24', '1', '', '', '');
-INSERT INTO `resource` VALUES ('42', '编辑用户', 'sys_user_edit', '', '/user!edit.action', '24', '2', '', '', '');
-INSERT INTO `resource` VALUES ('43', '删除用户', 'sys_user_del', '', '/user!del.action', '24', '3', '', '', '');
-INSERT INTO `resource` VALUES ('44', '添加产品系列', 'pro_cate_add', '', '/pro-category!add.action', '26', '1', '', '', '');
-INSERT INTO `resource` VALUES ('45', '编辑产品系列', 'pro_cate_edit', '', '/pro-category!edit.action', '26', '2', '', '', '');
-INSERT INTO `resource` VALUES ('46', '删除产品系列', 'pro_cate_del', '', '/pro-category!del.action', '26', '3', '', '', '');
-INSERT INTO `resource` VALUES ('47', '添加产品', 'pro_pro_add', '', '/product!add.action', '27', '1', '', '', '');
-INSERT INTO `resource` VALUES ('48', '编辑产品', 'pro_pro_edit', '', '/product!edit.action', '27', '2', '', '', '');
-INSERT INTO `resource` VALUES ('49', '删除产品', 'pro_pro_del', '', '/product!del.action', '27', '3', '', '', '');
-INSERT INTO `resource` VALUES ('50', '添加图片', 'pro_image_add', '', '/pro-image!add.action', '27', '4', '', '', '');
-INSERT INTO `resource` VALUES ('51', '图片备注', 'pro_image_edit', '', '/pro-image!edit.action', '27', '5', '', '', '');
-INSERT INTO `resource` VALUES ('52', '删除图片', 'pro_image_del', '', '/pro-image!del.action', '27', '6', '', '', '');
-INSERT INTO `resource` VALUES ('53', '留言处理', 'cust_message_deal', '', '/message!deal.action', '29', '1', '', '', '');
-INSERT INTO `resource` VALUES ('54', '添加文章', 'site_info_about_add', '', '/info!add.action?type=about', '31', '1', '', '', '');
-INSERT INTO `resource` VALUES ('55', '编辑文章', 'site_info_about_edit', '', '/info!edit.action?type=about', '31', '2', '', '', '');
-INSERT INTO `resource` VALUES ('56', '删除文章', 'site_info_about_del', '', '/info!del.action?type=about', '31', '3', '', '', '');
-INSERT INTO `resource` VALUES ('57', '添加文章', 'site_info_con_add', '', '/info!add.action?type=contact', '32', '1', '', '', '');
-INSERT INTO `resource` VALUES ('58', '编辑文章', 'site_info_con_edit', '', '/info!edit.action?type=contact', '32', '2', '', '', '');
-INSERT INTO `resource` VALUES ('59', '删除文章', 'site_info_con_del', '', '/info!del.action?type=contact', '32', '3', '', '', '');
-INSERT INTO `resource` VALUES ('60', '添加新闻', 'site_info_news_add', '', '/info!add.action?type=news', '33', '1', '', '', '');
-INSERT INTO `resource` VALUES ('61', '编辑新闻', 'site_info_news_edit', '', '/info!edit.action?type=news', '33', '2', '', '', '');
-INSERT INTO `resource` VALUES ('62', '删除新闻', 'site_info_news_del', '', '/info!del.action?type=news', '33', '3', '', '', '');
-INSERT INTO `resource` VALUES ('63', '图片上传', 'site_img_fct_add', '', '/image-display!add.action?type=factory', '34', '1', '', '', '');
-INSERT INTO `resource` VALUES ('64', '编辑图片', 'site_img_fct_edit', '', '/image-display!edit.action?type=factory', '34', '2', '', '', '');
-INSERT INTO `resource` VALUES ('65', '删除照片', 'site_img_fct_del', '', '/image-display!del.action?type=factory', '34', '3', '', '', '');
-INSERT INTO `resource` VALUES ('66', '上传图片', 'site_rotate_add', '', '/rotate-image!add.action', '35', '1', '', '', '');
-INSERT INTO `resource` VALUES ('67', '编辑图片', 'site_rotate_edit', '', '/rotate-image!edit.action', '35', '2', '', '', '');
-INSERT INTO `resource` VALUES ('68', '删除图片', 'site_rotate_del', '', '/rotate-image!del.action', '35', '3', '', '', '');
-INSERT INTO `resource` VALUES ('69', '移动', 'site_rotate_sort', '', '/rotate-image!sort.action', '35', '4', '', '', '');
-INSERT INTO `resource` VALUES ('70', '发布', 'site_rotate_pub', '', '/rotate-image!publish.action', '35', '5', '', '', '');
-INSERT INTO `resource` VALUES ('71', '取消发布', 'site_rotate_can', '', '/rotate-image!cancel.action', '35', '6', '', '', '');
-INSERT INTO `resource` VALUES ('72', '移动', 'site_img_fct_sort', '', '/image-display!sort.action?type=factory', '34', '4', '', '', '');
-INSERT INTO `resource` VALUES ('73', '发布', 'site_img_fct_pub', '', '/image-display!publish.action?type=factory', '34', '5', '', '', '');
-INSERT INTO `resource` VALUES ('74', '取消发布', 'site_img_fct_can', '', '/image-display!cancel.action?type=factory', '34', '6', '', '', '');
-INSERT INTO `resource` VALUES ('75', '排序', 'site_info_news_sort', '', '/info!sort.action?type=news', '33', '4', '', '', '');
-INSERT INTO `resource` VALUES ('76', '发布', 'site_info_news_pub', '', '/info!publish.action?type=news', '33', '5', '', '', '');
-INSERT INTO `resource` VALUES ('77', '取消发布', 'site_info_news_can', '', '/info!cancel.action?type=news', '33', '6', '', '', '');
-INSERT INTO `resource` VALUES ('78', '排序', 'site_info_con_sort', '', '/info!sort.action?type=contact', '32', '4', '', '', '');
-INSERT INTO `resource` VALUES ('79', '发布', 'site_info_con_pub', '', '/info!publish.action?type=contact', '32', '5', '', '', '');
-INSERT INTO `resource` VALUES ('80', '取消发布', 'site_info_con_can', '', '/info!cancel.action?type=contact', '32', '6', '', '', '');
-INSERT INTO `resource` VALUES ('81', '排序', 'site_info_about_sort', '', '/info!sort.action?type=about', '31', '4', '', '', '');
-INSERT INTO `resource` VALUES ('82', '发布', 'site_info_about_pub', '', '/info!publish.action?type=about', '31', '5', '', '', '');
-INSERT INTO `resource` VALUES ('83', '取消发布', 'site_info_about_can', '', '/info!cancel.action?type=about', '31', '6', '', '', '');
-INSERT INTO `resource` VALUES ('84', '移动', 'pro_cate_sort', '', '/pro-category!sort.action', '26', '4', '', '', '');
-INSERT INTO `resource` VALUES ('85', '移动产品', 'pro_pro_sort', '', '/product!sort.action', '27', '7', '', '', '');
-INSERT INTO `resource` VALUES ('86', '发布', 'pro_pro_pub', '', '/product!publish.action', '27', '8', '', '', '');
-INSERT INTO `resource` VALUES ('87', '取消发布', 'pro_pro_can', '', '/product!cancel.action', '27', '9', '', '', '');
-INSERT INTO `resource` VALUES ('88', '移动图片', 'pro_image_sort', '', '/pro-image!sort.action', '27', '10', '', '', '');
-INSERT INTO `resource` VALUES ('89', '首页管理', 'site_inde', '', '/index-area.action', '30', '7', '', '', '');
-INSERT INTO `resource` VALUES ('90', '首页板块', 'site_index_area', '', '/area-entity.action', '89', '1', '', '', '');
-INSERT INTO `resource` VALUES ('91', '区域内容添加', 'site_index_area_add', '', '/area-entity!form.action', '89', '2', '', '', '');
-INSERT INTO `resource` VALUES ('92', '区域添加', 'site_index_add', '', '/index-area!add.action', '89', '3', '', '', '');
-INSERT INTO `resource` VALUES ('93', '编辑首页区域', 'site_index_edit', '', '/index-area!edit.action', '89', '4', '', '', '');
-INSERT INTO `resource` VALUES ('94', '删除区域', 'site_index_del', '', '/index-area!del.action', '89', '5', '', '', '');
-INSERT INTO `resource` VALUES ('95', '删除区域记录', 'site_inex_entity_del', '', '/area-entity!del.action', '89', '6', '', '', '');
-INSERT INTO `resource` VALUES ('96', '添加到首页', 'site_inex_entity_add', '', '/area-entity!add.action', '89', '7', '', '', '');
-INSERT INTO `resource` VALUES ('97', '记录排序', 'site_index_area_sort', '', '/area-entity!sort.action', '89', '8', '', '', '');
-INSERT INTO `resource` VALUES ('98', '删除产品属性', 'pro_prop_del', '', '/product!delprop.action', '27', '11', '', '', '');
-INSERT INTO `resource` VALUES ('99', '详情查看', 'cust_msg_detail', '', '/message!detail.action', '29', '2', '', '', '');
-INSERT INTO `resource` VALUES ('100', '附件下载', 'cust_msg_file', '', '/message!file.action', '29', '3', '', '', '');
-INSERT INTO `resource` VALUES ('101', '留言处理', 'cust_msg_deal', '', '/message!edit.action', '29', '4', '', '', '');
-INSERT INTO `resource` VALUES ('102', '文件上传', 'admin_file_up', '', '/admin!upfile.action', '0', '5', '', '', '');
+INSERT INTO `resource` VALUES ('42', '编辑用户', 'sys_user_edit', '', '/user!edit.action', '24', '2', '', '\0', '');
+INSERT INTO `resource` VALUES ('43', '删除用户', 'sys_user_del', '', '/user!del.action', '24', '3', '', '\0', '');
+INSERT INTO `resource` VALUES ('44', '添加产品系列', 'pro_cate_add', '', '/pro-category!add.action', '26', '1', '', '\0', '');
+INSERT INTO `resource` VALUES ('45', '编辑产品系列', 'pro_cate_edit', '', '/pro-category!edit.action', '26', '2', '', '\0', '');
+INSERT INTO `resource` VALUES ('46', '删除产品系列', 'pro_cate_del', '', '/pro-category!del.action', '26', '3', '', '\0', '');
+INSERT INTO `resource` VALUES ('47', '添加产品', 'pro_pro_add', '', '/product!add.action', '27', '1', '', '\0', '');
+INSERT INTO `resource` VALUES ('48', '编辑产品', 'pro_pro_edit', '', '/product!edit.action', '27', '2', '', '\0', '');
+INSERT INTO `resource` VALUES ('49', '删除产品', 'pro_pro_del', '', '/product!del.action', '27', '3', '', '\0', '');
+INSERT INTO `resource` VALUES ('50', '添加图片', 'pro_image_add', '', '/pro-image!add.action', '27', '4', '', '\0', '');
+INSERT INTO `resource` VALUES ('51', '图片备注', 'pro_image_edit', '', '/pro-image!edit.action', '27', '5', '', '\0', '');
+INSERT INTO `resource` VALUES ('52', '删除图片', 'pro_image_del', '', '/pro-image!del.action', '27', '6', '', '\0', '');
+INSERT INTO `resource` VALUES ('53', '留言处理', 'cust_message_deal', '', '/message!deal.action', '29', '1', '', '\0', '');
+INSERT INTO `resource` VALUES ('54', '添加文章', 'site_info_about_add', '', '/info!add.action?type=about', '31', '1', '', '\0', '');
+INSERT INTO `resource` VALUES ('55', '编辑文章', 'site_info_about_edit', '', '/info!edit.action?type=about', '31', '2', '', '\0', '');
+INSERT INTO `resource` VALUES ('56', '删除文章', 'site_info_about_del', '', '/info!del.action?type=about', '31', '3', '', '\0', '');
+INSERT INTO `resource` VALUES ('57', '添加文章', 'site_info_con_add', '', '/info!add.action?type=contact', '32', '1', '', '\0', '');
+INSERT INTO `resource` VALUES ('58', '编辑文章', 'site_info_con_edit', '', '/info!edit.action?type=contact', '32', '2', '', '\0', '');
+INSERT INTO `resource` VALUES ('59', '删除文章', 'site_info_con_del', '', '/info!del.action?type=contact', '32', '3', '', '\0', '');
+INSERT INTO `resource` VALUES ('60', '添加新闻', 'site_info_news_add', '', '/info!add.action?type=news', '33', '1', '', '\0', '');
+INSERT INTO `resource` VALUES ('61', '编辑新闻', 'site_info_news_edit', '', '/info!edit.action?type=news', '33', '2', '', '\0', '');
+INSERT INTO `resource` VALUES ('62', '删除新闻', 'site_info_news_del', '', '/info!del.action?type=news', '33', '3', '', '\0', '');
+INSERT INTO `resource` VALUES ('63', '图片上传', 'site_img_fct_add', '', '/image-display!add.action?type=factory', '34', '1', '', '\0', '');
+INSERT INTO `resource` VALUES ('64', '编辑图片', 'site_img_fct_edit', '', '/image-display!edit.action?type=factory', '34', '2', '', '\0', '');
+INSERT INTO `resource` VALUES ('65', '删除照片', 'site_img_fct_del', '', '/image-display!del.action?type=factory', '34', '3', '', '\0', '');
+INSERT INTO `resource` VALUES ('66', '上传图片', 'site_rotate_add', '', '/rotate-image!add.action', '35', '1', '', '\0', '');
+INSERT INTO `resource` VALUES ('67', '编辑图片', 'site_rotate_edit', '', '/rotate-image!edit.action', '35', '2', '', '\0', '');
+INSERT INTO `resource` VALUES ('68', '删除图片', 'site_rotate_del', '', '/rotate-image!del.action', '35', '3', '', '\0', '');
+INSERT INTO `resource` VALUES ('69', '移动', 'site_rotate_sort', '', '/rotate-image!sort.action', '35', '4', '', '\0', '');
+INSERT INTO `resource` VALUES ('70', '发布', 'site_rotate_pub', '', '/rotate-image!publish.action', '35', '5', '', '\0', '');
+INSERT INTO `resource` VALUES ('71', '取消发布', 'site_rotate_can', '', '/rotate-image!cancel.action', '35', '6', '', '\0', '');
+INSERT INTO `resource` VALUES ('72', '移动', 'site_img_fct_sort', '', '/image-display!sort.action?type=factory', '34', '4', '', '\0', '');
+INSERT INTO `resource` VALUES ('73', '发布', 'site_img_fct_pub', '', '/image-display!publish.action?type=factory', '34', '5', '', '\0', '');
+INSERT INTO `resource` VALUES ('74', '取消发布', 'site_img_fct_can', '', '/image-display!cancel.action?type=factory', '34', '6', '', '\0', '');
+INSERT INTO `resource` VALUES ('75', '排序', 'site_info_news_sort', '', '/info!sort.action?type=news', '33', '4', '', '\0', '');
+INSERT INTO `resource` VALUES ('76', '发布', 'site_info_news_pub', '', '/info!publish.action?type=news', '33', '5', '', '\0', '');
+INSERT INTO `resource` VALUES ('77', '取消发布', 'site_info_news_can', '', '/info!cancel.action?type=news', '33', '6', '', '\0', '');
+INSERT INTO `resource` VALUES ('78', '排序', 'site_info_con_sort', '', '/info!sort.action?type=contact', '32', '4', '', '\0', '');
+INSERT INTO `resource` VALUES ('79', '发布', 'site_info_con_pub', '', '/info!publish.action?type=contact', '32', '5', '', '\0', '');
+INSERT INTO `resource` VALUES ('80', '取消发布', 'site_info_con_can', '', '/info!cancel.action?type=contact', '32', '6', '', '\0', '');
+INSERT INTO `resource` VALUES ('81', '排序', 'site_info_about_sort', '', '/info!sort.action?type=about', '31', '4', '', '\0', '');
+INSERT INTO `resource` VALUES ('82', '发布', 'site_info_about_pub', '', '/info!publish.action?type=about', '31', '5', '', '\0', '');
+INSERT INTO `resource` VALUES ('83', '取消发布', 'site_info_about_can', '', '/info!cancel.action?type=about', '31', '6', '', '\0', '');
+INSERT INTO `resource` VALUES ('84', '移动', 'pro_cate_sort', '', '/pro-category!sort.action', '26', '4', '', '\0', '');
+INSERT INTO `resource` VALUES ('85', '移动产品', 'pro_pro_sort', '', '/product!sort.action', '27', '7', '', '\0', '');
+INSERT INTO `resource` VALUES ('86', '发布', 'pro_pro_pub', '', '/product!publish.action', '27', '8', '', '\0', '');
+INSERT INTO `resource` VALUES ('87', '取消发布', 'pro_pro_can', '', '/product!cancel.action', '27', '9', '', '\0', '');
+INSERT INTO `resource` VALUES ('88', '移动图片', 'pro_image_sort', '', '/pro-image!sort.action', '27', '10', '', '\0', '');
+INSERT INTO `resource` VALUES ('89', '首页管理', 'site_inde', '\0', '/index-area.action', '30', '7', '', '', '');
+INSERT INTO `resource` VALUES ('90', '首页板块', 'site_index_area', '', '/area-entity.action', '89', '1', '', '\0', '');
+INSERT INTO `resource` VALUES ('91', '区域内容添加', 'site_index_area_add', '', '/area-entity!form.action', '89', '2', '', '\0', '');
+INSERT INTO `resource` VALUES ('92', '区域添加', 'site_index_add', '', '/index-area!add.action', '89', '3', '', '\0', '');
+INSERT INTO `resource` VALUES ('93', '编辑首页区域', 'site_index_edit', '', '/index-area!edit.action', '89', '4', '', '\0', '');
+INSERT INTO `resource` VALUES ('94', '删除区域', 'site_index_del', '', '/index-area!del.action', '89', '5', '', '\0', '');
+INSERT INTO `resource` VALUES ('95', '删除区域记录', 'site_inex_entity_del', '', '/area-entity!del.action', '89', '6', '', '\0', '');
+INSERT INTO `resource` VALUES ('96', '添加到首页', 'site_inex_entity_add', '', '/area-entity!add.action', '89', '7', '', '\0', '');
+INSERT INTO `resource` VALUES ('97', '记录排序', 'site_index_area_sort', '', '/area-entity!sort.action', '89', '8', '', '\0', '');
+INSERT INTO `resource` VALUES ('98', '删除产品属性', 'pro_prop_del', '', '/product!delprop.action', '27', '11', '', '\0', '');
+INSERT INTO `resource` VALUES ('99', '详情查看', 'cust_msg_detail', '', '/message!detail.action', '29', '2', '', '\0', '');
+INSERT INTO `resource` VALUES ('100', '附件下载', 'cust_msg_file', '', '/message!file.action', '29', '3', '', '\0', '');
+INSERT INTO `resource` VALUES ('101', '留言处理', 'cust_msg_deal', '', '/message!edit.action', '29', '4', '', '\0', '');
+INSERT INTO `resource` VALUES ('102', '文件上传', 'admin_file_up', '', '/admin!upfile.action', '0', '5', '', '\0', '');
 
 -- ----------------------------
--- Table structure for `resource_role`
+-- Table structure for resource_role
 -- ----------------------------
 DROP TABLE IF EXISTS `resource_role`;
 CREATE TABLE `resource_role` (
@@ -571,7 +576,7 @@ INSERT INTO `resource_role` VALUES ('88', '101', '1');
 INSERT INTO `resource_role` VALUES ('89', '102', '1');
 
 -- ----------------------------
--- Table structure for `role`
+-- Table structure for role
 -- ----------------------------
 DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
@@ -592,7 +597,7 @@ INSERT INTO `role` VALUES ('3', 'FASDFA', 'DGSDFGSFSDG', '2013-08-21 22:03:33', 
 INSERT INTO `role` VALUES ('4', 'tttttttt', '', '2013-08-21 22:04:08', 'tttttttttt');
 
 -- ----------------------------
--- Table structure for `rotate_image`
+-- Table structure for rotate_image
 -- ----------------------------
 DROP TABLE IF EXISTS `rotate_image`;
 CREATE TABLE `rotate_image` (
@@ -617,7 +622,7 @@ INSERT INTO `rotate_image` VALUES ('3', '32', '', '', '3', '', '3');
 INSERT INTO `rotate_image` VALUES ('4', '33', '', '', '4', '', '4');
 
 -- ----------------------------
--- Table structure for `site_log`
+-- Table structure for site_log
 -- ----------------------------
 DROP TABLE IF EXISTS `site_log`;
 CREATE TABLE `site_log` (
@@ -637,7 +642,7 @@ INSERT INTO `site_log` VALUES ('1', '127.0.0.1', '/index.htm', '2013-12-20 22:52
 INSERT INTO `site_log` VALUES ('2', '127.0.0.1', '/product/p.htm', '2013-12-20 22:52:42', '62E242D3BCA17D15848C4CDD65566F6A', 'Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko');
 
 -- ----------------------------
--- Table structure for `site_property`
+-- Table structure for site_property
 -- ----------------------------
 DROP TABLE IF EXISTS `site_property`;
 CREATE TABLE `site_property` (
@@ -662,7 +667,7 @@ INSERT INTO `site_property` VALUES ('7', 'msn', 'winsmoke100@msn.com', 'msn', nu
 INSERT INTO `site_property` VALUES ('8', 'site_contact', '<li>\r\n	<span class=\"name\">Contact:</span><span class=\"value\">Mr.Hunk</span> \r\n</li>\r\n<li>\r\n	<span class=\"name\">MSN:</span><span class=\"value\">winsmoke100@msn.com</span> \r\n</li>\r\n<li>\r\n	<span class=\"name\">Skype:</span><span class=\"value\">winsmoke</span> \r\n</li>\r\n<li>\r\n	<span class=\"name\">Email:</span><span class=\"value\">winsmoke@163.com</span> \r\n</li>\r\n<li>\r\n	<span class=\"name\">Mobile:</span><span class=\"value\">+86-18664330742</span> \r\n</li>', '联系方式', null);
 
 -- ----------------------------
--- Table structure for `user`
+-- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -685,4 +690,4 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'songxh', '1E91736D0C85A84ABD76B1BE8D8FB1F8', 'songxh', '2013-08-22 21:40:11', '', '15260816875', '474345424', '474345424@qq.com', '1', '0');
+INSERT INTO `user` VALUES ('1', 'songxh', 'E10ADC3949BA59ABBE56E057F20F883E', 'songxh', '2013-08-22 21:40:11', '', '15260816875', '474345424', '474345424@qq.com', '1', '0');

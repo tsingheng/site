@@ -68,7 +68,9 @@
 </form>
 <script type="text/javascript">
 $(document).ready(function() {
-	${type}editor = KindEditor.create('#${type}-info-content');
+	${type}editor = KindEditor.create('#${type}-info-content', {
+		uploadJson: admin + '/admin!upfile.action'
+	});
 	$('#${type}-infoForm').validate({
 		rules: {
 			"model.title": {

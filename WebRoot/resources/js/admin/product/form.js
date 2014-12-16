@@ -1,5 +1,7 @@
 $(document).ready(function(){
-	editor = KindEditor.create('#pro-description');
+	editor = KindEditor.create('#pro-description', {
+		uploadJson: admin + '/admin!upfile.action'
+	});
 	$('#proForm').find('.multifile').multifile();
 	$('#proForm').validate({
 		rules: {

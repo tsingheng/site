@@ -40,8 +40,8 @@ public class AdminAction extends BaseAction<User> {
 	private RoleService roleService;
 	@Autowired
 	private ResourceService resourceService;
-	private File file;
-	private String fileFileName;
+	private File imgFile;
+	private String imgFileFileName;
 	private static String[] acceptTypes = {".gif", ".jpeg", ".jpg", ".png", ".bmp", ".pdf", ".rar", ".doc"};
 	
 	public String execute(){
@@ -189,17 +189,17 @@ public class AdminAction extends BaseAction<User> {
 	public String upfile(){
 		boolean success = false;
 		String msg = "";
-		if(file == null){
+		if(imgFile == null){
 			msg = "请选择文件";
-		}else if(file.length() > 2*1024*1024){
+		}else if(imgFile.length() > 2*1024*1024){
 			msg = "不能上传大于2M的文件";
-		}else if(fileFileName.indexOf(".") < 0){
+		}else if(imgFileFileName.indexOf(".") < 0){
 			msg = "文件不合法";
-		}else if(!Arrays.asList(acceptTypes).contains(fileFileName.substring(fileFileName.lastIndexOf(".")).toLowerCase())){
+		}else if(!Arrays.asList(acceptTypes).contains(imgFileFileName.substring(imgFileFileName.lastIndexOf(".")).toLowerCase())){
 			msg = "文件格式不合法";
 		}else{
 			try {
-				msg = FileUtils.saveFile(file, fileFileName);
+				msg = FileUtils.saveFile(imgFile, imgFileFileName);
 				success = true;
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -209,7 +209,7 @@ public class AdminAction extends BaseAction<User> {
 		JSONObject obj = new JSONObject();
 		obj.put("error", success ? 0 : 1);
 		obj.put("message", msg);
-		obj.put("url", msg);
+		obj.put("url", request.getContextPath() + "/" + msg);
 		outJson(obj.toJSONString());
 		return null;
 	}
@@ -225,20 +225,20 @@ public class AdminAction extends BaseAction<User> {
 		return null;
 	}
 
-	public File getFile() {
-		return file;
+	public File getImgFile() {
+		return imgFile;
 	}
 
-	public void setFile(File file) {
-		this.file = file;
+	public void setImgFile(File imgFile) {
+		this.imgFile = imgFile;
 	}
 
-	public String getFileFileName() {
-		return fileFileName;
+	public String getImgFileFileName() {
+		return imgFileFileName;
 	}
 
-	public void setFileFileName(String fileFileName) {
-		this.fileFileName = fileFileName;
+	public void setImgFileFileName(String imgFileFileName) {
+		this.imgFileFileName = imgFileFileName;
 	}
 
 	@Override

@@ -53,10 +53,10 @@
                                                 <td height="60" colspan="2" valign="top" align="center"><img src="${ctx}/resources/image/login/captain.gif"/></td>
                                             </tr>
                                             <tr>
-                                                <td height="50" width="93"><span class="textLabel">登录账户：</span><br></td><td><input type="text" id="username" name="username" value="" class="inputText1" /></td>
+                                                <td height="50" width="93"><span class="textLabel">登录账户：</span><br></td><td><input type="text" id="username" name="username" value="songxh" class="inputText1" /></td>
                                             </tr>
                                             <tr>
-                                                <td height="50" width="93"><span class="textLabel">登录密码：</span></td><td><input type="password" id="password" name="password" value="" class="inputText1" /></td>
+                                                <td height="50" width="93"><span class="textLabel">登录密码：</span></td><td><input type="password" id="password" name="password" value="123456" class="inputText1" /></td>
                                             </tr>
                                             <tr>
                                                 <td height="50" width="93"><span class="textLabel">验证码：</span></td>

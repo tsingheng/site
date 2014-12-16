@@ -42,6 +42,7 @@ public class SitePropertyAction extends BaseAction<SiteProperty> {
 			request.setAttribute("propertyMap", propertyMap);
 			return "edit";
 		}else{
+			@SuppressWarnings("unchecked")
 			Enumeration<String> names = request.getParameterNames();
 			Map<String, String> map = new HashMap<String, String>();
 			while(names.hasMoreElements()){

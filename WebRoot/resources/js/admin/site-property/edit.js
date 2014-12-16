@@ -1,7 +1,13 @@
 $(document).ready(function() {
-	headEditor = KindEditor.create('#head_editor');
-	footEditor = KindEditor.create('#foot_editor');
-	contactEditor = KindEditor.create('#contact_editor');
+	headEditor = KindEditor.create('#head_editor', {
+		uploadJson: admin + '/admin!upfile.action'
+	});
+	footEditor = KindEditor.create('#foot_editor', {
+		uploadJson: admin + '/admin!upfile.action'
+	});
+	contactEditor = KindEditor.create('#contact_editor', {
+		uploadJson: admin + '/admin!upfile.action'
+	});
 	//保存原值
 	$('.input1,textarea', $('#sitePropertyForm ')).each(function(){
 		$.data(this, 'old', $(this).val());

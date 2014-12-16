@@ -16,8 +16,8 @@
 		<script type="text/javascript" src="${ctx}/components/jquery.extend.js"></script>
 		<script type="text/javascript" src="${ctx}/resources/js/ajax.extend.js"></script>
 	    <script type="text/javascript" src="${ctx}/resources/js/common-admin.js"></script>
-	    <script type="text/javascript" src="${ctx}/components/kindeditor/kindeditor-min.js"></script>
-		<script type="text/javascript" src="${ctx}/components/kindeditor/zh_CN.js"></script>
+	    <script type="text/javascript" src="${ctx}/components/kindeditor-4.1.10/kindeditor-all.js"></script>
+		<script type="text/javascript" src="${ctx}/components/kindeditor/lang/zh_CN.js"></script>
 		<script type="text/javascript" src="${ctx}/resources/js/jquery.multifile.js"></script>
 		<script type="text/javascript" src="${ctx}/resources/js/admin/index.js"></script>
   	</head>
